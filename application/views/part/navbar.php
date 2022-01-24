@@ -2,18 +2,24 @@
     <div data-simplebar class="h-100">
         <div id="sidebar-menu">
             <ul class="metismenu list-unstyled" id="side-menu">
+              <li>
+                <a href="<?= base_url('Dashboard'); ?>" class="waves-effect">
+                  <i class="mdi mdi-home-variant-outline"></i><span
+                  class="badge rounded-pill bg-primary float-end">3</span>
+                  <span>Dashboard</span>
+                </a>
+              </li>
                 <li class="menu-title">Menu</li>
                 <li>
-                    <a href="index.html" class="waves-effect">
-                        <i class="mdi mdi-home-variant-outline"></i><span
-                            class="badge rounded-pill bg-primary float-end">3</span>
-                        <span>Dashboard</span>
+                    <a href="<?=base_url('Anggota'); ?>" class=" waves-effect">
+                        <i class="mdi mdi-calendar-outline"></i>
+                        <span>Anggota</span>
                     </a>
                 </li>
                 <li>
                     <a href="calendar.html" class=" waves-effect">
                         <i class="mdi mdi-calendar-outline"></i>
-                        <span>Calendar</span>
+                        <span>Instansi</span>
                     </a>
                 </li>
                 <li>

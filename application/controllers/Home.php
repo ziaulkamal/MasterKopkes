@@ -12,6 +12,8 @@ class Home extends CI_Controller{
   function index()
   {
       $data = array(
+        'js'  => '',
+        'title' => 'Dashboard',
         'page' => 'page/starter',
       );
       $this->load->view('main', $data);
