@@ -12,7 +12,7 @@ class Home extends CI_Controller{
   function index()
   {
       $data = array(
-        'page' => '',
+        'page' => 'page/starter',
       );
       $this->load->view('main', $data);
   }
