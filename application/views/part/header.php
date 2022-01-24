@@ -19,6 +19,7 @@
         <div id="layout-wrapper">
 
             <?php
+            // HACK: Semua Untuk Asset Setiap Part sudah di Pilah Ke masing masing file
             $this->load->view('part/topbar');
             $this->load->view('part/navbar');
             ?>
