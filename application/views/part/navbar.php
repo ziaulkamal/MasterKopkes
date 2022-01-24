@@ -17,7 +17,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="calendar.html" class=" waves-effect">
+                    <a href="<?=base_url('Instansi'); ?>" class=" waves-effect">
                         <i class="mdi mdi-calendar-outline"></i>
                         <span>Instansi</span>
                     </a>
