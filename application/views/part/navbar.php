@@ -9,7 +9,7 @@
                   <span>Dashboard</span>
                 </a>
               </li>
-                <li class="menu-title">Menu</li>
+                <li class="menu-title">Manejemen Dasar</li>
                 <li>
                     <a href="<?=base_url('Anggota'); ?>" class=" waves-effect">
                         <i class="mdi mdi-calendar-outline"></i>
@@ -22,15 +22,16 @@
                         <span>Instansi</span>
                     </a>
                 </li>
+                <li class="menu-title">Simpanan</li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="mdi mdi-email-outline"></i>
-                        <span>Email</span>
+                        <span>Simpanan</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="email-inbox.html">Inbox</a></li>
-                        <li><a href="email-read.html">Read Email</a></li>
-                        <li><a href="email-compose.html">Email Compose</a></li>
+                        <li><a href="email-inbox.html">Simpanan Pokok</a></li>
+                        <li><a href="email-read.html">Simpanan Wajib</a></li>
+                        <li><a href="email-compose.html">Simpanan Sukarela</a></li>
                     </ul>
                 </li>
                 <li class="menu-title">Layouts</li>

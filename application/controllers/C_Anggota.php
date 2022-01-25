@@ -28,4 +28,14 @@ class C_Anggota extends CI_Controller{
     );
     $this->load->view('main', $data);
   }
+
+  function profile()
+  {
+    $data = array(
+      'js'    => '',
+      'title' => 'Profile Anggota',
+      'page'  => 'page/anggota/profile',
+    );
+    $this->load->view('main', $data);
+  }
 }
