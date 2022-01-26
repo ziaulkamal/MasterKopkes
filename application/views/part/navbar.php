@@ -2,6 +2,39 @@
     <div data-simplebar class="h-100">
         <div id="sidebar-menu">
             <ul class="metismenu list-unstyled" id="side-menu">
+              <li>
+                <a href="<?= base_url('Dashboard'); ?>" class="waves-effect">
+                  <i class="mdi mdi-home-variant-outline"></i><span
+                  class="badge rounded-pill bg-primary float-end">3</span>
+                  <span>Dashboard</span>
+                </a>
+              </li>
+                <li class="menu-title">Manejemen Dasar</li>
+                <li>
+                    <a href="<?=base_url('Anggota'); ?>" class=" waves-effect">
+                        <i class="mdi mdi-calendar-outline"></i>
+                        <span>Anggota</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="<?=base_url('Instansi'); ?>" class=" waves-effect">
+                        <i class="mdi mdi-calendar-outline"></i>
+                        <span>Instansi</span>
+                    </a>
+                </li>
+                <li class="menu-title">Simpanan</li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="mdi mdi-email-outline"></i>
+                        <span>Simpanan</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="email-inbox.html">Simpanan Pokok</a></li>
+                        <li><a href="email-read.html">Simpanan Wajib</a></li>
+                        <li><a href="email-compose.html">Simpanan Sukarela</a></li>
+                    </ul>
+                </li>
+                <li class="menu-title">Layouts</li>
                 <li class="menu-title">Menu</li>
                 <li>
                     <a href="index.html" class="waves-effect">
@@ -31,7 +64,6 @@
                 </li>
 
                 <li class="menu-title">Layouts</li>
-
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="mdi mdi-gradient"></i>
@@ -44,7 +76,6 @@
                         <li><a href="layouts-boxed.html">Boxed Layout</a></li>
                     </ul>
                 </li>
-
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="mdi mdi-page-layout-header"></i>
@@ -56,9 +87,8 @@
                         <li><a href="layouts-hori-boxed-width.html">Boxed width</a></li>
                     </ul>
                 </li>
-
                 <li class="menu-title">Pages</li>
-
+                <li class="menu-title">Pages</li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="mdi mdi-account-circle-outline"></i>
@@ -71,7 +101,6 @@
                         <li><a href="auth-lock-screen.html">Lock Screen</a></li>
                     </ul>
                 </li>
-
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="mdi mdi-format-page-break"></i>
@@ -88,9 +117,8 @@
                         <li><a href="pages-500.html">Error 500</a></li>
                     </ul>
                 </li>
-
                 <li class="menu-title">Components</li>
-
+                <li class="menu-title">Components</li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="mdi mdi-briefcase-variant-outline"></i>
@@ -120,7 +148,6 @@
                         <li><a href="ui-rating.html">Rating</a></li>
                     </ul>
                 </li>
-
                 <li>
                     <a href="javascript: void(0);" class="waves-effect">
                         <i class="ri-eraser-fill"></i>
@@ -138,7 +165,6 @@
                         <li><a href="form-mask.html">Form Mask</a></li>
                     </ul>
                 </li>
-
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="ri-table-2"></i>
@@ -151,7 +177,6 @@
                         <li><a href="tables-editable.html">Editable Table</a></li>
                     </ul>
                 </li>
-
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="ri-bar-chart-line"></i>
@@ -165,7 +190,6 @@
                         <li><a href="charts-sparkline.html">Sparkline Charts</a></li>
                     </ul>
                 </li>
-
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="ri-brush-line"></i>
@@ -178,7 +202,6 @@
                         <li><a href="icons-fontawesome.html">Font Awesome </a></li>
                     </ul>
                 </li>
-
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="ri-map-pin-line"></i>
@@ -189,7 +212,6 @@
                         <li><a href="maps-vector.html">Vector Maps</a></li>
                     </ul>
                 </li>
-
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="ri-share-line"></i>
