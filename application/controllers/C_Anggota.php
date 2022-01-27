@@ -12,7 +12,7 @@ class C_Anggota extends CI_Controller{
   function index()
   {
     $data = array(
-      'js'    => 'anggota',
+      'js'    => 'editdata',
       'title' => 'Data Anggota',
       'page'  => 'page/anggota/index',
     );
