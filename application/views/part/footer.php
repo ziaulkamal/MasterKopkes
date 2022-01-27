@@ -15,6 +15,7 @@
 
 </div>
 </div>
+
 <script src="<?=base_url(); ?>assets/libs/jquery/jquery.min.js"></script>
 <script src="<?=base_url(); ?>assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="<?=base_url(); ?>assets/libs/metismenu/metisMenu.min.js"></script>
@@ -38,11 +39,7 @@ if ($js == 'editdata' || $js == 'instansi') {?>
 <script src="<?=base_url(); ?>assets/js/pages/datatables.init.js"></script>
 <script src="<?=base_url(); ?>assets/libs/table-edits/build/table-edits.min.js"></script>
 <script src="<?=base_url(); ?>assets/js/pages/table-editable.init.js"></script>
-  <?php }
-// elseif ($js == 'transaksi') {
-//   // code...
-// }
-//    ?>
+  <?php } ?>
 
 </body>
 </html>

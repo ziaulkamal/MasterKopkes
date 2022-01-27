@@ -12,7 +12,7 @@ class Home extends CI_Controller{
   function index()
   {
       $data = array(
-        'js'  => '',
+        'js'  => TRUE,
         'title' => 'Dashboard',
         'page' => 'page/starter',
       );
