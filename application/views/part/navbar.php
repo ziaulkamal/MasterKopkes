@@ -20,8 +20,6 @@
                         <li><a href="<?=base_url(''); ?>">Simpanan Sukarela</a></li>
                     </ul>
                 </li>
-<<<<<<< HEAD
-=======
                 <li class="menu-title">Layouts</li>
                 <li class="menu-title">Menu</li>
                 <li>
@@ -50,9 +48,7 @@
                         <li><a href="email-compose.html">Email Compose</a></li>
                     </ul>
                 </li>
-
                 <li class="menu-title">Layouts</li>
->>>>>>> fe247cc5e61146bb82cb2d3ca024880b73f9802c
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="mdi mdi-gradient"></i>
@@ -76,11 +72,6 @@
                         <li><a href="layouts-hori-boxed-width.html">Data Harian</a></li>
                     </ul>
                 </li>
-<<<<<<< HEAD
-=======
-                <li class="menu-title">Pages</li>
-                <li class="menu-title">Pages</li>
->>>>>>> fe247cc5e61146bb82cb2d3ca024880b73f9802c
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="mdi mdi-account-circle-outline"></i>
@@ -103,11 +94,6 @@
                         <li><a href="pages-comingsoon.html">Hapus Modul</a></li>
                     </ul>
                 </li>
-<<<<<<< HEAD
-=======
-                <li class="menu-title">Components</li>
-                <li class="menu-title">Components</li>
->>>>>>> fe247cc5e61146bb82cb2d3ca024880b73f9802c
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="mdi mdi-briefcase-variant-outline"></i>
