@@ -3,6 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 $route['default_controller'] = 'Home';
 $route['Dashboard'] = 'Home/index';
+//Auth
 $route['Auth'] = 'C_Auth/index';
 //Anggota
 $route['Anggota'] = 'C_Anggota/index';
