@@ -41,5 +41,12 @@ if ($js == 'editdata' || $js == 'instansi') {?>
 <script src="<?=base_url(); ?>assets/js/pages/table-editable.init.js"></script>
   <?php } ?>
 
+  <?php
+  if ($js == 'charts') {?>
+  <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
+  <script src="assets/js/pages/apex.init.js"></script>
+
+  <?php } ?>
+
 </body>
 </html>
