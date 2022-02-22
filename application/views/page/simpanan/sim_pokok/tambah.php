@@ -1,16 +1,11 @@
 <div class="page-content">
     <div class="container-fluid">
-
-        <!-- start page title -->
         <div class="row">
                     <div class="col-xl-12">
                             <div class="card">
                                 <div class="card-body">
-
-                                    <h4 class="card-title">Range validation</h4>
-                                    <p class="card-title-desc">Parsley is a javascript form validation
-                                        library. It helps you provide your users with feedback on their form
-                                        submission before sending it to your server.</p>
+                                    <h4 class="card-title">Simpana Pokok</h4>
+                                    <p class="card-title-desc">Form Tambah Simpanan Pokok</p>
 
                                     <form action="#" class="custom-validation">
 

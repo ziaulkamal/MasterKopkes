@@ -1,7 +1,13 @@
 <div class="page-content">
     <div class="container-fluid">
         <div class="row">
-    <div class="col-xl-6">
+    <div class="col-xl-12">
+      <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+      <h4 class="mb-sm-0"><?= $title ?></h4>
+    </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Nav pills</h4>
@@ -45,6 +51,7 @@
               </div>
                   </div>
                   </div>
+                </div>
                 </div>
               </div>
           </div>

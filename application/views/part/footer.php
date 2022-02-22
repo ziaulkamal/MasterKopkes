@@ -23,7 +23,7 @@
 <script src="<?=base_url(); ?>assets/libs/node-waves/waves.min.js"></script>
 <script src="<?=base_url(); ?>assets/js/app.js"></script>
 <?php
-if ($js == 'anggota' || $js == 'instansi') {?>
+if ($js == 'editdata' || $js == 'instansi') {?>
 <script src="<?=base_url(); ?>assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?=base_url(); ?>assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
 <script src="<?=base_url(); ?>assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
@@ -39,6 +39,48 @@ if ($js == 'anggota' || $js == 'instansi') {?>
 <script src="<?=base_url(); ?>assets/js/pages/datatables.init.js"></script>
 <script src="<?=base_url(); ?>assets/libs/table-edits/build/table-edits.min.js"></script>
 <script src="<?=base_url(); ?>assets/js/pages/table-editable.init.js"></script>
+
+<script src="assets/libs/sweetalert2/sweetalert2.min.js"></script>
+<script src="assets/js/pages/sweet-alerts.init.js"></script>
+
+<script>
+var flash = $('#flash').data('flash');
+  if(flash) {
+    swal.fire({
+      icon: 'success',
+      title: 'Success',
+      text: flash
+    })
+  }
+
+  $(document).on('click', '#btn-delete', function(e) {
+    e.preventDefault();
+    var link = $(this).attr('href');
+
+    Swal.fire({
+    title: 'Apakah Anda Yakin?',
+    text: "Data Akan Dihapus!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      window.location = link;
+    }
+    })
+  })
+</script>
+
+  <?php } ?>
+
+  <?php
+  if ($js == 'charts') {?>
+  <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
+  <script src="assets/js/pages/apex.init.js"></script>
+  <script src="assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+
   <?php } ?>
 
 </body>
