@@ -2,12 +2,16 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 $route['default_controller'] = 'Home';
-$route['Dashboard'] = 'Home/index';
+$route['dashboard'] = 'Home/index';
 //Auth
 $route['Auth'] = 'C_Auth/index';
 //Anggota
-$route['Anggota'] = 'C_Anggota/index';
-$route['tambah_anggota'] = 'C_Anggota/tambah_anggota';
+$route['anggota'] = 'C_Anggota/index';
+$route['daftar'] = 'C_Anggota/daftar';
+$route['detail/(:any)'] = 'C_Anggota/detail/$1';
+$route['edit/(:any)'] = 'C_Anggota/update/$1';
+$route['hapus/(:any)'] = 'C_Anggota/delete/$1';
+$route['update_anggota'] = 'C_Anggota/update_action';
 $route['Profile'] = 'C_Anggota/profile';
 //Instansi
 $route['Instansi'] = 'C_Instansi/index';

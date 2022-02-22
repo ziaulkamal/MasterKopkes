@@ -3,24 +3,34 @@
         <div id="sidebar-menu">
             <ul class="metismenu list-unstyled" id="side-menu">
               <li>
-                <a href="<?= base_url('Dashboard'); ?>" class="waves-effect">
-                  <i class="mdi mdi-home-variant-outline"></i><span
-                  class="badge rounded-pill bg-primary float-end">3</span>
+                <a href="<?= base_url('dashboard'); ?>" class="waves-effect">
+                  <i class="mdi mdi-home-variant-outline"></i>
                   <span>Dashboard</span>
                 </a>
               </li>
+              <li class="menu-title">Manejemen Dasar</li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="mdi mdi-gradient"></i>
-                        <span>Manejemen Dasar</span>
+                        <span>Anggota</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="<?=base_url('Anggota'); ?>">Anggota</a></li>
-                        <li><a href="<?=base_url('Instansi'); ?>">Instansi</a></li>
-                        <li><a href="<?=base_url(''); ?>">Simpanan Sukarela</a></li>
+                        <li><a href="<?=base_url('anggota'); ?>">Data Anggota</a></li>
+                        <li><a href="<?=base_url('daftar'); ?>">Daftar Anggota</a></li>
                     </ul>
                 </li>
-
+                <li class="menu-title">Instansi</li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="mdi mdi-gradient"></i>
+                        <span>Instansi</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                      <li><a href="<?=base_url('Instansi'); ?>"> Data Instansi</a></li>
+                        <li><a href="<?=base_url(''); ?>"></a></li>
+                    </ul>
+                </li>
+                <li class="menu-title">Simpanan</li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="mdi mdi-gradient"></i>
@@ -32,6 +42,7 @@
                         <li><a href="<?=base_url('sim_sukarela'); ?>">Simpanan Sukarela</a></li>
                     </ul>
                 </li>
+                <li class="menu-title">Operasional</li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="mdi mdi-page-layout-header"></i>
@@ -44,6 +55,7 @@
                         <li><a href="layouts-hori-boxed-width.html">Data Harian</a></li>
                     </ul>
                 </li>
+                <li class="menu-title">Angsuran</li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="mdi mdi-account-circle-outline"></i>
@@ -55,6 +67,7 @@
                         <li><a href="auth-recoverpw.html">Laporan Angsuran</a></li>
                     </ul>
                 </li>
+                <li class="menu-title">Mudul</li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="mdi mdi-format-page-break"></i>
@@ -66,6 +79,7 @@
                         <li><a href="pages-comingsoon.html">Hapus Modul</a></li>
                     </ul>
                 </li>
+                <li class="menu-title">Laporan</li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="mdi mdi-briefcase-variant-outline"></i>
