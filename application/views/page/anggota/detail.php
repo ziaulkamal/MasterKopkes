@@ -33,7 +33,7 @@
                                         <div class="mb-3 col-xl-6">
                                           <label class="form-label">No Rekening</label>
                                           <div>
-                                            <input type="text" class="form-control"  value="<?php echo $no_rekening; ?>" readonly/>
+                                            <input type="text" class="form-control"  value="<?php echo $no_rek; ?>" readonly/>
                                           </div>
                                         </div>
                                         <div class="mb-3 col-xl-6">
@@ -82,13 +82,13 @@
                                         <div class="mb-3 col-xl-6">
                                           <label class="form-label">Instansi</label>
                                           <div>
-                                            <input type="text" class="form-control"  value="<?php echo $no_hp; ?>" readonly/>
+                                            <input type="text" class="form-control"  value="<?php echo $instansi; ?>" readonly/>
                                           </div>
                                         </div>
                                         <div class="mb-3 col-xl-6">
                                           <label class="form-label">Tanggal Terdata</label>
                                           <div>
-                                            <input type="text" class="form-control"  value="<?php echo $tanggal_terdaftar; ?>" readonly/>
+                                            <input type="text" class="form-control"  value="<?php echo $d_reg; ?>" readonly/>
                                           </div>
                                         </div>
                                         <div>

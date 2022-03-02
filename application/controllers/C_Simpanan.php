@@ -17,21 +17,21 @@ class C_Simpanan extends CI_Controller{
     );
     $this->load->view('main', $data);
   }
-  function detail_simpanan()
-  {
-    $data = array(
-      'js'    =>  'editdata',
-      'title' =>  'Detail Simpanan Pokok',
-      'page'  =>  'page/simpanan/sim_pokok/detail_simpanan'
-    );
-    $this->load->view('main', $data);
-  }
-  function tambah_simpanan()
+  function cari_simpan()
   {
     $data = array(
       'js'    =>  '',
-      'title' =>  'Tambah Simpanan Pokok',
-      'page'  =>  'page/simpanan/sim_pokok/tambah'
+      'title' =>  'Cari Nasabah',
+      'page'  =>  'page/simpanan/cari_simpan'
+    );
+    $this->load->view('main', $data);
+  }
+  function data_simpan()
+  {
+    $data = array(
+      'js'    =>  'editdata',
+      'title' =>  'Data Simpana Anggota',
+      'page'  =>  'page/simpanan/data_simpan'
     );
     $this->load->view('main', $data);
   }
