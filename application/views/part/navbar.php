@@ -38,7 +38,7 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="<?=base_url('C_Simpanan/cari_simpan'); ?>">Cari ID Anggota</a></li>
-                        <li><a href="<?=base_url('C_Simpanan/data_simpan'); ?>">Data Simpanan Anggota</a></li>
+                        <li><a href="<?=base_url('C_Simpanan/penarikan'); ?>">Data Simpanan Anggota</a></li>
                     </ul>
                 </li>
 

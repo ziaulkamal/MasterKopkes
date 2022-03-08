@@ -31,6 +31,13 @@ class M_anggota extends CI_Model
     return $this->db->get($this->table)->row();
   }
 
+  function cari_anggota($no_anggota)
+  {
+    $this->db->like('no_anggota', $no_anggota);
+    $query = $this->db->get($this->table);
+    return $query->result();
+  }
+
 
   // insert data
   function insert($data)

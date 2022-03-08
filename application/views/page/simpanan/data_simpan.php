@@ -23,46 +23,39 @@
                                 <div class="card">
                                     <div class="card-body">
 
-                                        <h4 class="card-title">Default Datatable</h4>            
+                                        <h4 class="card-title">Default Datatable</h4>
                                         <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                             <thead>
                                             <tr>
-                                                <th>Name</th>
-                                                <th>Position</th>
-                                                <th>Office</th>
-                                                <th>Age</th>
-                                                <th>Start date</th>
-                                                <th>Salary</th>
+                                                <th>No</th>
+                                                <th>ID Anggota</th>
+                                                <th>Nama Anggota</th>
+                                                <th>Simpana Pokok</th>
+                                                <th>Simpana Wajib</th>
+                                                <th>Simpana Sukarela</th>
+                                                <th>Tanggal Update</th>
+                                                <th>Opsi Lanjutan</th>
                                             </tr>
                                             </thead>
-
-
                                             <tbody>
+                                            <?php
+                                            $no = 1;
+                                            foreach ($simpanan as $data) {
+                                            ?>
                                             <tr>
-                                                <td>Tiger Nixon</td>
-                                                <td>System Architect</td>
-                                                <td>Edinburgh</td>
-                                                <td>61</td>
-                                                <td>2011/04/25</td>
-                                                <td>$320,800</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Garrett Winters</td>
-                                                <td>Accountant</td>
-                                                <td>Tokyo</td>
-                                                <td>63</td>
-                                                <td>2011/07/25</td>
-                                                <td>$170,750</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Ashton Cox</td>
-                                                <td>Junior Technical Author</td>
-                                                <td>San Francisco</td>
-                                                <td>66</td>
-                                                <td>2009/01/12</td>
-                                                <td>$86,000</td>
-                                            </tr>
+                                              <td><?= $no++ ?></td>
+                        			                <td><?= $data->no_anggota ?></td>
+                        			                <td><?= $data->nm_lengkap ?></td>
+                        			                <td><?= $data->simpok ?></td>
+                        			                <td><?= $data->simwa ?></td>
+                        			                <td><?= $data->simka ?></td>
+                        			                <td><?= $data->tgl_update ?></td>
+                        			               <td>
+                                               <a href="<?= base_url('') ?>"class="btn btn-primary btn-rounded waves-effect waves-light">Penarikan</a>
 
+                                             </td>
+                                            </tr>
+                                              <?php } ?>
                                             </tbody>
                                         </table>
 

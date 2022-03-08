@@ -74,7 +74,7 @@
                                           </div>
                                         </div>
                                         <div class="mb-3 col-xl-4">
-                                          <label class="form-label">Tanggal_lahir</label>
+                                          <label class="form-label">Tanggal Lahir</label>
                                           <div class="input-group" id="datepicker1">
                                             <input type="date" class="form-control" name="tanggal_lahir" id="tanggal_lahir" value="<?php echo set_value('tgl_lahir'); ?>"
                                              data-date-format="dd M, yyyy" data-date-container="#datepicker1" data-provide="datepicker">
