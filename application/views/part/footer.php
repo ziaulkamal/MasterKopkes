@@ -37,9 +37,6 @@ if ($js == 'editdata' || $js == 'instansi') {?>
 <script src="<?=base_url(); ?>assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
 <script src="<?=base_url(); ?>assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
 <script src="<?=base_url(); ?>assets/js/pages/datatables.init.js"></script>
-<script src="<?=base_url(); ?>assets/libs/table-edits/build/table-edits.min.js"></script>
-<script src="<?=base_url(); ?>assets/js/pages/table-editable.init.js"></script>
-
 <script src="assets/libs/sweetalert2/sweetalert2.min.js"></script>
 <script src="assets/js/pages/sweet-alerts.init.js"></script>
 

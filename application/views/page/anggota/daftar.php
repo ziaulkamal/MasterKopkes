@@ -52,14 +52,12 @@
                                         <div class="mb-3 col-xl-4">
                                           <label class="form-label">Status Perkawinan</label>
                                             <div class="input-group">
-                                                <select class="form-control" name="status_perkawinan" required>
+                                                <select class="form-control" name="sts_kawin" required>
                                                   <option default>-- Pilih --</option>
                                                   <option value="Kawin">Kawin</option>
                                                   <option value="Belum">Belum Kawin</option>
                                                   <option value="Janda">Janda</option>
                                                   <option value="Duda">Duda</option>
-                                                  <option value="<?php echo $sts_kawin; ?>" selected><?php echo $sts_kawin; ?></option>
-
                                                 </select>
                                             </div>
                                         </div>
@@ -76,7 +74,7 @@
                                           </div>
                                         </div>
                                         <div class="mb-3 col-xl-4">
-                                          <label class="form-label">Tanggal_lahir</label>
+                                          <label class="form-label">Tanggal Lahir</label>
                                           <div class="input-group" id="datepicker1">
                                             <input type="date" class="form-control" name="tanggal_lahir" id="tanggal_lahir" value="<?php echo set_value('tgl_lahir'); ?>"
                                              data-date-format="dd M, yyyy" data-date-container="#datepicker1" data-provide="datepicker">

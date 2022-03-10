@@ -46,7 +46,8 @@
                         <td>
                         <a href="<?= base_url('detail/').$data->id_anggota; ?>" class="badge badge-soft-dark">Detail</a>
                         <a href="<?= base_url('edit/').$data->id_anggota; ?>" class="badge badge-soft-primary">Edit</a>
-                        <a href="<?= base_url('hapus/').$data->id_anggota; ?>" id="btn-delete" class="badge badge-soft-danger">Hapus</a>
+                        <a href="<?= base_url('hapus/').$data->id_anggota; ?>" id="btn-delete" class="badge badge-soft-danger" onclick="<?= base_url('anggota') ?>">Hapus</a>
+
                       </td>
                     </tr>
                     <?php } ?>

@@ -8,6 +8,7 @@ class C_Anggota extends CI_Controller{
   {
     parent::__construct();
     $this->load->model('M_anggota');
+    $this->load->model('M_rekening');
     $this->load->library('form_validation');
   }
 
@@ -26,6 +27,7 @@ class C_Anggota extends CI_Controller{
 // IDEA: fungsi detail
   function detail($id)
   {
+
     $row = $this->M_anggota->getById($id);
     if ($row) {
       $data = array(
@@ -45,8 +47,8 @@ class C_Anggota extends CI_Controller{
       'alamat' => $row->alamat,
       'no_hp' => $row->no_hp,
       'instansi' => $row->instansi,
-      'no_rekening' => $row->no_rek,
-      'tanggal_terdaftar' => $row->d_reg,
+      'no_rek' => $row->no_rek,
+      'd_reg' => $row->d_reg,
       'sts_anggota' => $row->sts_anggota,
         );
         $this->load->view('main', $data);
@@ -64,7 +66,7 @@ class C_Anggota extends CI_Controller{
      $b = time();
      $c = $a+$b;
      $generate = substr($c, 6);
-    $data = array(
+     $data = array(
      'js'    => '',
      'title' => 'Data Anggota',
      'id_anggota' => 'M-'.date('Y').$generate.date('d'),
@@ -76,9 +78,14 @@ class C_Anggota extends CI_Controller{
   // IDEA: daftar Anggota
   function daftar_anggota()
   {
-    $date = date('Y-m-d');
+
+    $b = time();
+    $rekening = substr($this->input->post('no_hp'),4);
     if ($this->input->post('nip') == '' || $this->input->post('nip') == NULL ) {
       $nip = '-';
+    }
+    else {
+      $nip = $this->input->post('nip');
     }
     $no_anggota = $this->input->post('id_anggota',TRUE);
     $nik = $this->input->post('nik',TRUE);
@@ -87,12 +94,12 @@ class C_Anggota extends CI_Controller{
     $nm_lengkap = $this->input->post('nama_lengkap',TRUE);
     $tp_lahir = $this->input->post('tempat_lahir',TRUE);
     $tgl_lahir = $this->input->post('tanggal_lahir',TRUE);
-    $sts_kawin = $this->input->post('status_perkawinan',TRUE);
+    $sts_kawin = $this->input->post('sts_kawin',TRUE);
     $alamat = $this->input->post('alamat',TRUE);
     $no_hp = $this->input->post('nomor_hp',TRUE);
     $instansi = $this->input->post('instansi',TRUE);
-    $d_reg = time();
-    $no_rek = time() - date('Y');
+    $d_reg = date('Y-m-d');
+    $no_rek = $b + $rekening;
     $sts_anggota = $this->input->post('status_anggota',TRUE);
 
     $this->form_validation->set_rules('nomor_hp', 'Nomor_hp', 'required|min_length[11]|max_length[14]trim|is_unique[tb_anggota.no_hp]' , array('trim' => '', 'required' => 'wajib diisi.', 'is_unique' => 'Nomor Telepon Tersebut Sudah Pernah Terdata'));
@@ -121,16 +128,18 @@ class C_Anggota extends CI_Controller{
         'no_rek'      => $no_rek,
         'sts_anggota' => $sts_anggota,
       );
-      $this->M_anggota->insert($data);
-      $this->session->set_flashdata('message', '<div class="alert-success">Berhasil Menambahkan Anggota baru dengan nama <strong>'.$data['nm_lengkap']. '</strong> dengan ID Anggota <strong>'.$data['id_anggota'].'<strong></div>');
-      redirect(site_url('anggota'));
 
+      $smpnrek = $this->M_anggota->insert($data);
+      $rekening = $this->M_rekening->insert($no_rek,$d_reg);
+      $this->session->set_flashdata('message', '<div class="alert alert-primary" role="alert">Berhasil Menambahkan Anggota baru dengan nama <strong>'.$data['nm_lengkap']. '</strong> dengan ID Anggota <strong>'.$data['no_anggota'].'<strong></div>');
+      redirect(site_url('anggota'));
     }
   }
 
   // IDEA: fungsi update
   function update($id)
   {
+
     $row = $this->M_anggota->getById($id);
     if ($row) {
       $data = array(
@@ -158,12 +167,12 @@ class C_Anggota extends CI_Controller{
         $this->session->set_flashdata('message', '<div class="alert-danger">Data yang Anda Cari Tidak Ditemukan</div>');
         redirect(site_url('anggota'));
       }
-
   }
 
   // IDEA: fungsi update action
    function update_action()
   {
+
     $date = date('Y-m-d');
     $id_anggota = $this->input->post('id_anggota');
     $data = array(
@@ -183,7 +192,7 @@ class C_Anggota extends CI_Controller{
       'sts_anggota' => $this->input->post('sts_anggota'),
     );
     $this->M_anggota->update($id_anggota, $data);
-    $this->session->set_flashdata('message', '<div class="alert-success">Data Anggota  Dengan ID '.$id_anggota.' Sudah Perbaharui.</div>');
+    $this->session->set_flashdata('message', '<div class="alert alert-primary" role="alert">Berhasil Menambahkan Anggota baru dengan nama <strong>'.$data['nm_lengkap']. '</strong> dengan ID Anggota <strong>'.$data['id_anggota'].'<strong></div>');
     redirect ('anggota');
   }
 
@@ -196,9 +205,11 @@ class C_Anggota extends CI_Controller{
     if ($row) {
         $this->M_anggota->delete($id);
         $this->db->query("DELETE FROM tb_anggota WHERE id_anggota='$id'");
+        $this->session->set_flashdata('message', '<div class="alert alert-danger mb-0" role="alert">Data Berhasil dihapus !</div>');
+        redirect(base_url('anggota'));
     }
     else {
-        $this->session->set_flashdata('message', '<div class="alert-danger">Data Tidak Ditemukan !</div>');
+        $this->session->set_flashdata('message', '<div class="alert alert-danger mb-0" role="alert">Data Tidak Ditemukan !</div>');
         redirect(base_url('anggota'));
       }
     }
