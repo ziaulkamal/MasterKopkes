@@ -4,21 +4,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class M_rekening extends CI_Model{
 
   public $table = 'tb_rekening';
-  public function __construct()
-  {
-    parent::__construct();
-
-  }
-  // no_rek
-  // saldo
-  // debit
-  // kredit
-  // simpok
-  // simwa
-  // simka
-  // dagoro
-  // sts_pinjam
-  // tgl_update
 
   public function data_rekening(){
      $this->db->SELECT('*');
@@ -39,7 +24,8 @@ class M_rekening extends CI_Model{
   }
 
 
-// IDEA: tambah data awal pendaftaran anggota
+// IDEA: tambah data awal pendaftaran anggota -> Di Model Anggota
+
   function insert($no_rek,$d_reg)
   {
       $query = "INSERT INTO tb_rekening VALUES ($no_rek,'','','','','','','','Belum Ada',$d_reg)";
