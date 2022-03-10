@@ -36,7 +36,7 @@ class C_Simpanan extends CI_Controller{
       'js'      =>  '',
       'title'   => 'Data Anggota',
       'anggota' => $cari['cari'],
-      'page'    => 'page/simpanan/simpan.php',
+      'page'    => 'page/simpanan/form_simpanan',
     );
     $this->load->view('main', $data);
   }
@@ -45,10 +45,16 @@ class C_Simpanan extends CI_Controller{
 
   function data_simpan()
   {
-      $no_anggota = $this->input->post('no_anggota');
-      $jml_simpan = $this->input->post('jml_simpan');
-      $tgl_simpan = $this->input->post('tgl_simpan');
-      $keterangan = $this->input->post('keterangan');
+    $no_anggota = $this->input->post('no_anggota');
+
+    $data_rekening = $this->M_rekening->baca_rekening($no_anggota);
+
+    $jml_simpan = $this->input->post('jml_simpan');
+    $jn_simpan  = $this->input->post('jn_simpanan');
+    $tgl_simpan = $this->input->post('tgl_simpan');
+    $keterangan = $this->input->post('keterangan');
+    $rekening   = $this->input->post('x');
+
 
       $data = array(
         'no_anggota' => $no_anggota,
@@ -56,7 +62,9 @@ class C_Simpanan extends CI_Controller{
         'tgl_simpan' => $tgl_simpan,
         'keterangan' => $keterangan,
        );
-       $this->M_rekening->insertD($data);
+
+       $this->M_rekening->proses_simpanan($data);
+
        $this->session->set_flashdata('message', '<div class="alert alert-primary" role="alert">Berhasil Menambahkan Simpana baru dengan nama <strong>'.$data['nm_lengkap']. '</strong> dengan ID Anggota <strong>'.$data['no_anggota'].'<strong></div>');
        redirect('C_Simpanan/cari_simpan');
     }

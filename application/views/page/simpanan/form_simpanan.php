@@ -11,6 +11,7 @@
                                    <?php foreach ($anggota as $data){?>
 
                                     <form method="post" action="<?=base_url('C_Simpanan/data_simpan') ?>" class="custom-validation">
+                                      <input type="hidden" name="x" value="<?= $data->no_rek; ?>">
                                       <div class="row">
                                         <div class="mb-3 col-xl-4">
                                           <label class="form-label">ID Anggota</label>

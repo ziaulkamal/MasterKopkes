@@ -43,9 +43,14 @@ class M_rekening extends CI_Model{
   // }
 
   // IDEA: tambah data simpana anggota
-  function insertD($data)
+  function proses_simpanan($data)
   {
     return $this->db->insert('tb_simpanan', $data);
   }
 
+  function baca_rekening($no_anggota)
+  {
+    $this->db->where('no_anggota', $no_anggota);
+    return $this->db->get('master_anggota')->row();
+  }
 }
