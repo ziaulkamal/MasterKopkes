@@ -7,6 +7,7 @@
                     </div>
                 </div>
             </div>
+            <?php echo $this->session->flashdata('message'); ?>
 
             <form class="custom-validation" action="<?= base_url('C_Simpanan/simpan_action') ?>"  method="post" enctype="multipart/form-data">
             <div class="row">
@@ -16,7 +17,7 @@
                         <div class="row">
                           <div class="mb-3 col-xl-12">
                             <div>
-                              <input type="text" class="form-control" name="<?= $name ?>" maxlength="12"  placeholder="<?= $placeholder ?>" />
+                              <input type="text" class="form-control" id="form-input" name="<?= $name ?>" maxlength="12"  placeholder="<?= $placeholder ?>" required/>
                             </div>
                           </div>
                         </div>

@@ -25,28 +25,29 @@
                                             <input type="text" class="form-control" name="nama_lengkap" value="<?= $data->nm_lengkap ?>" readonly/>
                                           </div>
                                         </div>
-                                        <?php // IDEA: tabel jenis simpanan belum ada ?>
-                                        <!-- <div class="mb-3 col-xl-4">
+                                        <div class="mb-3 col-xl-4">
                                           <label class="form-label">Jenis Simpanan</label>
                                             <div class="input-group">
-                                                <select class="form-control" name="jenis_simpan" required>
+                                                <select class="form-control" name="jn_simpanan" required>
+                                                  <option selected>-- Pilih --</option>
                                                   <option value="1">Pokok</option>
                                                   <option value="2">Wajib</option>
                                                   <option value="3">Sukarela</option>
+                                                  <option value="4">Dana gotongroyong</option>
                                                 </select>
                                             </div>
-                                        </div> -->
+                                        </div>
                                         <div class="mb-3 col-xl-4">
                                           <label class="form-label">Jumlah Simpanan</label>
                                           <div>
-                                            <input type="text" class="form-control" name="jml_simpan" />
+                                            <input type="text" class="form-control" name="jml_simpan" required/>
                                           </div>
                                         </div>
                                         <div class="mb-3 col-xl-4">
                                           <label class="form-label">Tanggal Transaksi</label>
                                           <div class="input-group" id="datepicker1">
-                                            <input type="date" class="form-control" name="tgl_simpan" id="tgl_simpan" value=""
-                                             data-date-format="dd M, yyyy" data-date-container="#datepicker1" data-provide="datepicker">
+                                            <input type="date" class="form-control" name="tgl_simpan"
+                                             data-date-format="dd M, yyyy" data-date-container="#datepicker1" data-provide="datepicker" required>
                                           </div>
                                         </div>
                                         <div class="mb-3 col-xl-4">
