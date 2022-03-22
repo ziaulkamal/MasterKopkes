@@ -21,14 +21,5 @@ class C_Instansi extends CI_Controller{
      );
      $this->load->view('main', $data);
   }
-  function tambah_instansi()
-  {
-    $data = array(
-      'js'    => '',
-      'title' => 'Tambah Instansi',
-      'page'  => 'page/instansi/tambah',
-    );
-    $this->load->view('main', $data);
-  }
 
 }

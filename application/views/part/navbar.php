@@ -26,8 +26,7 @@
                         <span>Instansi</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                      <li><a href="<?=base_url('Instansi'); ?>"> Data Instansi</a></li>
-                        <li><a href="<?=base_url(''); ?>"></a></li>
+                      <li><a href="<?=base_url('Instansi'); ?>"> Data Instansi Anggota</a></li>
                     </ul>
                 </li>
 

@@ -1,4 +1,4 @@
-<body class="bg-pattern">
+<body class="bg-light">
     <div class="bg-overlay"></div>
     <div class="account-pages my-5 pt-5">
         <div class="container">
@@ -15,7 +15,7 @@
                                 </div>
                                 <!-- end row -->
                                 <h4 class="font-size-18 text-muted mt-2 text-center">Welcome Back !</h4>
-                                <p class="mb-5 text-center">Sign in to continue to Upzet.</p>
+                                <p class="mb-5 text-center"> KPRI Kopkes Mandiri Syariah Abdya</p>
                                 <form class="form-horizontal" action="index.html">
 
                                     <div class="row">
@@ -38,8 +38,8 @@
                         </div>
                     </div>
                     <div class="mt-5 text-center">
-                        <p class="text-white-50">© <script>document.write(new Date().getFullYear())</script> Upzet. Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesdesign</p>
-                    </div>
+                          <script>document.write(new Date().getFullYear())</script> © KPRI Kopkes Mandiri Syariah Abdya.
+                      </div>
                 </div>
             </div>
         </div>

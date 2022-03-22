@@ -50,7 +50,6 @@
                                                   <option value="Janda">Janda</option>
                                                   <option value="Duda">Duda</option>
                                                   <option value="<?php echo $sts_kawin; ?>" selected><?php echo $sts_kawin; ?></option>
-
                                                 </select>
                                             </div>
                                         </div>

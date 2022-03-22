@@ -45,12 +45,10 @@ class C_Simpanan extends CI_Controller{
   }
 
   // IDEA: proses simpan data simpanan anggota
-
   function data_simpan()
   {
     $no_anggota = $this->input->post('no_anggota');
     $tgl_simpan = $this->input->post('tgl_simpan');
-
     if ($tgl_simpan != NULL) {
       $set_tanggal = $this->input->post('tgl_simpan');
     }else {
@@ -64,13 +62,13 @@ class C_Simpanan extends CI_Controller{
     $data_rekening = $this->M_rekening->baca_rekening($no_anggota);
     foreach ($data_rekening as $key) {
       $norek = $key->no_rek;
-      $saldo_awal = $key->saldo;
-      $debit_awal = $key->saldo;
-      $kredi_awal = $key->saldo;
-      $simpok_awal = $key->saldo;
-      $simwa_awal = $key->saldo;
-      $simka_awal = $key->saldo;
-      $dagoro_awal = $key->saldo;
+      $saldo_awal   = $key->saldo;
+      $debit_awal   = $key->saldo;
+      $kredi_awal   = $key->saldo;
+      $simpok_awal  = $key->saldo;
+      $simwa_awal   = $key->saldo;
+      $simka_awal   = $key->saldo;
+      $dagoro_awal  = $key->saldo;
     }
 
 
@@ -81,22 +79,30 @@ class C_Simpanan extends CI_Controller{
       $saldo_akhir = $saldo_awal + $jml_simpan;
       $simpan_akhir = $simpok_awal + $jml_simpan;
       $kode_trx = 'SPO-'.time();
-      $this->db->query("UPDATE tb_rekening SET saldo='$saldo_akhir', simpok='$simpan_akhir', tgl_update='$set_tanggal' WHERE no_rek='$norek'");
+      $ket_simpan = 'Berhasil Menambahkan Simpana Baru Sejumlah'.$jml_simpan;
+      $this->db->query("INSERT INTO log_transaksi (id_log, no_anggota, jenis_trx, keterangan, tanggal) VALUES ('','$no_anggota','$kode_trx','$ket_simpan','$tgl_simpan')");
+      $this->db->query("UPDATE tb_rekening SET saldo='$saldo_akhir', simpok='$simpan_akhir', tgl_update='$set_tanggal', sts_pinjam='Ada' WHERE no_rek='$norek'");
     }elseif ($pilih_simpan == 2) {
       $saldo_akhir = $saldo_awal + $jml_simpan;
       $simpan_akhir = $simwa_awal + $jml_simpan;
       $kode_trx = 'SWA-'.time();
-      $this->db->query("UPDATE tb_rekening SET saldo='$saldo_akhir', simpok='$simpan_akhir', tgl_update='$set_tanggal' WHERE no_rek='$norek'");
+      $ket_simpan = 'Berhasil Menambahkan Simpana Baru Sejumlah'.$jml_simpan;
+      $this->db->query("INSERT INTO log_transaksi (id_log, no_anggota, jenis_trx, keterangan, tanggal) VALUES ('','$no_anggota','$kode_trx','$ket_simpan','$tgl_simpan')");
+      $this->db->query("UPDATE tb_rekening SET saldo='$saldo_akhir', simpok='$simpan_akhir', tgl_update='$set_tanggal', sts_pinjam='Ada' WHERE no_rek='$norek'");
     }elseif ($pilih_simpan == 3) {
       $saldo_akhir = $saldo_awal + $jml_simpan;
       $simpan_akhir = $simka_awal + $jml_simpan;
       $kode_trx = 'SKS-'.time();
-      $this->db->query("UPDATE tb_rekening SET saldo='$saldo_akhir', simpok='$simpan_akhir', tgl_update='$set_tanggal' WHERE no_rek='$norek'");
+      $ket_simpan = 'Berhasil Menambahkan Simpana Baru Sejumlah'.$jml_simpan;
+      $this->db->query("INSERT INTO log_transaksi (id_log, no_anggota, jenis_trx, keterangan, tanggal) VALUES ('','$no_anggota','$kode_trx','$ket_simpan','$tgl_simpan')");
+      $this->db->query("UPDATE tb_rekening SET saldo='$saldo_akhir', simpok='$simpan_akhir', tgl_update='$set_tanggal', sts_pinjam='Ada' WHERE no_rek='$norek'");
     }elseif ($pilih_simpan == 4) {
       $saldo_akhir = $saldo_awal + $jml_simpan;
       $simpan_akhir = $dagoro_awal + $jml_simpan;
       $kode_trx = 'DGR-'.time();
-        $this->db->query("UPDATE tb_rekening SET saldo='$saldo_akhir', simpok='$simpan_akhir', tgl_update='$set_tanggal' WHERE no_rek='$norek'");
+      $ket_simpan = 'Berhasil Menambahkan Simpana Baru Sejumlah'.$jml_simpan;
+      $this->db->query("INSERT INTO log_transaksi (id_log, no_anggota, jenis_trx, keterangan, tanggal) VALUES ('','$no_anggota','$kode_trx','$ket_simpan','$tgl_simpan')");
+      $this->db->query("UPDATE tb_rekening SET saldo='$saldo_akhir', simpok='$simpan_akhir', tgl_update='$set_tanggal', sts_pinjam='Ada' WHERE no_rek='$norek'");
     }else {
       $pilih_simpan == NULL;
     }
@@ -106,11 +112,11 @@ class C_Simpanan extends CI_Controller{
         'trx_simpan' => $kode_trx,
         'jml_simpan' => $jml_simpan,
         'tgl_simpan' => $tgl_simpan,
-        'keterangan' => $keterangan,
+        'keterangan' => $ket_simpan,
        );
        $this->M_rekening->proses_simpanan($data);
        $this->session->set_flashdata('message', '<div class="alert alert-primary" role="alert">Berhasil Menambahkan Simpana Baru dengan ID Anggota <strong>'.$data['no_anggota'].'<strong></div>');
-       redirect('C_Simpanan/cari_simpan');
+       redirect('C_Simpanan/invoice');
     }
 
     function list_simpanan()
@@ -125,4 +131,38 @@ class C_Simpanan extends CI_Controller{
       $this->load->view('main', $data);
     }
 
+    function penarikan()
+    {
+      $data = array(
+        'js' => '',
+        'title' => 'Penarikan',
+        'page'  => 'page/simpanan/penarikan'
+      );
+      $this->load->view('main', $data);
+    }
+
+    function invoice()
+    {
+      $tampil_data = $this->M_transaksi->get_data_cetak()->result();
+      foreach ($tampil_data as $data) {
+      $nama = $data->nm_lengkap;
+      $no_anggota = $data->no_anggota;
+      $jml_simpan = $data->jml_simpan;
+      $keterangan = $data->keterangan;
+      $invoice_no = $data->trx_simpan;
+      $tanggal    = $data->tgl_simpan;
+    }
+      $data = array(
+        'nama'        => $nama,
+        'no_anggota'  => $no_anggota,
+        'jml_simpan'  => $jml_simpan,
+        'keterangan'  => $keterangan,
+        'invoice_no'  => $invoice_no,
+        'tanggal'     => $tanggal,
+        'js'    => '',
+        'title' => 'Cetak Invoice',
+        'page'  => 'page/simpanan/cetak_invoice'
+      );
+      $this->load->view('main', $data);
   }
+}

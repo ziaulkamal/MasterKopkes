@@ -23,7 +23,7 @@
                                 <div class="card">
                                     <div class="card-body">
 
-                                        <h4 class="card-title">Default Datatable</h4>
+                                        <h4 class="card-title"><?= $title ?></h4>
                                         <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                             <thead>
                                             <tr>
@@ -51,7 +51,7 @@
                         			                <td><?= $data->simka ?></td>
                         			                <td><?= $data->tgl_update ?></td>
                         			               <td>
-                                               <a href="<?= base_url('') ?>"class="btn btn-primary btn-rounded waves-effect waves-light">Penarikan</a>
+                                               <a href="<?= base_url('C_Simpanan/penarikan') ?>"class="btn btn-primary btn-rounded waves-effect waves-light">Penarikan</a>
 
                                              </td>
                                             </tr>
