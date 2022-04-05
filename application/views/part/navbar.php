@@ -11,7 +11,7 @@
               <li class="menu-title">Manejemen Dasar</li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="mdi mdi-gradient"></i>
+                        <i class="mdi mdi-account-circle-outline"></i>
                         <span>Anggota</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
@@ -22,7 +22,7 @@
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="mdi mdi-gradient"></i>
+                        <i class="mdi mdi-office-building-outline"></i>
                         <span>Instansi</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
@@ -32,7 +32,7 @@
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="mdi mdi-gradient"></i>
+                        <i class="mdi mdi-safe"></i>
                         <span>Simpanan</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
@@ -66,10 +66,19 @@
                     </ul>
                 </li>
 
-
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="mdi mdi-briefcase-variant-outline"></i>
+                        <i class="mdi mdi-account-cog"></i>
+                        <span>Data Petugas</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="<?=base_url('C_Admin'); ?>">List Petugas</a></li>
+                        <li><a href="<?=base_url('C_Admin/daftar'); ?>">Daftar Petugas</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="mdi mdi-application"></i>
                         <span>Buku Laporan</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
@@ -97,6 +106,12 @@
                     <li><a href="pages-maintenance.html">Edit Modul</a></li>
                     <li><a href="pages-comingsoon.html">Hapus Modul</a></li>
                   </ul>
+                </li>
+                <li>
+                    <a href="<?= base_url('C_Auth/logout') ?>">
+                        <i class="mdi mdi-logout"></i>
+                        <span> logout </span>
+                    </a>
                 </li>
             </ul>
         </div>

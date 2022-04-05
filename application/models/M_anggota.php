@@ -1,12 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-// Menampilkan data berdasrkan id
-// Menampilkan data secara keseluruhan
-// Menyimpan data Anggota
-// Edit data Anggota
-// Hapus data Anggota
-
 class M_anggota extends CI_Model
 {
 
