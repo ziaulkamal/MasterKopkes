@@ -143,23 +143,23 @@ class C_Anggota extends CI_Controller{
     $row = $this->M_anggota->getById($id);
     if ($row) {
       $data = array(
-        'js'       => '',
-        'title'    => 'Edit Anggota',
-        'page'     => 'page/anggota/edit',
+        'js'         => '',
+        'title'      => 'Edit Anggota',
+        'page'       => 'page/anggota/edit',
         'id_anggota' => set_value('id_anggota', $row->id_anggota),
-        'nik' => set_value('nik', $row->nik),
-        'nip' => set_value('nip', $row->nip),
-        'nm_depan' => set_value('nama_depan', $row->nm_depan),
-        'nm_belakang' => set_value('nama_belakang', $row->nm_belakang),
+        'nik'        => set_value('nik', $row->nik),
+        'nip'        => set_value('nip', $row->nip),
+        'nm_depan'   => set_value('nama_depan', $row->nm_depan),
+        'nm_belakang'=> set_value('nama_belakang', $row->nm_belakang),
         'nm_lengkap' => set_value('nama_lengkap', $row->nm_lengkap),
-        'tp_lahir' => set_value('tempat_lahir', $row->tp_lahir),
-        'tgl_lahir' => set_value('tanggal_lahir', $row->tgl_lahir),
-        'sts_kawin' => set_value('status_kawin', $row->sts_kawin),
+        'tp_lahir'   => set_value('tempat_lahir', $row->tp_lahir),
+        'tgl_lahir'  => set_value('tanggal_lahir', $row->tgl_lahir),
+        'sts_kawin'  => set_value('status_kawin', $row->sts_kawin),
         'alamat' => set_value('alamat', $row->alamat),
         'no_hp' => set_value('nomor_hp', $row->no_hp),
         'instansi' => set_value('instansi', $row->instansi),
         'sts_anggota' => set_value('status_anggota', $row->sts_anggota),
-        'd_reg' => set_value('d_reg', $row->d_reg),
+        'd_reg' => set_value('d_reg', $row->d_reg)
       );
       $this->load->view('main', $data);
     }
@@ -180,15 +180,15 @@ class C_Anggota extends CI_Controller{
       'nik'         => $this->input->post('nik'),
       'nip'         => $this->input->post('nip'),
       'nm_depan'    => $this->input->post('nama_depan'),
-      'nm_lengkap'    => $this->input->post('nama_lengkap'),
+      'nm_lengkap'  => $this->input->post('nama_lengkap'),
       'nm_belakang' => $this->input->post('nama_belakang'),
       'tp_lahir'    => $this->input->post('tempat_lahir'),
       'tgl_lahir'   => $this->input->post('tanggal_lahir'),
       'sts_kawin'   => $this->input->post('sts_kawin'),
       'alamat'      => $this->input->post('alamat'),
       'no_hp'       => $this->input->post('nomor_hp'),
-      'instansi' => $this->input->post('instansi'),
-      'd_reg' => $this->input->post('tanggal_daftar'),
+      'instansi'    => $this->input->post('instansi'),
+      'd_reg'       => $this->input->post('tanggal_daftar'),
       'sts_anggota' => $this->input->post('sts_anggota'),
     );
     $this->M_anggota->update($id_anggota, $data);

@@ -1,7 +1,5 @@
 <div class="page-content">
     <div class="container-fluid">
-
-        <!-- start page title -->
         <div class="row">
                     <div class="col-xl-12">
                             <div class="card">
@@ -10,7 +8,7 @@
                                     <?php echo validation_errors('<div class="alert alert-warning">','</div>'); ?>
                                     <form method="post" action="<?=base_url('C_Anggota/update_action') ?>" class="custom-validation">
                                       <input type="hidden" name="id_anggota" value="<?= $id_anggota; ?>">
-                                      <input type="hidden" name="tanggal_daftar" value="<?php echo $d_reg; ?>">
+                                      <input type="hidden" name="tanggal_daftar" value="<?= $d_reg; ?>">
                                       <div class="row">
                                         <div class="mb-3 col-xl-4">
                                           <label class="form-label">Nama Depan</label>
@@ -50,7 +48,6 @@
                                                   <option value="Janda">Janda</option>
                                                   <option value="Duda">Duda</option>
                                                   <option value="<?php echo $sts_kawin; ?>" selected><?php echo $sts_kawin; ?></option>
-
                                                 </select>
                                             </div>
                                         </div>

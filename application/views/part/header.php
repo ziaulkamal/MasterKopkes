@@ -16,6 +16,10 @@
         <link href="<?= base_url(); ?>assets/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
         <link href="<?= base_url(); ?>assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
         <link href="<?= base_url(); ?>assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+
+        <!-- Custom style invoice1.css -->
+        <link rel="stylesheet" type="text/css" href="<?= base_url('assets'); ?>/css/invoice1.css">
+
     </head>
 
     <body data-sidebar="dark">

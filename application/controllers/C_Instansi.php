@@ -15,20 +15,11 @@ class C_Instansi extends CI_Controller{
     $tampil_data = $this->M_anggota->getAll();
     $data = array(
       'js'    => 'instansi',
-      'title' => 'Instansi',
+      'title' => 'Data Instansi',
       'anggota' => $tampil_data,
       'page'  =>  'page/instansi/index',
      );
      $this->load->view('main', $data);
-  }
-  function tambah_instansi()
-  {
-    $data = array(
-      'js'    => '',
-      'title' => 'Tambah Instansi',
-      'page'  => 'page/instansi/tambah',
-    );
-    $this->load->view('main', $data);
   }
 
 }

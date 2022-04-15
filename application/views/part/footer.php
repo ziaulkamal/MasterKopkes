@@ -17,6 +17,17 @@
 </div>
 
 <script src="<?=base_url(); ?>assets/libs/jquery/jquery.min.js"></script>
+<script>
+    var myApp = new function () {
+        this.printDiv = function () {
+            var div = document.getElementById('parent');
+            var win = window.open('', '', 'height=700,width=700');
+            win.document.write(div.outerHTML);
+            win.document.close();
+            win.print();
+        }
+    }
+</script>
 <script src="<?=base_url(); ?>assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="<?=base_url(); ?>assets/libs/metismenu/metisMenu.min.js"></script>
 <script src="<?=base_url(); ?>assets/libs/simplebar/simplebar.min.js"></script>
@@ -79,6 +90,20 @@ var flash = $('#flash').data('flash');
   <script src="assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 
   <?php } ?>
+  <script type="text/javascript">
+  $("#form-input").on({
+  keydown: function(e) {
+   if (e.which === 32)
+     return false;
+  },
+  keyup: function(){
+   this.value = this.value.toLowerCase();
+  },
+  change: function() {
+    this.value = this.value.replace(/\s/g, "");
+    }
+  });
+  </script>
 
 </body>
 </html>

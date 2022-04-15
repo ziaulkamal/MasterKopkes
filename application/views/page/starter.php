@@ -3,11 +3,11 @@
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                    <h4 class="mb-sm-0">Starter Page</h4>
+                    <h4 class="mb-sm-0"><?= $title ?></h4>
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="javascript: void(0);">Utility</a></li>
-                            <li class="breadcrumb-item active">Starter Page</li>
+                            <li class="breadcrumb-item active">Dashboard</li>
                         </ol>
                     </div>
                 </div>
@@ -24,8 +24,8 @@
                               </div>
                           </div>
                           <div class="flex-grow-1 overflow-hidden">
-                              <p class="mb-1">Anggota</p>
-                              <h5 class="mb-3">435</h5>
+                              <p class="mb-1">Total Anggota</p>
+                              <h5 class="mb-3"><?= $total_anggota ?></h5>
                           </div>
                       </div>
                   </div>
@@ -43,8 +43,8 @@
                               </div>
                           </div>
                           <div class="flex-grow-1 overflow-hidden">
-                              <p class="mb-1">Total Peminjam</p>
-                              <h5 class="mb-3">435</h5>
+                              <p class="mb-1">Total Simpanan</p>
+                              <h5 class="mb-3"><?= $total_simpanan ?></h5>
                           </div>
                       </div>
                   </div>

@@ -3,32 +3,48 @@
 
         <!-- start page title -->
         <div class="row">
-                    <div class="col-xl-12">
+                    <div class="col-xl-8">
                             <div class="card">
                                 <div class="card-body">
                                     <h4 class="card-title"><?= $title; ?></h4>
                                   <?php echo $this->session->flashdata('message'); ?>
-                                   <?php foreach ($anggota as $data){?>
-
-                                    <form method="post" action="<?=base_url('C_Simpanan/data_simpan'); ?>" class="custom-validation">
-                                      <input type="hidden" name="x" value="<?= $data->no_rek; ?>">
+                                    <form method="post" action="<?=base_url('') ?>" class="custom-validation">
+                                      <input type="hidden" name="x" value="">
                                       <div class="row">
-                                        <div class="mb-3 col-xl-4">
+                                        <div class="mb-3 col-xl-6">
                                           <label class="form-label">ID Anggota</label>
                                           <div>
-                                            <input type="text" class="form-control" name="no_anggota"  value="<?= $data->no_anggota ?>"  readonly/>
+                                            <input type="text" class="form-control" name="no_anggota"  value=""  readonly/>
                                           </div>
                                         </div>
-                                        <div class="mb-3 col-xl-4">
+                                        <div class="mb-3 col-xl-6">
                                           <label class="form-label">Nama Lengkap</label>
                                           <div>
-                                            <input type="text" class="form-control" name="nama_lengkap" value="<?= $data->nm_lengkap ?>" readonly/>
+                                            <input type="text" class="form-control" name="nama_lengkap" value="" readonly/>
                                           </div>
                                         </div>
                                         <div class="mb-3 col-xl-4">
-                                          <label class="form-label">Jenis Simpanan</label>
+                                          <label class="form-label">Total Simpanan Pokok</label>
+                                          <div>
+                                            <input type="text" class="form-control" name="simpok" value="" />
+                                          </div>
+                                        </div>
+                                        <div class="mb-3 col-xl-4">
+                                          <label class="form-label">Total Simpanan Wajib</label>
+                                          <div>
+                                            <input type="text" class="form-control" name="simwa" value="" />
+                                          </div>
+                                        </div>
+                                        <div class="mb-3 col-xl-4">
+                                          <label class="form-label">Total Simpanan Sukarela</label>
+                                          <div>
+                                            <input type="text" class="form-control" name="simka" value="" />
+                                          </div>
+                                        </div>
+                                        <div class="mb-3 col-xl-12">
+                                          <label class="form-label">Pengajuan Penarika</label>
                                             <div class="input-group">
-                                                <select class="form-control" name="jn_simpanan" required>
+                                                <select class="form-control" name="pengajuan_penarikan" >
                                                   <option selected>-- Pilih --</option>
                                                   <option value="1">Pokok</option>
                                                   <option value="2">Wajib</option>
@@ -38,16 +54,9 @@
                                             </div>
                                         </div>
                                         <div class="mb-3 col-xl-4">
-                                          <label class="form-label">Jumlah Simpanan</label>
+                                          <label class="form-label">Jumlah Penarikan</label>
                                           <div>
-                                            <input type="text" class="form-control" name="jml_simpan" required/>
-                                          </div>
-                                        </div>
-                                        <div class="mb-3 col-xl-4">
-                                          <label class="form-label">Tanggal Transaksi</label>
-                                          <div class="input-group" id="datepicker1">
-                                            <input type="date" class="form-control" name="tgl_simpan"
-                                             data-date-format="dd M, yyyy" data-date-container="#datepicker1" data-provide="datepicker" required>
+                                            <input type="text" class="form-control" name="keterangan"  value="" />
                                           </div>
                                         </div>
                                         <div class="mb-3 col-xl-4">
@@ -56,7 +65,6 @@
                                             <input type="text" class="form-control" name="keterangan"  value="" />
                                           </div>
                                         </div>
-                                        <?php } ?>
                                         <div>
                                             <div>
                                                 <button class="btn btn-primary waves-effect waves-light me-1">

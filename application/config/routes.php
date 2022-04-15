@@ -27,5 +27,10 @@ $route['tambah_instansi'] = 'C_Instansi/tambah_instansi';
 // Proses Simpan
 $route['p_simpan']  = 'C_Simpanan/simpan_action';
 
+
+
+//Daftar Petugas
+$route['edit/(:any)']    = 'C_Admin/update/$1';
+$route['hapus/(:any)']   = 'C_Admin/delete/$1';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
