@@ -25,39 +25,46 @@
                   <div class="col-12">
                     <div class="card">
                       <div class="card-body">
-                <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                    <thead>
-                    <tr>
-                        <th>No.</th>
-                        <th>ID Anggota</th>
-                        <th>No Rekening</th>
-                        <th>Nama Anggota</th>
-                        <th>Status Anggota</th>
-                        <th>Opsi Lanjutan</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                      <?php
-                      $no = 1;
-                      foreach($anggota as $data){
-                        ?>
-                    <tr>
-                        <td><?= $no++ ?></td>
-  			                <td><?= $data->no_anggota ?></td>
-  			                <td><?= $data->no_rek ?></td>
-  			                <td><?= $data->nm_lengkap ?></td>
-                        <td><?= $data->sts_anggota ?></td>
+                        <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                            <thead>
+                            <tr>
+                              <th>No.</th>
+                              <th>ID Anggota</th>
+                              <th>Nama Anggota</th>
+                              <th>Instansi</th>
+                              <th>Status</th>
+                              <th>Terdaftar</th>
+                              <th>Aksi</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                              <?php
+                              $start = 1;
+                              foreach($anggota as $data){
+                                ?>
+                            <tr>
+                                <td><?= $start++ ?></td>
+          			                <td><?= $data->no; ?></td>
+          			                <td><?= ucwords($data->nama) ?></td>
+                                <td><?= ucwords($data->instansi) ?></td>
+                                <td><?php if ($data->status == 1) {
+                                  echo '<span class="badge bg-primary">Aktif</span>';
+                                }elseif ($data->status == 0) {
+                                  echo '<span class="badge bg-light">Non-aktif</span>';
+                                } ?></td>
+                                <td><?= $data->terdaftar; ?></td>
+                                <td>
+                                <a href="<?= base_url('detail/').$data->no; ?>" class="btn btn-sm btn-outline-info waves-effect waves-light">Detail</a>
+                                <a href="<?= base_url('edit/').$data->no; ?>" class="btn btn-sm btn-outline-danger waves-effect waves-light">Edit</a>
+                                <a href="<?= base_url('hapus/').$data->no; ?>" class="btn btn-sm btn-outline-dark waves-effect waves-light" onclick="<?= base_url('anggota') ?>">Hapus</a>
+                              </td>
+                            </tr>
+                            <?php } ?>
+                            </tbody>
 
-                        <td>
-                        <a href="<?= base_url('detail/').$data->id_anggota; ?>" class="badge badge-soft-dark">Detail</a>
-                        <a href="<?= base_url('edit/').$data->id_anggota; ?>" class="badge badge-soft-primary">Edit</a>
-                        <a href="<?= base_url('hapus/').$data->id_anggota; ?>" id="btn-delete" class="badge badge-soft-danger" onclick="<?= base_url('anggota') ?>">Hapus</a>
 
-                      </td>
-                    </tr>
-                    <?php } ?>
-                    </tbody>
-                </table>
+                        </table>
+
             </div>
         </div>
     </div> <!-- end col -->

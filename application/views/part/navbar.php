@@ -16,7 +16,7 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="<?=base_url('anggota'); ?>">Data Anggota</a></li>
-                        <li><a href="<?=base_url('daftar'); ?>">Daftar Anggota</a></li>
+                        <li><a href="<?=base_url('daftar'); ?>">Tambah Anggota Baru</a></li>
                     </ul>
                 </li>
 
@@ -26,7 +26,8 @@
                         <span>Instansi</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                      <li><a href="<?=base_url('Instansi'); ?>"> Data Instansi Anggota</a></li>
+                      <li><a href="<?=base_url('Instansi'); ?>"> Data Instansi</a></li>
+                      <li><a href="<?=base_url('tambah_instansi'); ?>"> Tambah Instansi Baru</a></li>
                     </ul>
                 </li>
 
@@ -36,8 +37,19 @@
                         <span>Simpanan</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="<?=base_url('C_Simpanan/cari_simpan'); ?>">Cari ID Anggota</a></li>
-                        <li><a href="<?=base_url('C_Simpanan/list_simpanan'); ?>">Data Simpanan Anggota</a></li>
+                        <li><a href="<?=base_url('cari_simpanan'); ?>">Cari ID Anggota</a></li>
+                        <li><a href="<?=base_url('simpanan'); ?>">Data Simpanan Anggota</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="mdi mdi-safe"></i>
+                        <span>Pinjaman</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="<?=base_url('cari_pinjaman'); ?>">Cari ID Anggota</a></li>
+                        <li><a href="<?=base_url('pinjaman'); ?>">Data Pinjaman Anggota</a></li>
                     </ul>
                 </li>
 
@@ -47,10 +59,10 @@
                         <span>Operasional</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="layouts-horizontal.html">Update Data</a></li>
-                        <li><a href="layouts-hori-topbar-dark.html">Data Keseluruhan</a></li>
-                        <li><a href="layouts-hori-boxed-width.html">Data Bulana</a></li>
-                        <li><a href="layouts-hori-boxed-width.html">Data Harian</a></li>
+                        <li><a href="<?=base_url('operasional/cash_out'); ?>">Update Data Kas Keluar</a></li>
+                        <li><a href="<?=base_url('operasional/cash_in'); ?>">Update Data Kas Masuk</a></li>
+                        <li><a href="<?= base_url() ?>">Data Bulana</a></li>
+                        <li><a href="<?= base_url() ?>">Data Harian</a></li>
                     </ul>
                 </li>
 

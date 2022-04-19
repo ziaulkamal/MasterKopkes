@@ -20,25 +20,31 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-editable table-nowrap align-middle table-edits">
+                                <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                     <thead>
                                         <tr>
-                                            <th>No</th>
-                                            <th>Nama</th>
-                                            <th>Asal Instansi</th>
+                                          <th>No</th>
+                                          <th>Kode Instansi</th>
+                                          <th>Nama Instansi </th>
+                                          <th>Terdata </th>
+                                          <th>Aksi </th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                      <?php
-                                      $no = 1;
-                                      foreach($anggota as $data){
-                                        ?>
-                                    <tr>
-                                        <td><?= $no++ ?></td>
-                                        <td><?= $data->nm_lengkap ?></td>
-                                        <td><?= $data->instansi ?></td>
-                                    </tr>
-                                    <?php } ?>
+                                      <?php $start = 1;
+                                      foreach ($instansi as $data) { ?>
+                                        <tr>
+                                            <td><?= $start++ ?></td>
+                                            <td><?= $data->kode_instansi ?></td>
+                                            <td><?= $data->nama_instansi ?></td>
+                                            <td><?= $data->registration ?></td>
+                                            <td>aksi</td>
+
+                                        </tr>
+                                      <?php }
+                                       ?>
+
+
                                     </tbody>
                                     </table>
                             </div>

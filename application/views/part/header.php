@@ -10,15 +10,21 @@
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesdesign" name="author" />
         <link rel="shortcut icon" href="<?= base_url(); ?>assets/images/favicon.ico">
+        <?php // IDEA: Dasar Assets ?>
         <link href="<?= base_url(); ?>assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
         <link href="<?= base_url(); ?>assets/css/icons.min.css" rel="stylesheet" type="text/css" />
         <link href="<?= base_url(); ?>assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
-        <link href="<?= base_url(); ?>assets/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
-        <link href="<?= base_url(); ?>assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+        <?php // IDEA: End Dasar Assets ?>
+        <?php // IDEA: Penggunaan Assets DataTables ?>
+        <?php if ($js == 'dataTables') { ?>
         <link href="<?= base_url(); ?>assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        <link href="<?= base_url(); ?>assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        <link href="<?= base_url(); ?>assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+      <?php }
+        // IDEA: End Penggunaan Assets DataTables
+        ?>
 
-        <!-- Custom style invoice1.css -->
-        <link rel="stylesheet" type="text/css" href="<?= base_url('assets'); ?>/css/invoice1.css">
+
 
     </head>
 
