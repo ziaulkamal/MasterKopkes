@@ -27,4 +27,9 @@ class M_create extends CI_Model{
     $this->db->update('tb_rekening', $data);
   }
 
+
+  function insert_pinjaman($data)
+  {
+     return $this->db->insert('tb_pinjaman', $data);
+  }
 }
