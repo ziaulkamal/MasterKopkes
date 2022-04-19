@@ -22,24 +22,25 @@
       <div class="col-lg-4">
           <div class="card">
             <div class="card-body">
-                <form method="post" action="<?=base_url('C_Anggota/daftar_anggota') ?>" class="custom-validation">
+                <form method="post" action="<?=base_url('proses_pinjaman/').$rekening->no ?>" class="custom-validation">
                   <div class="row">
                     <div class="mb-3 col-xl-12">
                       <label class="form-label">Nama Anggota</label>
+
                       <div>
-                        <input type="text" class="form-control" name="nik" maxlength="16" value="<?= $rekening->nama ?>"  readonly/>
+                        <input type="text" class="form-control" value="<?= $rekening->nama ?>"  readonly/>
                       </div>
                     </div>
                     <div class="mb-3 col-xl-12">
                       <label class="form-label">Masa Pinjaman <code>* angka dalam hitungan bulan</code></label>
                       <div>
-                        <input type="number" class="form-control" name="nik" maxlength="16" value="" />
+                        <input type="number" class="form-control" name="tenor" maxlength="2"/>
                       </div>
                     </div>
                     <div class="mb-3 col-xl-12">
                       <label class="form-label">Jumlah Pinjaman</label>
                       <div>
-                        <input type="text" class="form-control" name="nik" maxlength="16" value="" />
+                        <input type="text" class="form-control" name="jumlah" />
                       </div>
                     </div>
                     <div>

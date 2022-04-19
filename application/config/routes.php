@@ -15,13 +15,14 @@ $route['tambah_instansi'] = 'C_Instansi/tambah_instansi';
 
 //Simpanan
 $route['simpanan_pertama/(:any)'] = 'C_Pencarian/add_simpanan/$1';
-$route['simpan_rekening/(:any)'] = 'C_Simpanan/simpan_rekening/$1';
+$route['simpan_rekening/(:any)'] = 'C_Akutansi/simpan_rekening/$1';
 $route['simpanan'] = 'C_Akutansi/rekening';
 $route['tambah_simpanan'] = 'C_Akutansi/tambah_simpanan';
 
 //Pinjaman
 $route['pinjaman'] = 'C_Akutansi/pinjaman';
 $route['tambah_pinjaman'] = 'C_Akutansi/tambah_pinjaman';
+$route['proses_pinjaman/(:any)'] = 'C_Akutansi/simpan_pinjaman/$1';
 
 // Pencarian
 $route['cari_simpanan']  = 'C_Pencarian/cari_anggota_simpanan';
