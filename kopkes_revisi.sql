@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 21, 2022 at 05:30 PM
+-- Generation Time: Apr 21, 2022 at 07:03 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -49,7 +49,7 @@ CREATE TABLE `master_view_anggota_all` (
 CREATE TABLE `master_view_pinjaman` (
 `id` int(11)
 ,`kode` varchar(15)
-,`no_anggota` varchar(11)
+,`no_rekening` varchar(11)
 ,`nama` varchar(50)
 ,`plafon` double
 ,`tenor` int(11)
@@ -909,7 +909,7 @@ CREATE TABLE `tb_phu` (
 CREATE TABLE `tb_pinjaman` (
   `id` int(11) NOT NULL,
   `kode_pinjaman` varchar(15) NOT NULL,
-  `no_anggota` varchar(11) NOT NULL,
+  `no_rekening` varchar(11) NOT NULL,
   `plafon` double NOT NULL,
   `tenor` int(11) NOT NULL,
   `margin` double NOT NULL,
@@ -946,7 +946,7 @@ CREATE TABLE `tb_rekening` (
 --
 
 INSERT INTO `tb_rekening` (`no_rekening`, `anggota_no`, `s_pokok`, `s_wajib`, `s_khusus`, `s_lain`, `s_gotongroyong`, `total_akumulasi`, `sts_pinjaman`, `last_update`) VALUES
-('20220101', '0101', 24000, 5520000, 0, 0, 0, 5544000, 0, '0000-00-00'),
+('20220101', '0101', 24000, 5520000, 0, 0, 1674930, 5544000, 0, '0000-00-00'),
 ('202201010', '01010', 24000, 14530000, 440000, 0, 0, 14994000, 0, '0000-00-00'),
 ('202201011', '01011', 24000, 14530000, 400000, 0, 0, 14954000, 0, '0000-00-00'),
 ('202201012', '01012', 24000, 14530000, 400000, 0, 0, 14954000, 0, '0000-00-00'),
@@ -1625,7 +1625,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `master_view_pinjaman`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `master_view_pinjaman`  AS SELECT `tb_pinjaman`.`id` AS `id`, `tb_pinjaman`.`kode_pinjaman` AS `kode`, `tb_pinjaman`.`no_anggota` AS `no_anggota`, `tb_anggota`.`nama_anggota` AS `nama`, `tb_pinjaman`.`plafon` AS `plafon`, `tb_pinjaman`.`tenor` AS `tenor`, `tb_pinjaman`.`margin` AS `margin`, `tb_pinjaman`.`pokok_murabahan` AS `pokok`, `tb_pinjaman`.`total_gotongroyong` AS `gotong_royong`, `tb_pinjaman`.`angsuran_ke` AS `ke`, `tb_pinjaman`.`sisa_angsuran` AS `sisa_angsuran`, `tb_pinjaman`.`tanggal_pengajuan` AS `tgl_pengajuan`, `tb_pinjaman`.`last_update` AS `last_update` FROM (`tb_pinjaman` join `tb_anggota` on(`tb_anggota`.`no_anggota` = `tb_pinjaman`.`no_anggota`))  ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `master_view_pinjaman`  AS SELECT `tb_pinjaman`.`id` AS `id`, `tb_pinjaman`.`kode_pinjaman` AS `kode`, `tb_pinjaman`.`no_rekening` AS `no_rekening`, `master_view_rekening`.`nama` AS `nama`, `tb_pinjaman`.`plafon` AS `plafon`, `tb_pinjaman`.`tenor` AS `tenor`, `tb_pinjaman`.`margin` AS `margin`, `tb_pinjaman`.`pokok_murabahan` AS `pokok`, `tb_pinjaman`.`total_gotongroyong` AS `gotong_royong`, `tb_pinjaman`.`angsuran_ke` AS `ke`, `tb_pinjaman`.`sisa_angsuran` AS `sisa_angsuran`, `tb_pinjaman`.`tanggal_pengajuan` AS `tgl_pengajuan`, `tb_pinjaman`.`last_update` AS `last_update` FROM (`tb_pinjaman` join `master_view_rekening` on(`master_view_rekening`.`no` = `tb_pinjaman`.`no_rekening`))  ;
 
 -- --------------------------------------------------------
 
@@ -1734,7 +1734,7 @@ ALTER TABLE `tb_phu`
 -- AUTO_INCREMENT for table `tb_pinjaman`
 --
 ALTER TABLE `tb_pinjaman`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tb_shu`

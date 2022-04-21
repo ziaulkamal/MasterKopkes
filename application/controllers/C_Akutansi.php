@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+date_default_timezone_set('Asia/Jakarta');
 
 class C_Akutansi extends CI_Controller{
 
@@ -62,7 +63,7 @@ class C_Akutansi extends CI_Controller{
     $k = $load->s_khusus;
     $l = $load->s_lain;
     $t = $load->total_akumulasi;
-    $last_update = date('d-m-Y');
+    $last_update = date('Y-m-d');
     $jumlah = $this->input->post('jml_simpan');
 
     if ($this->input->post('jenis_simpanan') == 1) {
@@ -149,8 +150,8 @@ class C_Akutansi extends CI_Controller{
     $total_gotongroyong	= (0.015 * $plafon);
     $total_angsuran	= $plafon + $rumus_margin;
     $angsuran_ke	= 0;
-    $tanggal_pengajuan	= date('d-m-Y');
-    $last_update = date('d-m-Y');
+    $tanggal_pengajuan	= date('Y-m-d');
+    $last_update = date('Y-m-d');
 
 
     $pinjaman = array(
