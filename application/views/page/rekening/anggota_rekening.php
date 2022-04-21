@@ -43,11 +43,11 @@
                                           <td><?= $start++ ?></td>
                                           <td><?= $data->no ?></td>
                                           <td><?= $data->nama ?></td>
-                                          <td><?= convRupiah($data->pokok) ?></td>
-                                          <td><?= convRupiah($data->wajib) ?></td>
-                                          <td><?= convRupiah($data->kusus) ?></td>
-                                          <td><?= convRupiah($data->lain) ?></td>
-                                          <td><?= convRupiah($data->total) ?></td>
+                                          <td><?= $this->conv->convRupiah($data->pokok) ?></td>
+                                          <td><?= $this->conv->convRupiah($data->wajib) ?></td>
+                                          <td><?= $this->conv->convRupiah($data->kusus) ?></td>
+                                          <td><?= $this->conv->convRupiah($data->lain) ?></td>
+                                          <td><?= $this->conv->convRupiah($data->total) ?></td>
                                           <td><?php if ($data->status == 1) { ?>
                                             <span class="badge bg-success">Ada</span>
                                           <?php }else { ?>

@@ -42,11 +42,11 @@
                                         <td><?= $start++; ?></td>
                                         <td><?= $s->kode; ?></td>
                                         <td><?= $s->nama; ?></td>
-                                        <td><?= convRupiah($s->plafon); ?></td>
+                                        <td><?= $this->conv->convRupiah($s->plafon); ?></td>
                                         <td><?= $s->tenor.' Bulan'; ?></td>
-                                        <td><?= convRupiah($s->margin); ?></td>
-                                        <td><?= convRupiah($s->pokok); ?></td>
-                                        <td><?= convRupiah($s->sisa); ?></td>
+                                        <td><?= $this->conv->convRupiah($s->margin); ?></td>
+                                        <td><?= $this->conv->convRupiah($s->pokok); ?></td>
+                                        <td><?= $this->conv->convRupiah($s->sisa_angsuran); ?></td>
                                         <td><?= $s->tgl_pengajuan; ?></td>
                                       </tr>
 

@@ -101,7 +101,7 @@
                           </div>
                           <div class="flex-grow-1 overflow-hidden">
                               <p class="mb-1">Jumlah Simpanan Anggota </p>
-                              <h5 class="mb-3"><?= convRupiah($jumlah_simpanan->total) ?></h5>
+                              <h5 class="mb-3"><?= $this->conv->convRupiah($jumlah_simpanan->total) ?></h5>
                           </div>
                       </div>
                   </div>

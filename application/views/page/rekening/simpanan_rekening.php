@@ -84,11 +84,11 @@
                           <tbody>
                               <tr>
                                 <td><?= $rekening->no ?></td>
-                                <td><?= convRupiah($rekening->pokok) ?></td>
-                                <td><?= convRupiah($rekening->wajib) ?></td>
-                                <td><?= convRupiah($rekening->kusus) ?></td>
-                                <td><?= convRupiah($rekening->lain) ?></td>
-                                <td><strong><?= convRupiah($rekening->total) ?></strong></td>
+                                <td><?= $this->conv->convRupiah($rekening->pokok) ?></td>
+                                <td><?= $this->conv->convRupiah($rekening->wajib) ?></td>
+                                <td><?= $this->conv->convRupiah($rekening->kusus) ?></td>
+                                <td><?= $this->conv->convRupiah($rekening->lain) ?></td>
+                                <td><strong><?= $this->conv->convRupiah($rekening->total) ?></strong></td>
                               </tr>
 
 

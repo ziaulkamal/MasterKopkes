@@ -12,7 +12,7 @@ class C_Pencarian extends CI_Controller{
         'Data_Entry/M_views' => 'mv',
         'Data_Entry/M_function' => 'mf',
     ));
-    $this->load->helper('curency_indo_helper');
+    $this->load->library(array('Curency_indo_helper' => 'conv'));
   }
 
   function cari_anggota_simpanan()

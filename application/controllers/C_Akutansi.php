@@ -112,16 +112,20 @@ class C_Akutansi extends CI_Controller{
     $q['s'] = [];
     if ($s = $this->mf->cari_anggota(htmlspecialchars($this->input->post('no_anggota')))) {
       $q['s'] = $s;
-      foreach ($q['s'] as $s) { $no_rekening = $s->no_rekening;}
+      foreach ($q['s'] as $s) { $no_rekening = $s->no_rekening; $sts_pinjaman = $s->sts_pinjaman; }
       $load = $this->mf->detail_anggota_simpanan($no_rekening);
-
-      $data = array(
-        'js'      => false,
-        'title'   =>  'Tambah Pinjaman Anggota',
-        'rekening' =>  $load,
-        'page'    =>  'page/rekening/pinjaman_rekening'
-      );
-      $this->load->view('main', $data);
+      if ($sts_pinjaman == 1) {
+        $this->session->set_flashdata('message', '<div class="alert alert-warning"> Anggota ini tidak dapat ambil pinjaman karena masih ada pinjaman yang belum lunas </div>');
+        redirect('cari_simpanan');
+      }else {
+        $data = array(
+          'js'      => false,
+          'title'   =>  'Tambah Pinjaman Anggota',
+          'rekening' =>  $load,
+          'page'    =>  'page/rekening/pinjaman_rekening'
+        );
+        $this->load->view('main', $data);
+      }
     }else {
       $this->session->set_flashdata('message', '<div class="alert alert-danger"> Data Tersebut Tidak Ada Di Sistem </div>');
       redirect('cari_simpanan');
@@ -164,6 +168,7 @@ class C_Akutansi extends CI_Controller{
       'last_update' => $last_update,
     );
 
+
     $load = $this->mv->get_detail_rekening($no_rekening);
     $akumulasi_dagoro = $load->s_gotongroyong + $total_gotongroyong;
 
@@ -188,7 +193,7 @@ class C_Akutansi extends CI_Controller{
   function pinjaman()
   {
     $load = $this->mf->get_list_pinjaman();
-
+     // var_dump($load);die();
     $data = array(
       'js'    => 'dataTables',
       'title' => 'Pinjaman Anggota',
