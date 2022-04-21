@@ -11,6 +11,8 @@ class C_Operasional extends CI_Controller{
     $this->load->model(array(
       'Data_Operasional/M_update' => 'mu',
     ));
+    $this->load->library(array('Curency_indo_helper' => 'conv'));
+
   }
 
   function index()

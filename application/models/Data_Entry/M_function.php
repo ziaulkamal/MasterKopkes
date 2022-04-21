@@ -71,6 +71,10 @@ class M_function extends CI_Model{
     return $query->row();
   }
 
-
+  function get_list_pinjaman()
+  {
+    $this->db->order_by('kode', 'DESC');
+    return $this->db->get('master_view_pinjaman')->result();
+  }
 
 }

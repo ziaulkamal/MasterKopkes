@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.1.3
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Waktu pembuatan: 19 Apr 2022 pada 20.20
--- Versi server: 10.4.22-MariaDB
--- Versi PHP: 7.4.27
+-- Host: localhost
+-- Generation Time: Apr 21, 2022 at 05:30 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,8 +24,8 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Stand-in struktur untuk tampilan `master_view_anggota_all`
--- (Lihat di bawah untuk tampilan aktual)
+-- Stand-in structure for view `master_view_anggota_all`
+-- (See below for the actual view)
 --
 CREATE TABLE `master_view_anggota_all` (
 `no` varchar(30)
@@ -43,8 +43,30 @@ CREATE TABLE `master_view_anggota_all` (
 -- --------------------------------------------------------
 
 --
--- Stand-in struktur untuk tampilan `master_view_rekening`
--- (Lihat di bawah untuk tampilan aktual)
+-- Stand-in structure for view `master_view_pinjaman`
+-- (See below for the actual view)
+--
+CREATE TABLE `master_view_pinjaman` (
+`id` int(11)
+,`kode` varchar(15)
+,`no_anggota` varchar(11)
+,`nama` varchar(50)
+,`plafon` double
+,`tenor` int(11)
+,`margin` double
+,`pokok` double
+,`gotong_royong` double
+,`ke` int(11)
+,`sisa_angsuran` double
+,`tgl_pengajuan` date
+,`last_update` date
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `master_view_rekening`
+-- (See below for the actual view)
 --
 CREATE TABLE `master_view_rekening` (
 `no` varchar(30)
@@ -61,7 +83,7 @@ CREATE TABLE `master_view_rekening` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_anggota`
+-- Table structure for table `tb_anggota`
 --
 
 CREATE TABLE `tb_anggota` (
@@ -79,7 +101,7 @@ CREATE TABLE `tb_anggota` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_anggota`
+-- Dumping data for table `tb_anggota`
 --
 
 INSERT INTO `tb_anggota` (`id`, `no_anggota`, `nama_anggota`, `nik`, `nip`, `tp_lahir`, `tgl_lahir`, `alamat`, `instansi`, `status`, `registration`) VALUES
@@ -734,7 +756,7 @@ INSERT INTO `tb_anggota` (`id`, `no_anggota`, `nama_anggota`, `nik`, `nip`, `tp_
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_angsuran`
+-- Table structure for table `tb_angsuran`
 --
 
 CREATE TABLE `tb_angsuran` (
@@ -752,7 +774,7 @@ CREATE TABLE `tb_angsuran` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_brangkas`
+-- Table structure for table `tb_brangkas`
 --
 
 CREATE TABLE `tb_brangkas` (
@@ -767,7 +789,7 @@ CREATE TABLE `tb_brangkas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_brangkas`
+-- Dumping data for table `tb_brangkas`
 --
 
 INSERT INTO `tb_brangkas` (`kas`, `dana_gotongroyong`, `dana_simpok`, `dana_simwa`, `dana_kusus`, `dana_lainya`, `total_piutang`, `last_update`) VALUES
@@ -776,7 +798,7 @@ INSERT INTO `tb_brangkas` (`kas`, `dana_gotongroyong`, `dana_simpok`, `dana_simw
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_instansi`
+-- Table structure for table `tb_instansi`
 --
 
 CREATE TABLE `tb_instansi` (
@@ -788,7 +810,7 @@ CREATE TABLE `tb_instansi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_instansi`
+-- Dumping data for table `tb_instansi`
 --
 
 INSERT INTO `tb_instansi` (`id`, `kode_instansi`, `nama_instansi`, `alamat_instansi`, `registration`) VALUES
@@ -812,7 +834,7 @@ INSERT INTO `tb_instansi` (`id`, `kode_instansi`, `nama_instansi`, `alamat_insta
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_neraca_tahunan`
+-- Table structure for table `tb_neraca_tahunan`
 --
 
 CREATE TABLE `tb_neraca_tahunan` (
@@ -834,7 +856,7 @@ CREATE TABLE `tb_neraca_tahunan` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_operasional`
+-- Table structure for table `tb_operasional`
 --
 
 CREATE TABLE `tb_operasional` (
@@ -848,7 +870,7 @@ CREATE TABLE `tb_operasional` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_operasional`
+-- Dumping data for table `tb_operasional`
 --
 
 INSERT INTO `tb_operasional` (`id`, `keterangan`, `item`, `kode_item`, `nilai`, `konfirmasi`, `last_update`) VALUES
@@ -858,7 +880,7 @@ INSERT INTO `tb_operasional` (`id`, `keterangan`, `item`, `kode_item`, `nilai`, 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_phu`
+-- Table structure for table `tb_phu`
 --
 
 CREATE TABLE `tb_phu` (
@@ -881,7 +903,7 @@ CREATE TABLE `tb_phu` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_pinjaman`
+-- Table structure for table `tb_pinjaman`
 --
 
 CREATE TABLE `tb_pinjaman` (
@@ -903,7 +925,7 @@ CREATE TABLE `tb_pinjaman` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_rekening`
+-- Table structure for table `tb_rekening`
 --
 
 CREATE TABLE `tb_rekening` (
@@ -920,7 +942,7 @@ CREATE TABLE `tb_rekening` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_rekening`
+-- Dumping data for table `tb_rekening`
 --
 
 INSERT INTO `tb_rekening` (`no_rekening`, `anggota_no`, `s_pokok`, `s_wajib`, `s_khusus`, `s_lain`, `s_gotongroyong`, `total_akumulasi`, `sts_pinjaman`, `last_update`) VALUES
@@ -1575,7 +1597,7 @@ INSERT INTO `tb_rekening` (`no_rekening`, `anggota_no`, `s_pokok`, `s_wajib`, `s
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_shu`
+-- Table structure for table `tb_shu`
 --
 
 CREATE TABLE `tb_shu` (
@@ -1590,123 +1612,132 @@ CREATE TABLE `tb_shu` (
 -- --------------------------------------------------------
 
 --
--- Struktur untuk view `master_view_anggota_all`
+-- Structure for view `master_view_anggota_all`
 --
 DROP TABLE IF EXISTS `master_view_anggota_all`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `master_view_anggota_all`  AS SELECT `tb_anggota`.`no_anggota` AS `no`, `tb_anggota`.`nama_anggota` AS `nama`, `tb_anggota`.`nik` AS `nik`, `tb_anggota`.`nip` AS `nip`, `tb_anggota`.`tp_lahir` AS `lahir`, `tb_anggota`.`tgl_lahir` AS `tanggal`, `tb_anggota`.`alamat` AS `alamat`, `tb_instansi`.`nama_instansi` AS `instansi`, `tb_anggota`.`status` AS `status`, `tb_anggota`.`registration` AS `terdaftar` FROM (`tb_anggota` join `tb_instansi`) WHERE `tb_anggota`.`instansi` = `tb_instansi`.`kode_instansi` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `master_view_anggota_all`  AS SELECT `tb_anggota`.`no_anggota` AS `no`, `tb_anggota`.`nama_anggota` AS `nama`, `tb_anggota`.`nik` AS `nik`, `tb_anggota`.`nip` AS `nip`, `tb_anggota`.`tp_lahir` AS `lahir`, `tb_anggota`.`tgl_lahir` AS `tanggal`, `tb_anggota`.`alamat` AS `alamat`, `tb_instansi`.`nama_instansi` AS `instansi`, `tb_anggota`.`status` AS `status`, `tb_anggota`.`registration` AS `terdaftar` FROM (`tb_anggota` join `tb_instansi`) WHERE `tb_anggota`.`instansi` = `tb_instansi`.`kode_instansi``kode_instansi`  ;
 
 -- --------------------------------------------------------
 
 --
--- Struktur untuk view `master_view_rekening`
+-- Structure for view `master_view_pinjaman`
+--
+DROP TABLE IF EXISTS `master_view_pinjaman`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `master_view_pinjaman`  AS SELECT `tb_pinjaman`.`id` AS `id`, `tb_pinjaman`.`kode_pinjaman` AS `kode`, `tb_pinjaman`.`no_anggota` AS `no_anggota`, `tb_anggota`.`nama_anggota` AS `nama`, `tb_pinjaman`.`plafon` AS `plafon`, `tb_pinjaman`.`tenor` AS `tenor`, `tb_pinjaman`.`margin` AS `margin`, `tb_pinjaman`.`pokok_murabahan` AS `pokok`, `tb_pinjaman`.`total_gotongroyong` AS `gotong_royong`, `tb_pinjaman`.`angsuran_ke` AS `ke`, `tb_pinjaman`.`sisa_angsuran` AS `sisa_angsuran`, `tb_pinjaman`.`tanggal_pengajuan` AS `tgl_pengajuan`, `tb_pinjaman`.`last_update` AS `last_update` FROM (`tb_pinjaman` join `tb_anggota` on(`tb_anggota`.`no_anggota` = `tb_pinjaman`.`no_anggota`))  ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `master_view_rekening`
 --
 DROP TABLE IF EXISTS `master_view_rekening`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `master_view_rekening`  AS SELECT `tb_rekening`.`no_rekening` AS `no`, `tb_anggota`.`nama_anggota` AS `nama`, `tb_rekening`.`s_pokok` AS `pokok`, `tb_rekening`.`s_wajib` AS `wajib`, `tb_rekening`.`s_khusus` AS `kusus`, `tb_rekening`.`s_lain` AS `lain`, `tb_rekening`.`total_akumulasi` AS `total`, `tb_rekening`.`sts_pinjaman` AS `status`, `tb_rekening`.`last_update` AS `update_terakhir` FROM (`tb_rekening` join `tb_anggota` on(`tb_rekening`.`anggota_no` = `tb_anggota`.`no_anggota`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `master_view_rekening`  AS SELECT `tb_rekening`.`no_rekening` AS `no`, `tb_anggota`.`nama_anggota` AS `nama`, `tb_rekening`.`s_pokok` AS `pokok`, `tb_rekening`.`s_wajib` AS `wajib`, `tb_rekening`.`s_khusus` AS `kusus`, `tb_rekening`.`s_lain` AS `lain`, `tb_rekening`.`total_akumulasi` AS `total`, `tb_rekening`.`sts_pinjaman` AS `status`, `tb_rekening`.`last_update` AS `update_terakhir` FROM (`tb_rekening` join `tb_anggota` on(`tb_rekening`.`anggota_no` = `tb_anggota`.`no_anggota`))  ;
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indeks untuk tabel `tb_anggota`
+-- Indexes for table `tb_anggota`
 --
 ALTER TABLE `tb_anggota`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `tb_angsuran`
+-- Indexes for table `tb_angsuran`
 --
 ALTER TABLE `tb_angsuran`
   ADD UNIQUE KEY `kode_angsuran` (`kode_angsuran`);
 
 --
--- Indeks untuk tabel `tb_instansi`
+-- Indexes for table `tb_instansi`
 --
 ALTER TABLE `tb_instansi`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `tb_neraca_tahunan`
+-- Indexes for table `tb_neraca_tahunan`
 --
 ALTER TABLE `tb_neraca_tahunan`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `tb_operasional`
+-- Indexes for table `tb_operasional`
 --
 ALTER TABLE `tb_operasional`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `tb_phu`
+-- Indexes for table `tb_phu`
 --
 ALTER TABLE `tb_phu`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `tb_pinjaman`
+-- Indexes for table `tb_pinjaman`
 --
 ALTER TABLE `tb_pinjaman`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `kode_pinjaman` (`kode_pinjaman`);
 
 --
--- Indeks untuk tabel `tb_rekening`
+-- Indexes for table `tb_rekening`
 --
 ALTER TABLE `tb_rekening`
   ADD UNIQUE KEY `no_rekening` (`no_rekening`);
 
 --
--- Indeks untuk tabel `tb_shu`
+-- Indexes for table `tb_shu`
 --
 ALTER TABLE `tb_shu`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `no_anggota` (`no_anggota`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `tb_anggota`
+-- AUTO_INCREMENT for table `tb_anggota`
 --
 ALTER TABLE `tb_anggota`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=647;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_instansi`
+-- AUTO_INCREMENT for table `tb_instansi`
 --
 ALTER TABLE `tb_instansi`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_neraca_tahunan`
+-- AUTO_INCREMENT for table `tb_neraca_tahunan`
 --
 ALTER TABLE `tb_neraca_tahunan`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_operasional`
+-- AUTO_INCREMENT for table `tb_operasional`
 --
 ALTER TABLE `tb_operasional`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_phu`
+-- AUTO_INCREMENT for table `tb_phu`
 --
 ALTER TABLE `tb_phu`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_pinjaman`
+-- AUTO_INCREMENT for table `tb_pinjaman`
 --
 ALTER TABLE `tb_pinjaman`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_shu`
+-- AUTO_INCREMENT for table `tb_shu`
 --
 ALTER TABLE `tb_shu`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;

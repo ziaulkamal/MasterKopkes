@@ -10,9 +10,11 @@ class C_Akutansi extends CI_Controller{
     $this->load->model(
       array(
         'Data_Entry/M_views' => 'mv',
+        'Data_Entry/M_create' => 'mc',
         'Data_Entry/M_function' => 'mf',
     ));
-    $this->load->helper('curency_indo_helper');
+    $this->load->library(array('Curency_indo_helper' => 'conv'));
+
   }
 
 // IDEA: Menampilkan Opsi Data Rekening Anggota ( Data Simpanan )
@@ -132,12 +134,12 @@ class C_Akutansi extends CI_Controller{
   function simpan_pinjaman($no_rekening)
   {
 
-    $kode_pinjaman	= 'P-'.$no_rekening.date('mY');
+    $kode_pinjaman	= 'P-'.time();
     $plafon	= $this->input->post('jumlah');
     $tenor	= $this->input->post('tenor');
     $margin	= 0.08;
 
-    $rumus_margin = (0.08 * $plafon);
+    $rumus_margin = ($plafon*$margin)/12;
     $margin_angsur = $rumus_margin/$tenor;
     $pokok_murabahan	= $plafon/$tenor;
     $total_gotongroyong	= (0.015 * $plafon);
@@ -145,26 +147,55 @@ class C_Akutansi extends CI_Controller{
     $angsuran_ke	= 0;
     $tanggal_pengajuan	= date('d-m-Y');
     $last_update = date('d-m-Y');
-    $load = $this->mv->get_detail_rekening($no_rekening);
 
-    $data = array(
+
+    $pinjaman = array(
       'kode_pinjaman' => $kode_pinjaman,
       'no_rekening' => $no_rekening,
       'plafon' => $plafon,
       'tenor' => $tenor,
-      'margin' => round($rumus_margin/$tenor,0,PHP_ROUND_HALF_EVEN),
+      'margin' => round($rumus_margin,0,PHP_ROUND_HALF_EVEN),
       'pokok_murabahan' => round($pokok_murabahan,0,PHP_ROUND_HALF_EVEN),
       'total_gotongroyong' => $total_gotongroyong,
-      'total_angsuran' => $total_angsuran,
+      'total_angsuran' => round(0,0,PHP_ROUND_HALF_EVEN),
       'angsuran_ke' => $angsuran_ke,
-      'sisa_angsuran' => $total_angsuran,
+      'sisa_angsuran' => round($total_angsuran,0,PHP_ROUND_HALF_EVEN),
       'tanggal_pengajuan' => $tanggal_pengajuan,
       'last_update' => $last_update,
     );
 
-    echo "<pre>";
-    var_dump($data);
-    echo "</pre>";
+    $load = $this->mv->get_detail_rekening($no_rekening);
+    $akumulasi_dagoro = $load->s_gotongroyong + $total_gotongroyong;
+
+    if ($load->sts_pinjaman == 1) {
+      $this->session->set_flashdata('message', '<div class="alert alert-warning"> Anggota ini masih ada pinjaman dengan kode pinjaman <b>'.$kode_pinjaman .'</b> silahkan lunaskan terlebih dahulu. </div>');
+      redirect('pinjaman');
+    }else {
+      $rekening = array(
+        'no_rekening' => $no_rekening,
+        'anggota_no' => $load->anggota_no,
+        's_gotongroyong' => $akumulasi_dagoro,
+        'sts_pinjaman' => 1,
+      );
+      $this->mc->update_dagoro($no_rekening, $rekening);
+      $this->mc->insert_pinjaman($pinjaman);
+      $this->session->set_flashdata('message', '<div class="alert alert-sucsess"> Pinjaman Atas Nama </div>');
+      redirect('pinjaman');
+    }
+
+  }
+
+  function pinjaman()
+  {
+    $load = $this->mf->get_list_pinjaman();
+
+    $data = array(
+      'js'    => 'dataTables',
+      'title' => 'Pinjaman Anggota',
+      'pinjaman' => $load,
+      'page'  => 'page/rekening/anggota_pinjaman',
+    );
+    $this->load->view('main', $data);
   }
 
 }

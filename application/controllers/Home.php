@@ -10,7 +10,7 @@ class Home extends CI_Controller{
       'Data_Entry/M_function' => 'mf',
       'Data_Entry/M_views' => 'mv',
     ));
-    $this->load->helper('curency_indo_helper');
+    $this->load->library(array('Curency_indo_helper' => 'conv'));
 
   }
 

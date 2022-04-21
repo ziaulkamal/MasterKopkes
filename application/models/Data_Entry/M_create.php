@@ -25,11 +25,18 @@ class M_create extends CI_Model{
   {
     $this->db->where('no_rekening', $no_rekening);
     $this->db->update('tb_rekening', $data);
+    return;
   }
 
-
-  function insert_pinjaman($data)
+  function update_dagoro($no_rekening, $rekening)
   {
-     return $this->db->insert('tb_pinjaman', $data);
+    $this->db->where('no_rekening', $no_rekening);
+    $this->db->update('tb_rekening', $rekening);
+    return;
+  }
+
+  function insert_pinjaman($pinjaman)
+  {
+     return $this->db->insert('tb_pinjaman', $pinjaman);
   }
 }
