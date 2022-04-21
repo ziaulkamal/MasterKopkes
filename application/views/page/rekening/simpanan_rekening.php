@@ -27,7 +27,7 @@
                     <div class="mb-3 col-xl-12">
                       <label class="form-label">Nama Anggota</label>
                       <div>
-                        <input type="text" name="no_rekening" value="<?= $rekening->no ?>" required>
+                        <input type="hidden" name="no_rekening" value="<?= $rekening->no ?>" required>
                         <input type="text" class="form-control" value="<?= $rekening->nama ?>"  readonly/>
                       </div>
                     </div>

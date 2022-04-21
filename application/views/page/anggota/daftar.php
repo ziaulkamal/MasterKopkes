@@ -20,7 +20,7 @@
                             <div class="card">
                               <?php echo validation_errors('<div class="alert alert-warning">','</div>'); ?>
                                 <div class="card-body">
-                                    <form method="post" action="<?= base_url('daftar_new_anggota') ?>" class="custom-validation">
+                                    <form method="post" action="<?= base_url('daftar_baru') ?>" class="custom-validation">
                                       <?php if (isset($id_anggota)) { ?>
                                         <input type="hidden" name="id_anggota" value="<?= $id_anggota; ?>">
                                       <?php } ?>

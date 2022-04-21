@@ -8,6 +8,7 @@ $route['dashboard'] = 'Home/index';
 //Anggota
 $route['anggota']        = 'C_Anggota/index';
 $route['daftar']         = 'C_Anggota/daftar';
+$route['daftar_baru']         = 'C_Anggota/simpan_anggota';
 
 //Instansi
 $route['Instansi']        = 'C_Instansi/index';

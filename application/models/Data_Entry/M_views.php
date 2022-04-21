@@ -14,6 +14,13 @@ class M_views extends CI_Model{
     return $this->db->get('master_view_anggota_all')->result();
   }
 
+  function get_anggota_last()
+  {
+    $this->db->select('id');
+    $this->db->order_by('id', 'DESC');
+    return $this->db->get('tb_anggota', 1, 0)->row();
+  }
+
   function get_instansi()
   {
     return $this->db->get('tb_instansi')->result();
