@@ -16,10 +16,10 @@
             <div class="top">
                 <div class="top-left">
                     <h1 class="main">Invoice</h1>
-                    <span class="code">No Anggota. <b><?= $no_anggota ?></b></span>
+                    <span class="code">No Rekening. <b><?= $no_rekening ?></b></span>
                 </div>
                 <div class="top-right">
-                    <div class="date">Tanggal:<?= '$tanggal' ?> </div>
+                    <div class="date">Tanggal:<?= $last_update ?> </div>
                 </div>
             </div>
             <div class="bill-box">

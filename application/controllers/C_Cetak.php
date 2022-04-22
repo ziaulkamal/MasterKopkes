@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-error_reporting(0);
+
 class C_Cetak extends CI_Controller{
 
   public function __construct()
@@ -25,18 +25,18 @@ class C_Cetak extends CI_Controller{
   function simpanan($kode_log)
   {
 
-    $load = $this->mv->log_transaksi($kode_log);
-
-    if ($load == null) {
+    $loads = $this->mv->log_transaksi($kode_log);
+    $load = $loads->row();
+    if ($loads == null) {
       echo "Paramameter Salah";
     }else {
       $data = array(
         'js'      => '',
         'title'   => 'Cetak Invoice',
-        'no_anggota' => $load->anggota_no,
         'nama_anggota' => $load->nama_anggota,
+        'no_rekening' => $load->no_rekening,
         'kode_log' => $load->kode_log,
-        'jumlah' => convRupiah($load->jumlah),
+        'jumlah' => $this->conv->convRupiah($load->jumlah),
         'kode_jenis' => $load->kode_jenis,
         'jenis' => $load->jenis,
         'last_update' => $load->last_update,

@@ -107,9 +107,9 @@ function simpan_rekening($no_rekening)
       $jenis_log = 'Simpanan Lain';
     }
 
-    $log = array(
-      'no_anggota' => $load->anggota_no,
-      'nama_anggota' => $load->nama,
+    $logs = array(
+      'no_rekening' => $no_rekening,
+      'nama_anggota' => $log_load->nama,
       'kode_log' => $kode_log,
       'jumlah' => $jumlah,
       'kode_jenis' => 1,
@@ -118,7 +118,7 @@ function simpan_rekening($no_rekening)
       'last_update' => $last_update,
     );
 
-    $this->mc->log_simpanan($log);
+    $this->mc->add_log_simpanan($logs);
     $this->mc->update_rekening($no_rekening, $data);
     $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show">Berhasil mengupdate simpanan, <a class="btn btn-info waves-effect waves-light" href="'.base_url('cetak/simpanan/').$kode_log.'" target="_blank"> Download Invoice</a> </div>');
     redirect('simpanan');

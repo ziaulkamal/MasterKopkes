@@ -47,6 +47,6 @@ class M_views extends CI_Model{
   function log_transaksi($log_kode)
   {
     $this->db->where('kode_log', $log_kode);
-    return $this->db->get('log_transaksi_anggota', 1, 0)->row();
+    return $this->db->get('log_transaksi_anggota', 1, 0);
   }
 }
