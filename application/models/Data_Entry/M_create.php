@@ -39,4 +39,5 @@ class M_create extends CI_Model{
   {
      return $this->db->insert('tb_pinjaman', $pinjaman);
   }
+
 }
