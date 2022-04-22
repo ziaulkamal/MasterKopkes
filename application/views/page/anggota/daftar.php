@@ -42,7 +42,7 @@
                                           <label class="form-label">Instansi</label>
                                           <div class="input-group">
                                               <select class="form-control" name="instansi" required>
-                                                <option value="" default>-- Pilih Instansi --</option>
+                                                <option default>-- Pilih Instansi --</option>
                                                 <?php foreach ($instansi as $data) { ?>
                                                 <option value="<?= $data->kode_instansi ?>"><?= $data->nama_instansi ?></option>
                                                 <?php } ?>

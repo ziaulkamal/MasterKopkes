@@ -45,9 +45,9 @@ class C_Anggota extends CI_Controller{
   {
     $load = $this->mv->get_anggota_last();
     $last_id = $load->id;
-    $no_anggota = $instansi.($last_id+1);
     $nama_anggota = $this->input->post('nama_lengkap');
     $instansi = $this->input->post('instansi');
+    $no_anggota = $instansi.($last_id+1);
     $alamat = $this->input->post('alamat');
     $status = $this->input->post('status_anggota');
     $registration = date('Y-m-d');
@@ -56,11 +56,12 @@ class C_Anggota extends CI_Controller{
     $data = array(
       'no_anggota' => $no_anggota,
       'nama_anggota' => $nama_anggota,
-      'alamat' => $instansi,
-      'instansi' => $alamat,
+      'alamat' => $alamat,
+      'instansi' => $instansi,
       'status' => $status,
       'registration' => $registration,
     );
+
 
     $rekening = array(
       'no_rekening' => $no_rekening,
