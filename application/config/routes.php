@@ -33,5 +33,10 @@ $route['cari_pinjaman']  = 'C_Pencarian/cari_anggota_pinjaman';
 // Operasional
 $route['operasional/cash_out']  = 'C_Operasional/fitur_operasional';
 
+// Cetak
+$route['cetak']        = 'C_Cetak/index';
+// cetak Simpanan
+$route['cetak/simpanan/(:any)']        = 'C_Cetak/simpanan/$1';
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

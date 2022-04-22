@@ -37,4 +37,16 @@ class M_views extends CI_Model{
     $this->db->where('kode_pinjaman', $kode_pinjaman);
     return $this->db->get('tb_pinjaman', 1, 0)->row();
   }
+
+  function master_view_rekening($no_rekening)
+  {
+    $this->db->where('no', $no_rekening);
+    return $this->db->get('master_view_rekening', 1, 0)->row();
+  }
+
+  function log_transaksi($log_kode)
+  {
+    $this->db->where('kode_log', $log_kode);
+    return $this->db->get('log_transaksi_anggota', 1, 0)->row();
+  }
 }

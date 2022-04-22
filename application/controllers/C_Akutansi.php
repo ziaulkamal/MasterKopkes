@@ -57,7 +57,11 @@ class C_Akutansi extends CI_Controller{
 // IDEA: Menyimpan Data Simpanan
   function simpan_rekening($no_rekening)
   {
+    var_dump($no_rekening);
+    die();
     $load = $this->mv->get_detail_rekening($no_rekening);
+    $log_load = $this->mv->master_view_rekening($no_rekening);
+    $kode_log = time();
     $p = $load->s_pokok;
     $w = $load->s_wajib;
     $k = $load->s_khusus;
@@ -72,34 +76,51 @@ class C_Akutansi extends CI_Controller{
           'total_akumulasi' => $t + $jumlah,
           'last_update' => $last_update,
       );
+      $jenis_log = 'Simpanan Pokok';
     }elseif ($this->input->post('jenis_simpanan') == 2) {
       $data = array(
           's_wajib' => $w + $jumlah,
           'total_akumulasi' => $t + $jumlah,
           'last_update' => $last_update,
       );
+      $jenis_log = 'Simpanan Wajib';
     }elseif ($this->input->post('jenis_simpanan') == 3) {
       $data = array(
           's_khusus' => $k + $jumlah,
           'total_akumulasi' => $t + $jumlah,
           'last_update' => $last_update,
       );
+      $jenis_log = 'Simpanan Khusus';
     }elseif ($this->input->post('jenis_simpanan') == 4) {
       $data = array(
           's_lain' => $l + $jumlah,
           'total_akumulasi' => $t + $jumlah,
           'last_update' => $last_update,
       );
+      $jenis_log = 'Simpanan Lain';
     }else {
       $data = array(
           's_lain' => $l + $jumlah,
           'total_akumulasi' => $t + $jumlah,
           'last_update' => $last_update,
       );
+      $jenis_log = 'Simpanan Lain';
     }
 
+    $log = array(
+      'no_anggota' => $load->anggota_no,
+      'nama_anggota' => $load->nama,
+      'kode_log' => $kode_log,
+      'jumlah' => $jumlah,
+      'kode_jenis' => 1,
+      'jenis' => $jenis_log,
+      'keterangan' => 'Berhasil update '.$jenis_log.' dengan jumlah '.$jumlah,
+      'last_update' => $last_update,
+    );
+
+    $this->mc->log_simpanan($log);
     $this->mc->update_rekening($no_rekening, $data);
-    $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show">Berhasil Mengupdate Simpanan</div>');
+    $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show">Berhasil mengupdate simpanan, <a class="btn btn-info waves-effect waves-light" href="'.base_url('cetak/simpanan/').$kode_log.'" target="_blank"> Download Invoice</a> </div>');
     redirect('simpanan');
   }
 

@@ -22,7 +22,7 @@
       <div class="col-lg-4">
           <div class="card">
             <div class="card-body">
-                <form method="post" action="<?= base_url('simpan_rekening/').$rekening->no ?>" class="custom-validation">
+                <form method="post" action="<?= base_url('simpan_rekening/').$rekening->no ?>" class="custom-validation" method="post" enctype="multipart/form-data">
                   <div class="row">
                     <div class="mb-3 col-xl-12">
                       <label class="form-label">Nama Anggota</label>

@@ -39,4 +39,9 @@ class M_create extends CI_Model{
   {
      return $this->db->insert('tb_pinjaman', $pinjaman);
   }
+
+  function log_simpanan($log)
+  {
+    return $this->db->insert('log_transaksi_anggota', $log);
+  }
 }
