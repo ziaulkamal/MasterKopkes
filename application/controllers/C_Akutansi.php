@@ -53,12 +53,12 @@ class C_Akutansi extends CI_Controller{
       $this->session->set_flashdata('message', '<div class="alert alert-danger"> Data Tersebut Tidak Ada Di Sistem </div>');
       redirect('cari_simpanan');
     }
+  }
 
-// IDEA: Menyimpan Data Simpanan
-  function simpan_rekening($no_rekening)
+  // IDEA: Menyimpan Data Simpanan
+function simpan_rekening($no_rekening)
   {
-    var_dump($no_rekening);
-    die();
+
     $load = $this->mv->get_detail_rekening($no_rekening);
     $log_load = $this->mv->master_view_rekening($no_rekening);
     $kode_log = time();
@@ -125,7 +125,7 @@ class C_Akutansi extends CI_Controller{
   }
 
 
-  }
+
 
 // IDEA: Cari Pinjaman Berdasarkan ID anggota
   function tambah_pinjaman()
