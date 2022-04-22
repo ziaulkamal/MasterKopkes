@@ -25,8 +25,8 @@
                                   <thead>
                                       <tr>
                                         <th>No</th>
-                                        <th>Nama</th>
                                         <th>Nomor Rekening</th>
+                                        <th>Nama</th>
                                         <th>Simpanan Pokok</th>
                                         <th>Simpanan Wajib</th>
                                         <th>Simpanan Khusus</th>
