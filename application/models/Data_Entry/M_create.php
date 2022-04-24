@@ -40,8 +40,27 @@ class M_create extends CI_Model{
      return $this->db->insert('tb_pinjaman', $pinjaman);
   }
 
+  function insert_angsuran($data)
+  {
+     return $this->db->insert('tb_angsuran', $data);
+  }
+
   function add_log_simpanan($logs)
   {
     return $this->db->insert('log_transaksi_anggota', $logs);
+  }
+
+  function update_angsuran_bulanan($kode_pinjaman, $update_p)
+  {
+    $this->db->where('kode_pinjaman', $kode_pinjaman);
+    $this->db->update('tb_pinjaman', $update_p);
+    return;
+  }
+
+  function update_status_rekening($no_rekening, $status_pinjaman)
+  {
+    $this->db->where('no_rekening', $no_rekening);
+    $this->db->update('tb_rekening', $status_pinjaman);
+    return;
   }
 }

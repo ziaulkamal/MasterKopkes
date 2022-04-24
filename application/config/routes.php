@@ -25,6 +25,12 @@ $route['pinjaman'] = 'C_Akutansi/pinjaman';
 $route['tambah_pinjaman'] = 'C_Akutansi/tambah_pinjaman';
 $route['proses_pinjaman/(:any)'] = 'C_Akutansi/simpan_pinjaman/$1';
 
+// Angsuran
+$route['angsuran'] = 'C_Akutansi/angsuran_anggota';
+$route['angsuran/(:any)'] = 'C_Akutansi/bayar_angsuran/$1';
+$route['pelunasan/(:any)'] = 'C_Akutansi/pelunasan_angsuran/$1';
+$route['proses_angsuran/(:any)'] = 'C_Akutansi/proses_angsuran/$1';
+
 // Pencarian
 $route['cari_simpanan']  = 'C_Pencarian/cari_anggota_simpanan';
 $route['cari_pinjaman']  = 'C_Pencarian/cari_anggota_pinjaman';
@@ -37,6 +43,8 @@ $route['operasional/cash_out']  = 'C_Operasional/fitur_operasional';
 $route['cetak']        = 'C_Cetak/index';
 // cetak Simpanan
 $route['cetak/simpanan/(:any)']        = 'C_Cetak/simpanan/$1';
+$route['cetak/angsuran/(:any)']        = 'C_Cetak/angsuran/$1';
+$route['cetak/pinjaman/(:any)']        = 'C_Cetak/pinjaman/$1';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

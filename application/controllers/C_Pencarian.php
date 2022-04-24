@@ -32,8 +32,8 @@ class C_Pencarian extends CI_Controller{
     $data = array(
       'js'      =>  false,
       'title'   =>  'Cari Anggota',
-      'placeholder' => 'Masukkan ID Anggota',
-      'name'    =>  'no_anggota',
+      'placeholder' => 'Masukkan Nomor Rekening Anggota',
+      'name'    =>  'no_rekening',
       'page'    =>  'page/rekening/search_anggota_pinjaman'
     );
     $this->load->view('main', $data);

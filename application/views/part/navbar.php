@@ -48,7 +48,7 @@
                         <span>Pinjaman</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="<?=base_url('cari_pinjaman'); ?>">Cari ID Anggota</a></li>
+                        <li><a href="<?=base_url('cari_pinjaman'); ?>">Cari Rekening Anggota</a></li>
                         <li><a href="<?=base_url('pinjaman'); ?>">Data Pinjaman Anggota</a></li>
                     </ul>
                 </li>
@@ -72,7 +72,7 @@
                         <span>Angsuran</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="auth-login.html">Proses Angsuran</a></li>
+                        <li><a href="<?= base_url('angsuran') ?>">Data Angsuran Terakhir</a></li>
                         <li><a href="auth-register.html">Cek Angsuran Tertunda</a></li>
                         <li><a href="auth-recoverpw.html">Laporan Angsuran</a></li>
                     </ul>

@@ -44,9 +44,27 @@ class M_views extends CI_Model{
     return $this->db->get('master_view_rekening', 1, 0)->row();
   }
 
-  function log_transaksi($log_kode)
+  function log_transaksi_simpanan($log_kode)
   {
     $this->db->where('kode_log', $log_kode);
     return $this->db->get('log_transaksi_anggota', 1, 0);
+  }
+
+  function log_transaksi_angsuran($angsur_kode)
+  {
+    $this->db->where('kode', $angsur_kode);
+    return $this->db->get('log_angsuran_anggota', 1, 0);
+  }
+
+  function log_transaksi_pinjaman($kode_pinjaman)
+  {
+    $this->db->where('kode', $kode_pinjaman);
+    return $this->db->get('master_view_pinjaman', 1, 0);
+  }
+
+  function master_view_angsuran()
+  {
+    $this->db->order_by('tgl_update', 'DESC');
+    return $this->db->get('log_angsuran_anggota');
   }
 }

@@ -33,6 +33,7 @@
                                         <th>Simpanan Lainya</th>
                                         <th>Total Simpanan</th>
                                         <th>Status Pinjaman</th>
+                                        <th>Tambah Simpanan</th>
                                       </tr>
                                   </thead>
                                   <tbody>
@@ -40,7 +41,7 @@
 
                                     foreach ($rekening as $data) { ?>
                                         <tr>
-                                          <td><?= $start++ ?></td>
+                                          <th scope="row"><?= $start++ ?></th>
                                           <td><?= $data->no ?></td>
                                           <td><?= $data->nama ?></td>
                                           <td><?= $this->conv->convRupiah($data->pokok) ?></td>
@@ -48,12 +49,12 @@
                                           <td><?= $this->conv->convRupiah($data->kusus) ?></td>
                                           <td><?= $this->conv->convRupiah($data->lain) ?></td>
                                           <td><?= $this->conv->convRupiah($data->total) ?></td>
-                                          <td><?php if ($data->status == 1) { ?>
+                                          <td><center><?php if ($data->status == 1) { ?>
                                             <span class="badge bg-success">Ada</span>
                                           <?php }else { ?>
                                             <span class="badge bg-info">Tidak Ada</span>
-                                          <?php } ?></td>
-
+                                          <?php } ?></center></td>
+                                          <td><center><a href="<?= base_url('simpanan_pertama/').$data->no ?>" class="badge bg-primary">  Update Simpanan  </a></center></td>
                                         </tr>
                                     <?php }
                                      ?>

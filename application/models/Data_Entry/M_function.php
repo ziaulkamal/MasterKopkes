@@ -59,10 +59,22 @@ class M_function extends CI_Model{
     return $this->db->get('tb_rekening')->result();
   }
 
+  function cari_rekening($no_rekening)
+  {
+    $this->db->where('no_rekening', $no_rekening);
+    return $this->db->get('tb_rekening')->result();
+  }
+
   function detail_anggota_simpanan($no_rekening)
   {
     $this->db->where('no', $no_rekening);
     return $this->db->get('master_view_rekening')->row();
+  }
+
+  function detail_anggota_personal($no_anggota)
+  {
+    $this->db->where('no', $no_anggota);
+    return $this->db->get('master_view_anggota_all')->row();
   }
 
   function get_format_daftar()
@@ -75,6 +87,26 @@ class M_function extends CI_Model{
   {
     $this->db->order_by('kode', 'DESC');
     return $this->db->get('master_view_pinjaman')->result();
+  }
+
+  function get_pinjaman_kode($kode_pinjaman)
+  {
+    $this->db->where('kode_pinjaman', $kode_pinjaman);
+    return $this->db->get('tb_pinjaman')->row();
+  }
+
+  function get_angsuran_kode($kode_pinjaman)
+  {
+    $this->db->where('kode_pinjaman', $kode_pinjaman);
+    $this->db->order_by('last_update', 'DESC');
+    $this->db->limit('6');
+    return $this->db->get('tb_angsuran');
+  }
+
+  function get_detail_rekening($no_rekening)
+  {
+    $this->db->where('no_rekening', $no_rekening);
+    return $this->db->get('tb_rekening')->row();
   }
 
 }

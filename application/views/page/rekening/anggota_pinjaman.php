@@ -30,9 +30,13 @@
                                         <th>Plafon Pinjaman</th>
                                         <th>Masa Pinjaman</th>
                                         <th>Margin</th>
-                                        <th>Jumlah Angsuran Pokok </th>
-                                        <th>Sisa Angsuran Pokok</th>
+                                        <th>Pokok </th>
+                                        <th>Angsuran Perbulan </th>
+                                        <!-- <th>Sisa Angsuran Pokok</th> -->
+                                        <!-- <th>Angsur Per Bulan</th> -->
                                         <th>Tanggal Pengajuan</th>
+                                        <th>Opsi</th>
+                                        <th></th>
                                       </tr>
                                   </thead>
                                   <tbody>
@@ -46,8 +50,19 @@
                                         <td><?= $s->tenor.' Bulan'; ?></td>
                                         <td><?= $this->conv->convRupiah($s->margin); ?></td>
                                         <td><?= $this->conv->convRupiah($s->pokok); ?></td>
-                                        <td><?= $this->conv->convRupiah($s->sisa_angsuran); ?></td>
+                                        <!-- <td><?= $this->conv->convRupiah($s->sisa_angsuran); ?></td> -->
+                                        <td><?= $this->conv->convRupiah($s->margin+$s->pokok); ?></td>
                                         <td><?= $s->tgl_pengajuan; ?></td>
+                                        <?php if ($s->tenor == $s->ke) { ?>
+                                          <td><a class="btn btn-outline-success waves-effect"> Telah Lunas </a></td>
+                                        <?php }else { ?>
+                                          <td>
+                                            <a href="<?= base_url('angsuran/').$s->kode ?>" class="btn btn-outline-info waves-effect">  Bayar </a>
+                                            <a href="<?= base_url('pelunasan/').$s->kode ?>" class="btn btn-outline-dark waves-effect"> Percepat Pelunasan </a>
+                                          </td>
+                                        <?php } ?>
+
+
                                       </tr>
 
                                     <?php } ?>

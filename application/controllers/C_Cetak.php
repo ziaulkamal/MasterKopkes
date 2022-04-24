@@ -25,13 +25,14 @@ class C_Cetak extends CI_Controller{
   function simpanan($kode_log)
   {
 
-    $loads = $this->mv->log_transaksi($kode_log);
+    $loads = $this->mv->log_transaksi_simpanan($kode_log);
     $load = $loads->row();
     if ($loads == null) {
       echo "Paramameter Salah";
     }else {
       $data = array(
         'js'      => '',
+        'set'      => 'simpanan',
         'title'   => 'Cetak Invoice',
         'nama_anggota' => $load->nama_anggota,
         'no_rekening' => $load->no_rekening,
@@ -44,5 +45,53 @@ class C_Cetak extends CI_Controller{
       $this->load->view('cetak/invoice', $data);
     }
 
+  }
+
+  function angsuran($angsur_kode)
+  {
+    $loads = $this->mv->log_transaksi_angsuran($angsur_kode);
+    $load = $loads->row();
+    if ($loads == null) {
+      echo "Parameter Salah";
+    }else {
+      $data = array(
+        'js'      => '',
+        'set'      => 'angsuran',
+        'title'   => 'Cetak Invoice',
+        'nama_anggota' => $load->nama,
+        'kode' => $load->kode,
+        'pinjaman' => $load->pinjaman,
+        'angsuran_ke' => $load->angsuran_ke,
+        'pokok' => $load->pokok,
+        'margin' => $load->margin,
+        'keterangan' => $load->keterangan,
+        'last_update' => $load->tgl_update,
+      );
+      $this->load->view('cetak/invoice', $data);
+    }
+  }
+
+  function pinjaman($kode_pinjaman)
+  {
+    $loads = $this->mv->log_transaksi_pinjaman($kode_pinjaman);
+    $load = $loads->row();
+    if ($loads == null) {
+      echo "Parameter Salah";
+    }else {
+      $data = array(
+        'js'            => '',
+        'set'           => 'pinjaman',
+        'title'         => 'Cetak Invoice',
+        'pinjaman'      => $load->kode,
+        'no_rekening'   => $load->no_rekening,
+        'nama_anggota'  => $load->nama,
+        'plafon'        => $load->plafon,
+        'margin'        => $load->margin,
+        'pokok'         => $load->pokok,
+        'gotong_royong' => $load->gotong_royong,
+        'last_update'   => $load->last_update,
+      );
+      $this->load->view('cetak/invoice', $data);
+    }
   }
 }

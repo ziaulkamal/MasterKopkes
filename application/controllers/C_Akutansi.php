@@ -56,7 +56,7 @@ class C_Akutansi extends CI_Controller{
   }
 
   // IDEA: Menyimpan Data Simpanan
-function simpan_rekening($no_rekening)
+  function simpan_rekening($no_rekening)
   {
 
     $load = $this->mv->get_detail_rekening($no_rekening);
@@ -132,7 +132,7 @@ function simpan_rekening($no_rekening)
   {
     // IDEA: Tangkap Penampung Data ke Array Kosong
     $q['s'] = [];
-    if ($s = $this->mf->cari_anggota(htmlspecialchars($this->input->post('no_anggota')))) {
+    if ($s = $this->mf->cari_rekening(htmlspecialchars($this->input->post('no_rekening')))) {
       $q['s'] = $s;
       foreach ($q['s'] as $s) { $no_rekening = $s->no_rekening; $sts_pinjaman = $s->sts_pinjaman; }
       $load = $this->mf->detail_anggota_simpanan($no_rekening);
@@ -159,7 +159,6 @@ function simpan_rekening($no_rekening)
 
   function simpan_pinjaman($no_rekening)
   {
-
     $kode_pinjaman	= 'P-'.time();
     $plafon	= $this->input->post('jumlah');
     $tenor	= $this->input->post('tenor');
@@ -185,7 +184,7 @@ function simpan_rekening($no_rekening)
       'total_gotongroyong' => $total_gotongroyong,
       'total_angsuran' => round(0,0,PHP_ROUND_HALF_EVEN),
       'angsuran_ke' => $angsuran_ke,
-      'sisa_angsuran' => round($total_angsuran,0,PHP_ROUND_HALF_EVEN),
+      'sisa_angsuran' => $plafon,
       'tanggal_pengajuan' => $tanggal_pengajuan,
       'last_update' => $last_update,
     );
@@ -206,10 +205,110 @@ function simpan_rekening($no_rekening)
       );
       $this->mc->update_dagoro($no_rekening, $rekening);
       $this->mc->insert_pinjaman($pinjaman);
-      $this->session->set_flashdata('message', '<div class="alert alert-sucsess"> Pinjaman Atas Nama </div>');
+      $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show">Berhasil melakukan pinjaman, <a class="btn btn-info waves-effect waves-light" href="'.base_url('cetak/pinjaman/').$kode_pinjaman.'" target="_blank"> Download Invoice</a> </div>');
       redirect('pinjaman');
     }
 
+  }
+
+  function bayar_angsuran($kode_pinjaman)
+  {
+    $load_pinjaman = $this->mf->get_pinjaman_kode($kode_pinjaman);
+    $load_angsuran = $this->mf->get_angsuran_kode($kode_pinjaman);
+    $no_rekening = $load_pinjaman->no_rekening;
+    $load_anggota = $this->mf->detail_anggota_simpanan($no_rekening);
+
+
+    $data = array(
+      'js'       => '',
+      'title'    => 'Bayar Angsuran Anggota',
+      'anggota'  => $load_anggota,
+      'angsuran' => $load_angsuran,
+      'pinjaman' => $load_pinjaman,
+      'jenis'    => 1,
+      'page'     => 'page/rekening/angsuran_pinjaman',
+    );
+    $this->load->view('main', $data);
+  }
+
+  function pelunasan_angsuran($kode_pinjaman)
+  {
+    $load_pinjaman = $this->mf->get_pinjaman_kode($kode_pinjaman);
+    $load_angsuran = $this->mf->get_angsuran_kode($kode_pinjaman);
+    $no_rekening = $load_pinjaman->no_rekening;
+    $load_anggota = $this->mf->detail_anggota_simpanan($no_rekening);
+
+    $data = array(
+      'js'       => '',
+      'title'    => 'Bayar Angsuran Anggota',
+      'anggota'  => $load_anggota,
+      'angsuran' => $load_angsuran,
+      'pinjaman' => $load_pinjaman,
+      'jenis'    => 2,
+      'page'     => 'page/rekening/angsuran_pinjaman',
+    );
+    $this->load->view('main', $data);
+  }
+
+  function proses_angsuran($kode_pinjaman)
+  {
+    $no_rekening = $this->input->post('no_rekening');
+    $pinjaman    = $this->mf->get_pinjaman_kode($kode_pinjaman);
+    $anggota     = $this->mf->get_detail_rekening($no_rekening);
+    $last_update = date('Y-m-d');
+    $kode_pinjaman = $this->input->post('kode_pinjaman');
+    $angsuran_pokok = $this->input->post('pokok');
+    $angsuran_margin = $this->input->post('margin');
+
+    if ($this->input->post('jenis') == 1) {
+        $angsur_kode = 'A-'.time();
+        $keterangan = 'Sudah melakukan pembayaran Angsuran Bulanan';
+        $angsuran_ke = $pinjaman->angsuran_ke+1;
+        $c_angsur = $pinjaman->angsuran_ke+1;
+        $sisa_angsuran = ($pinjaman->sisa_angsuran-$angsuran_pokok);
+        if ($c_angsur == $pinjaman->tenor) {
+          $sts_pinjaman = 0;
+          $status_pinjaman = array('sts_pinjaman' => $sts_pinjaman);
+          $this->mc->update_status_rekening($no_rekening, $status_pinjaman);
+        }else {
+          $sts_pinjaman = 1;
+        }
+    }else {
+        $angsur_kode = 'L-'.time();
+        $keterangan = 'Sudah Berhasil melunaskan Angsuran';
+        $angsuran_ke = 'Lunas';
+        $c_angsur = $pinjaman->tenor;
+        $sisa_angsuran = ($pinjaman->sisa_angsuran-$angsuran_pokok);
+        $sts_pinjaman = 0;
+        $status_pinjaman = array('sts_pinjaman' => $sts_pinjaman);
+        $this->mc->update_status_rekening($no_rekening, $status_pinjaman);
+    }
+
+    $update_p = array(
+      'kode_pinjaman' => $kode_pinjaman,
+      'total_angsuran' => ($pinjaman->total_angsuran+$angsuran_pokok+$angsuran_margin),
+      'angsuran_ke' => $c_angsur,
+      'sisa_angsuran' => $sisa_angsuran,
+      'last_update' => $last_update,
+  );
+
+    $data = array(
+      'kode_angsuran'      => $angsur_kode,
+      'kode_pinjaman'      => $kode_pinjaman,
+      'no_anggota'         => $anggota->anggota_no,
+      'angsuran_ke'        => $angsuran_ke,
+      'angsuran_pokok'     => $angsuran_pokok,
+      'angsuran_margin'    => $angsuran_margin,
+      'keterangan'         => $keterangan,
+      'status_pinjaman'    => $sts_pinjaman,
+      'last_update'        => $last_update,
+    );
+
+
+    $this->mc->insert_angsuran($data);
+    $this->mc->update_angsuran_bulanan($kode_pinjaman, $update_p);
+    $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show">Berhasil melakukan angsuran, <a class="btn btn-info waves-effect waves-light" href="'.base_url('cetak/angsuran/').$angsur_kode.'" target="_blank"> Download Invoice</a> </div>');
+    redirect('pinjaman');
   }
 
   function pinjaman()
@@ -224,5 +323,17 @@ function simpan_rekening($no_rekening)
     );
     $this->load->view('main', $data);
   }
+
+function angsuran_anggota()
+{
+  $load = $this->mv->master_view_angsuran();
+  $data = array(
+    'js'    => 'dataTables',
+    'title' => 'Angsuran Anggota',
+    'angsuran' => $load->result(),
+    'page'  => 'page/rekening/anggota_angsuran',
+  );
+  $this->load->view('main', $data);
+}
 
 }
