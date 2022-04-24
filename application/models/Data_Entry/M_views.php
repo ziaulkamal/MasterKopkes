@@ -10,8 +10,15 @@ class M_views extends CI_Model{
 
   function master_view_anggota_all()
   {
+
+    $this->db->select('*');
+    $this->db->from('master_view_anggota_all');
     $this->db->order_by('no', 'DESC');
-    return $this->db->get('master_view_anggota_all')->result();
+    $this->db->where('status', 0);
+    $this->db->or_where('status', 1);
+    $query = $this->db->get();
+    return $query->result();
+
   }
 
   function get_anggota_last()

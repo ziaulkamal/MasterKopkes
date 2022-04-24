@@ -76,4 +76,55 @@ class C_Anggota extends CI_Controller{
     $this->session->set_flashdata('message', '<div class="alert alert-success"> Berhasil menambahkan anggota baru <b>'.$nama_anggota .'</b> silahkan masukan simpanan wajib terlebih dahulu. <a class="btn btn-info waves-effect waves-light" href="'.base_url('simpanan_pertama/').$no_rekening.'">Klik Disini</a> </div>');
     redirect('anggota');
   }
-}
+
+  function update($no_anggota)
+  {
+    $instansi = $this->mv->get_instansi();
+    $load = $this->mf->get_anggota_by_no($no_anggota);
+    if ($load) {
+      $data = array(
+        'no_anggota'  => set_value('no_anggota', $load->no_anggota),
+        'nama_anggota'=> set_value('nama_anggota', $load->nama_anggota),
+        'nik'         => set_value('nik', $load->nik),
+        'nip'         => set_value('nip', $load->nip),
+        'tgl_lahir'   => set_value('lahir', $load->tgl_lahir),
+        'alamat'      => set_value('alamat', $load->alamat),
+        'instansi'    => $instansi,
+        'status'      => set_value('status', $load->status),
+        'registration'=> set_value('terdaftar', $load->registration),
+        'js'          => '',
+        'title'       => 'Edit Anggota',
+        'page'        => 'page/anggota/update',
+      );
+      $this->load->view('main', $data);
+    }
+      else {
+        redirect(site_url('anggota'));
+      }
+  }
+
+  function update_proses()
+  {
+      $no_anggota = $this->input->post('no_anggota');
+      $data = array(
+        'no_anggota'  => $no_anggota,
+        'instansi'    =>  $this->input->post('instansi'),
+        'nama_anggota'=> $this->input->post('nama_anggota'),
+        'nik'         => $this->input->post('nik'),
+        'nip'         => $this->input->post('nip'),
+        'tgl_lahir'   => $this->input->post('tgl_lahir'),
+        'alamat'      => $this->input->post('alamat'),
+        'registration'=> $this->input->post('registration'),
+      );
+      $this->mf->update_anggota($no_anggota, $data);
+      $this->session->set_flashdata('message', '<div class="alert alert-primary" role="alert">Berhasil Menambahkan Anggota baru dengan nama <strong>'.$data['nama_anggota']. '</strong> dengan NO Anggota <strong>'.$data['no_anggota'].'<strong></div>');
+      redirect ('anggota');
+    }
+
+    function delete($no_anggota)
+    {
+      $this->mf->delete($id_anggota);
+      $this->db->query("UPDATE tb_anggota SET status = 2 WHERE  no_anggota = '$no_anggota'");
+      redirect('anggota');
+      }
+  }

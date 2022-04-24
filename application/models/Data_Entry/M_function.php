@@ -77,4 +77,22 @@ class M_function extends CI_Model{
     return $this->db->get('master_view_pinjaman')->result();
   }
 
+  function get_anggota_by_no($no_anggota)
+  {
+    $this->db->where('no_anggota', $no_anggota);
+    return $this->db->get('tb_anggota')->row();
+  }
+
+  function update_anggota($no_anggota, $data)
+  {
+    $this->db->where('no_anggota', $no_anggota);
+    $this->db->update('tb_anggota', $data);
+  }
+
+  function delete($id)
+    {
+      $query = $this->db->query ("SELECT status from tb_anggota WHERE no_anggota ='$id'");
+      return $this->db->query($query);
+    }
+
 }
