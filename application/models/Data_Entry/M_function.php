@@ -89,10 +89,12 @@ class M_function extends CI_Model{
     $this->db->update('tb_anggota', $data);
   }
 
-  function delete($id)
+  function delete($no_anggota)
     {
-      $query = $this->db->query ("SELECT status from tb_anggota WHERE no_anggota ='$id'");
-      return $this->db->query($query);
+      $query      = $this->db->query ("SELECT status from tb_anggota WHERE no_anggota ='$no_anggota'");
+      $set_update = $this->db->query("UPDATE tb_anggota SET status = 2 WHERE  no_anggota = '$no_anggota'");
+      $query_hasil = $query + $set_update;
+      return $query_hasil;
     }
 
 }

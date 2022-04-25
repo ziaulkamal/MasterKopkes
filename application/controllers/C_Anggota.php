@@ -117,14 +117,14 @@ class C_Anggota extends CI_Controller{
         'registration'=> $this->input->post('registration'),
       );
       $this->mf->update_anggota($no_anggota, $data);
-      $this->session->set_flashdata('message', '<div class="alert alert-primary" role="alert">Berhasil Menambahkan Anggota baru dengan nama <strong>'.$data['nama_anggota']. '</strong> dengan NO Anggota <strong>'.$data['no_anggota'].'<strong></div>');
+      $this->session->set_flashdata('message', '<div class="alert alert-success"> Data dengan nomor anggota <b>'.$no_anggota.'</b> dan nama anggota <b>'.$nama_anggota.'</b> Berhasil diubah </div>');
       redirect ('anggota');
     }
 
     function delete($no_anggota)
     {
-      $this->mf->delete($id_anggota);
-      $this->db->query("UPDATE tb_anggota SET status = 2 WHERE  no_anggota = '$no_anggota'");
+      $this->mf->delete($no_anggota);
+      $this->session->set_flashdata('message', '<div class="alert alert-danger"> Data dengan nomor anggota <b>'.$no_anggota.'</b> Berhasil dihapus </div>');
       redirect('anggota');
       }
   }

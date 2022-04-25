@@ -44,6 +44,37 @@
 // IDEA: End Penggunaan Assets DataTables
 ?>
 
+<?php // IDEA: Penggunaan SweetAlert Pada tombol Hapus ?>
+<script src="<?= base_url(); ?>assets/libs/sweetalert2/sweetalert2.all.min.js"></script>
+<script>
+var flash = $('#flash').data('flash');
+  if(flash) {
+    swal.fire({
+      icon: 'success',
+      title: 'Success',
+      text: flash
+    })
+  }
+
+  $(document).on('click', '#btn-delete', function(e) {
+    e.preventDefault();
+    var link = $(this).attr('href');
+
+    Swal.fire({
+    title: 'Apakah Anda Yakin?',
+    text: "Data Akan Dihapus!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      window.location = link;
+    }
+    })
+  })
+</script>
 
 </body>
 </html>
