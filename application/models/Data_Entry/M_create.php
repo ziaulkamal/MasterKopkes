@@ -70,4 +70,16 @@ class M_create extends CI_Model{
     $this->db->update('tb_rekening', $status_pinjaman);
     return;
   }
+
+  function update_margin($id, $is_margin)
+  {
+    $this->db->where('id_margin', $id);
+    $this->db->update('tb_margin_saving', $is_margin);
+    return;
+  }
+
+  function insert_margin($is_margin)
+  {
+    return $this->db->insert('tb_margin_saving', $is_margin);
+  }
 }

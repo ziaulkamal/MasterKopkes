@@ -112,4 +112,14 @@ class M_function extends CI_Model{
     return $this->db->get('tb_rekening')->row();
   }
 
+  function get_id_margin($no_rekening, $tahun)
+  {
+    $data = array(
+      'no_rekening' => $no_rekening,
+      'tahun' => $tahun,
+  );
+  $this->db->where($data);
+  return $this->db->get('tb_margin_saving')->row();
+  }
+
 }

@@ -186,33 +186,33 @@ class C_Akutansi extends CI_Controller{
     {
       $this->global_kas();
       $kode_pinjaman	= 'P-'.time();
-      $plafon	= $this->input->post('jumlah');
-      $tenor	= $this->input->post('tenor');
-      $margin	= 0.08;
+      $plafon	        = $this->input->post('jumlah');
+      $tenor	        = $this->input->post('tenor');
+      $margin	        = 0.08;
 
-      $rumus_margin = ($plafon*$margin)/12;
-      $margin_angsur = $rumus_margin/$tenor;
-      $pokok_murabahan	= $plafon/$tenor;
+      $rumus_margin   = ($plafon*$margin)/12;
+      $margin_angsur  = $rumus_margin/$tenor;
+      $pokok_murabahan= $plafon/$tenor;
       $total_gotongroyong	= (0.015 * $plafon);
       $total_angsuran	= $plafon + $rumus_margin;
-      $angsuran_ke	= 0;
+      $angsuran_ke	  = 0;
       $tanggal_pengajuan	= date('Y-m-d');
-      $last_update = date('Y-m-d');
+      $last_update    = date('Y-m-d');
 
 
       $pinjaman = array(
-        'kode_pinjaman' => $kode_pinjaman,
-        'no_rekening' => $no_rekening,
-        'plafon' => $plafon,
-        'tenor' => $tenor,
-        'margin' => round($rumus_margin,0,PHP_ROUND_HALF_EVEN),
-        'pokok_murabahan' => round($pokok_murabahan,0,PHP_ROUND_HALF_EVEN),
-        'total_gotongroyong' => $total_gotongroyong,
-        'total_angsuran' => round(0,0,PHP_ROUND_HALF_EVEN),
-        'angsuran_ke' => $angsuran_ke,
-        'sisa_angsuran' => $plafon,
-        'tanggal_pengajuan' => $tanggal_pengajuan,
-        'last_update' => $last_update,
+        'kode_pinjaman'       => $kode_pinjaman,
+        'no_rekening'         => $no_rekening,
+        'plafon'              => $plafon,
+        'tenor'               => $tenor,
+        'margin'              => round($rumus_margin,0,PHP_ROUND_HALF_EVEN),
+        'pokok_murabahan'     => round($pokok_murabahan,0,PHP_ROUND_HALF_EVEN),
+        'total_gotongroyong'  => $total_gotongroyong,
+        'total_angsuran'      => round(0,0,PHP_ROUND_HALF_EVEN),
+        'angsuran_ke'         => $angsuran_ke,
+        'sisa_angsuran'       => $plafon,
+        'tanggal_pengajuan'   => $tanggal_pengajuan,
+        'last_update'         => $last_update,
       );
 
 
@@ -224,10 +224,10 @@ class C_Akutansi extends CI_Controller{
         redirect('pinjaman');
       }else {
         $rekening = array(
-          'no_rekening' => $no_rekening,
-          'anggota_no' => $load->anggota_no,
-          's_gotongroyong' => $akumulasi_dagoro,
-          'sts_pinjaman' => 1,
+          'no_rekening'     => $no_rekening,
+          'anggota_no'      => $load->anggota_no,
+          's_gotongroyong'  => $akumulasi_dagoro,
+          'sts_pinjaman'    => 1,
         );
 
         $brangkas['dana_gotongroyong'] = $b_dagoro+$total_gotongroyong;
@@ -292,6 +292,25 @@ class C_Akutansi extends CI_Controller{
       $kode_pinjaman = $this->input->post('kode_pinjaman');
       $angsuran_pokok = $this->input->post('pokok');
       $angsuran_margin = $this->input->post('margin');
+      $tahun = date('Y')+1;
+
+      $data_margin = $this->mf->get_id_margin($no_rekening, $tahun);
+      if ($data_margin == NULL) {
+        $is_margin = array(
+          'no_rekening' => $no_rekening,
+          'margin_saving' => $angsuran_margin,
+          'tahun' => $tahun,
+          'last_update' => $last_update,
+        );
+        $this->mc->insert_margin($is_margin);
+      }else {
+        $id = $data_margin->id_margin;
+        $is_margin = array(
+          'margin_saving' => ($data_margin->margin_saving)+$angsuran_margin,
+          'last_update' => $last_update,
+        );
+        $this->mc->update_margin($id, $is_margin);
+      }
 
       if ($this->input->post('jenis') == 1) {
           $angsur_kode = 'A-'.time();
@@ -454,6 +473,24 @@ class C_Akutansi extends CI_Controller{
           'status'     => 2,
         );
 
+        $data_margin = $this->mf->get_id_margin($no_rekening, $tahun);
+        if ($data_margin == NULL) {
+          $is_margin = array(
+            'no_rekening' => $no_rekening,
+            'margin_saving' => $angsuran_margin,
+            'tahun' => $tahun,
+            'last_update' => $last_update,
+          );
+          $this->mc->insert_margin($is_margin);
+        }else {
+          $id = $data_margin->id_margin;
+          $is_margin = array(
+            'margin_saving' => ($data_margin->margin_saving)+$angsuran_margin,
+            'last_update' => $last_update,
+          );
+          $this->mc->update_margin($id, $is_margin);
+        }
+
         $brangkas['total_hutang'] = $total_hutang+$angsuran_pokok;
         $brangkas['total_piutang'] = $total_piutang-$angsuran_pokok;
         $brangkas['last_update'] = $last_update;
@@ -468,4 +505,4 @@ class C_Akutansi extends CI_Controller{
     }
 
 
-    }
+  }
