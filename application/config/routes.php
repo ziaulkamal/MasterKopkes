@@ -28,8 +28,11 @@ $route['proses_pinjaman/(:any)'] = 'C_Akutansi/simpan_pinjaman/$1';
 // Angsuran
 $route['angsuran'] = 'C_Akutansi/angsuran_anggota';
 $route['angsuran/(:any)'] = 'C_Akutansi/bayar_angsuran/$1';
+$route['meninggal/(:any)'] = 'C_Akutansi/meninggal/$1';
+$route['proses_tutup_meninggal/(:any)'] = 'C_Akutansi/proses_tutup_dagoro/$1';
 $route['pelunasan/(:any)'] = 'C_Akutansi/pelunasan_angsuran/$1';
 $route['proses_angsuran/(:any)'] = 'C_Akutansi/proses_angsuran/$1';
+$route['angsuran_tertunda'] = 'C_Akutansi/angsuran_tertunda';
 
 // Pencarian
 $route['cari_simpanan']  = 'C_Pencarian/cari_anggota_simpanan';

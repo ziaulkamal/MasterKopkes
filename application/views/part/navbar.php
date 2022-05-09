@@ -73,7 +73,7 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="<?= base_url('angsuran') ?>">Data Angsuran Terakhir</a></li>
-                        <li><a href="auth-register.html">Cek Angsuran Tertunda</a></li>
+                        <li><a href="<?= base_url('angsuran_tertunda') ?>">Cek Angsuran Tertunda</a></li>
                         <li><a href="auth-recoverpw.html">Laporan Angsuran</a></li>
                     </ul>
                 </li>

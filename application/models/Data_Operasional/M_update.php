@@ -15,4 +15,14 @@ class M_update extends CI_Model{
     return $query->result();
   }
 
+
+  function get_brangkas()
+  {
+    return $this->db->get('tb_brangkas');
+  }
+
+  function update_brangkas($brangkas)
+  {
+    return $this->db->update('tb_brangkas', $brangkas);
+  }
 }

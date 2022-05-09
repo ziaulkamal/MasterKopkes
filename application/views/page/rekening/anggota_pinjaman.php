@@ -31,12 +31,12 @@
                                         <th>Masa Pinjaman</th>
                                         <th>Margin</th>
                                         <th>Pokok </th>
-                                        <th>Angsuran Perbulan </th>
+                                        <!-- <th>Angsuran Perbulan </th> -->
                                         <!-- <th>Sisa Angsuran Pokok</th> -->
                                         <!-- <th>Angsur Per Bulan</th> -->
                                         <th>Tanggal Pengajuan</th>
                                         <th>Opsi</th>
-                                        <th></th>
+
                                       </tr>
                                   </thead>
                                   <tbody>
@@ -51,7 +51,7 @@
                                         <td><?= $this->conv->convRupiah($s->margin); ?></td>
                                         <td><?= $this->conv->convRupiah($s->pokok); ?></td>
                                         <!-- <td><?= $this->conv->convRupiah($s->sisa_angsuran); ?></td> -->
-                                        <td><?= $this->conv->convRupiah($s->margin+$s->pokok); ?></td>
+                                        <!-- <td><?= $this->conv->convRupiah($s->margin+$s->pokok); ?></td> -->
                                         <td><?= $s->tgl_pengajuan; ?></td>
                                         <?php if ($s->tenor == $s->ke) { ?>
                                           <td><a class="btn btn-outline-success waves-effect"> Telah Lunas </a></td>

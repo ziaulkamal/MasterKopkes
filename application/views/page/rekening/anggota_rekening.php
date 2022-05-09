@@ -39,24 +39,26 @@
                                   <tbody>
                                     <?php $start = 1;
 
-                                    foreach ($rekening as $data) { ?>
+                                    foreach ($rekening as $data) {
+                                      if ($data->keanggotaan != 2) { ?>
                                         <tr>
                                           <th scope="row"><?= $start++ ?></th>
-                                          <td><?= $data->no ?></td>
+                                          <td><?= $data->no_rekening ?></td>
                                           <td><?= $data->nama ?></td>
                                           <td><?= $this->conv->convRupiah($data->pokok) ?></td>
                                           <td><?= $this->conv->convRupiah($data->wajib) ?></td>
                                           <td><?= $this->conv->convRupiah($data->kusus) ?></td>
                                           <td><?= $this->conv->convRupiah($data->lain) ?></td>
                                           <td><?= $this->conv->convRupiah($data->total) ?></td>
-                                          <td><center><?php if ($data->status == 1) { ?>
+                                          <td><center><?php if ($data->status_pinjam == 1) { ?>
                                             <span class="badge bg-success">Ada</span>
                                           <?php }else { ?>
                                             <span class="badge bg-info">Tidak Ada</span>
                                           <?php } ?></center></td>
-                                          <td><center><a href="<?= base_url('simpanan_pertama/').$data->no ?>" class="badge bg-primary">  Update Simpanan  </a></center></td>
+                                          <td><center><a href="<?= base_url('simpanan_pertama/').$data->no_rekening ?>" class="badge bg-primary">  Update Simpanan  </a></center></td>
                                         </tr>
-                                    <?php }
+                                      <?php }
+                                     }
                                      ?>
 
 

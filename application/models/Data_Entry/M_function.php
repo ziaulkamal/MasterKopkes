@@ -49,8 +49,11 @@ class M_function extends CI_Model{
 
   function list_rekening()
   {
-    $this->db->order_by('no', 'DESC');
-    return $this->db->get('master_view_rekening')->result();
+    $this->db->select('no_rekening, anggota_no AS no_anggota, nama_anggota AS nama, s_pokok AS pokok, s_wajib AS wajib, s_khusus AS kusus, s_lain AS lain, s_gotongroyong AS gotong_royong, total_akumulasi AS total, sts_pinjaman AS status_pinjam, status AS keanggotaan, last_update AS update_terakhir');
+    $this->db->from('tb_rekening');
+    $this->db->join('tb_anggota', 'tb_anggota.no_anggota = tb_rekening.anggota_no');
+    $this->db->order_by('update_terakhir', 'DESC');
+    return $this->db->get();
   }
 
   function cari_anggota($no_anggota)

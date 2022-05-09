@@ -22,7 +22,11 @@
       <div class="col-lg-4">
           <div class="card">
             <div class="card-body">
-                <form method="post" action="<?= base_url('proses_angsuran/').$pinjaman->kode_pinjaman ?>" class="custom-validation" method="post" enctype="multipart/form-data">
+                <form method="post" action="<?php if ($jenis != 3) {
+                  echo base_url('proses_angsuran/').$pinjaman->kode_pinjaman;
+                }else {
+                  echo base_url('proses_tutup_meninggal/').$pinjaman->kode_pinjaman;
+                } ?>" class="custom-validation" method="post" enctype="multipart/form-data">
                   <div class="row">
                     <input type="hidden" name="jenis" value="<?= $jenis ?>">
                     <input type="hidden" name="no_rekening" value="<?= $pinjaman->no_rekening ?>">
@@ -63,12 +67,16 @@
                     </div>
                     <div>
                         <div>
+                          <?php if ($jenis != 3) {?>
                             <button type="submit" class="btn btn-primary waves-effect waves-light me-1">
                                 Proses Data
                             </button>
-                            <button type="reset" class="btn btn-secondary waves-effect">
-                                Reset Form
+                          <?php }else {?>
+                            <button type="submit" class="btn btn-outline-primary waves-effect waves-light me-1">
+                                Proses & Tutup Akun Anggota
                             </button>
+                          <?php } ?>
+
                         </div>
                     </div>
                     </div>

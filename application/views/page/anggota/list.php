@@ -51,6 +51,8 @@
                                   echo '<span class="badge bg-primary">Aktif</span>';
                                 }elseif ($data->status == 0) {
                                   echo '<span class="badge bg-light">Non-aktif</span>';
+                                }else {
+                                  echo '<span class="badge bg-danger">Meninggal</span>';
                                 } ?></td>
                                 <td><?= $data->terdaftar; ?></td>
                                 <td>

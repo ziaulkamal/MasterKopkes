@@ -24,30 +24,32 @@
                               <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                   <thead>
                                       <tr>
-                                        <th>No</th>
-                                        <th>Kode Angsuran</th>
+                                        <th>Kode Pinjaman</th>
                                         <th>Nama Anggota</th>
-                                        <th>Angsuran Ke</th>
-                                        <th>Jumlah Angsuran</th>
-                                        <th>Keterangan</th>
+                                        <th>Durasi Tunggakan</th>
+                                        <th>Sisa Angsuran Pokok</th>
                                         <th>Opsi</th>
-
                                       </tr>
                                   </thead>
                                   <tbody>
-                                    <?php $start = 1;
-                                    foreach ($angsuran as $s) {?>
+                                    <?php
+                                    foreach ($angsuran as $s) {
+
+                                      if ($this->bulan->parse($s->last_update) - $date != 0 && $s->tenor - $s->ke != 0) { ?>
                                       <tr>
-                                        <td><?= $start++; ?></td>
                                         <td><?= $s->kode; ?></td>
                                         <td><?= $s->nama; ?></td>
-                                        <td><?= $s->angsuran_ke; ?></td>
-                                        <td><?= $this->conv->convRupiah($s->pokok+$s->margin); ?></td>
-                                        <td><?= $s->keterangan; ?></td>
-                                        <td><a href="<?= base_url('cetak/angsuran/').$s->kode ?>" class="btn btn-outline-primary waves-effect"> Cek Invoice </a></td>
+                                        <td><?= $date - $this->bulan->parse($s->last_update). ' bulan' ?></td>
+                                        <td><?= $this->conv->convRupiah($s->sisa_angsuran); ?></td>
+                                        <td>
+                                          <a href="<?= base_url('angsuran/').$s->kode ?>" class="btn btn-outline-info waves-effect">  Bayar </a>
+                                          <a href="<?= base_url('pelunasan/').$s->kode ?>" class="btn btn-outline-dark waves-effect"> Percepat Pelunasan </a>
+                                          <a href="<?= base_url('meninggal/').$s->kode ?>" class="btn btn-outline-danger waves-effect"> Meninggal Dunia </a>
+                                        </td>
                                       </tr>
 
-                                    <?php } ?>
+                                      <?php }
+                                     } ?>
                                   </tbody>
                                   </table>
                           </div>

@@ -28,6 +28,13 @@ class M_create extends CI_Model{
     return;
   }
 
+  function update_anggota($no_anggota, $u_anggota)
+  {
+    $this->db->where('no_anggota', $no_anggota);
+    return $this->db->update('tb_anggota', $u_anggota);
+
+  }
+
   function update_dagoro($no_rekening, $rekening)
   {
     $this->db->where('no_rekening', $no_rekening);

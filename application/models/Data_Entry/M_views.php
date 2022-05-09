@@ -10,8 +10,8 @@ class M_views extends CI_Model{
 
   function master_view_anggota_all()
   {
-    $this->db->order_by('no', 'DESC');
-    return $this->db->get('master_view_anggota_all')->result();
+    $this->db->order_by('terdaftar', 'DESC');
+    return $this->db->get('master_view_anggota')->result();
   }
 
   function get_anggota_last()
@@ -66,5 +66,11 @@ class M_views extends CI_Model{
   {
     $this->db->order_by('tgl_update', 'DESC');
     return $this->db->get('log_angsuran_anggota');
+  }
+
+  function angsuran_tertunda()
+  {
+    $this->db->order_by('last_update', 'DESC');
+    return $this->db->get('master_view_pinjaman');
   }
 }
