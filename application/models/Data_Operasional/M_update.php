@@ -9,18 +9,6 @@ class M_update extends CI_Model{
     //Codeigniter : Write Less Do More
   }
 
-  function log_last_operasional_limit()
-  {
-    $query = $this->db->query('SELECT * FROM tb_operasional ORDER BY id DESC LIMIT 4');
-    return $query->result();
-  }
-
-
-  function get_brangkas()
-  {
-    return $this->db->get('tb_brangkas');
-  }
-
   function update_brangkas($brangkas)
   {
     return $this->db->update('tb_brangkas', $brangkas);

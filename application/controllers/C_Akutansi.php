@@ -292,7 +292,7 @@ class C_Akutansi extends CI_Controller{
       $kode_pinjaman = $this->input->post('kode_pinjaman');
       $angsuran_pokok = $this->input->post('pokok');
       $angsuran_margin = $this->input->post('margin');
-      $tahun = date('Y')+1;
+      $tahun = date('Y');
 
       $data_margin = $this->mf->get_id_margin($no_rekening, $tahun);
       if ($data_margin == NULL) {
