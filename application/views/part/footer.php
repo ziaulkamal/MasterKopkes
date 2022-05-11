@@ -63,10 +63,10 @@ var flash = $('#flash').data('flash');
     title: 'Apakah Anda Yakin?',
     text: "Data Akan Dihapus!",
     icon: 'warning',
-    showCancelButton: true,
+    showCancelButton: false,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes, delete it!'
+    confirmButtonText: 'Ya, Konfirmasi Penghapusan !'
   }).then((result) => {
     if (result.isConfirmed) {
       window.location = link;
