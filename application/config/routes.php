@@ -9,6 +9,9 @@ $route['dashboard'] = 'Home/index';
 $route['anggota']        = 'C_Anggota/index';
 $route['daftar']         = 'C_Anggota/daftar';
 $route['daftar_baru']    = 'C_Anggota/simpan_anggota';
+$route['update/(:any)']  = 'C_Anggota/update/$1';
+$route['update_proses']  = 'C_Anggota/update_proses';
+$route['hapus/(:any)']   = 'C_Anggota/delete/$1';
 
 //Instansi
 $route['Instansi']        = 'C_Instansi/index';
