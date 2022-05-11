@@ -190,10 +190,10 @@ class C_Akutansi extends CI_Controller{
       $tenor	        = $this->input->post('tenor');
       $margin	        = 0.08; // 8%
 
-      $rumus_margin   = ($plafon*$margin)/12;
-      $margin_angsur  = $rumus_margin/$tenor;
-      $pokok_murabahan= $plafon/$tenor;
-      $total_gotongroyong	= (0.015 * $plafon);
+      $rumus_margin   = ($plafon*$margin)/12; // Rumus untuk mendapatkan nilai margin perbulan
+      $margin_angsur  = $rumus_margin/$tenor; // akumulasi nilai margin ke setiap bulan
+      $pokok_murabahan= $plafon/$tenor; // Pembagian angsuran pokok untuk masa pinjaman/tenor
+      $total_gotongroyong	= (0.015 * $plafon); // total gotong royong di ambil dari nilai plafon sebanyak 1,5%
       $total_angsuran	= $plafon + $rumus_margin;
       $angsuran_ke	  = 0;
       $tanggal_pengajuan	= date('Y-m-d');
