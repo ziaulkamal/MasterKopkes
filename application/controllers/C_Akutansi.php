@@ -188,7 +188,7 @@ class C_Akutansi extends CI_Controller{
       $kode_pinjaman	= 'P-'.time();
       $plafon	        = $this->input->post('jumlah');
       $tenor	        = $this->input->post('tenor');
-      $margin	        = 0.08;
+      $margin	        = 0.08; // 8%
 
       $rumus_margin   = ($plafon*$margin)/12;
       $margin_angsur  = $rumus_margin/$tenor;
