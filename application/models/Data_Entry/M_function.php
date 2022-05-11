@@ -11,7 +11,9 @@ class M_function extends CI_Model{
 
   function last_instansi()
   {
-    $query = $this->db->query('SELECT kode_instansi FROM tb_instansi ORDER BY id DESC LIMIT 1');
+    $this->db->select('kode_instansi');
+    $this->db->order_by('id', 'DESC');
+    $this->db->get('tb_instansi', 1);
     return $query->row();
   }
 
@@ -82,8 +84,9 @@ class M_function extends CI_Model{
 
   function get_format_daftar()
   {
-    $query = $this->db->query('SELECT id FROM tb_anggota ORDER BY id DESC LIMIT 1');
-    return $query->row();
+    $this->db->select('id');
+    $this->db->order_by('id','DESC');
+    return $this->db->get('tb_anggota', 1)->row();
   }
 
   function get_list_pinjaman()
@@ -117,9 +120,28 @@ class M_function extends CI_Model{
     $data = array(
       'no_rekening' => $no_rekening,
       'tahun' => $tahun,
-  );
-  $this->db->where($data);
-  return $this->db->get('tb_margin_saving')->row();
+    );
+    $this->db->where($data);
+    return $this->db->get('tb_margin_saving')->row();
   }
 
+  function get_anggota_by_no($no_anggota)
+  {
+    $this->db->where('no_anggota', $no_anggota);
+    return $this->db->get('tb_anggota')->row();
+  }
+
+  function update_anggota($no_anggota, $data)
+  {
+    $this->db->where('no_anggota', $no_anggota);
+    $this->db->update('tb_anggota', $data);
+  }
+
+  function delete($no_anggota)
+  {
+    $query      = $this->db->query ("SELECT status from tb_anggota WHERE no_anggota ='$no_anggota'");
+    $set_update = $this->db->query("UPDATE tb_anggota SET status = 2 WHERE  no_anggota = '$no_anggota'");
+    $query_hasil = $query + $set_update;
+    return $query_hasil;
+  }
 }

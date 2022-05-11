@@ -57,8 +57,8 @@
                                 <td><?= $data->terdaftar; ?></td>
                                 <td>
                                 <a href="<?= base_url('detail/').$data->no; ?>" class="btn btn-sm btn-outline-info waves-effect waves-light">Detail</a>
-                                <a href="<?= base_url('edit/').$data->no; ?>" class="btn btn-sm btn-outline-danger waves-effect waves-light">Edit</a>
-                                <a href="<?= base_url('hapus/').$data->no; ?>" class="btn btn-sm btn-outline-dark waves-effect waves-light" onclick="<?= base_url('anggota') ?>">Hapus</a>
+                                <a href="<?= base_url('update/').$data->no; ?>" class="btn btn-sm btn-outline-danger waves-effect waves-light">Edit</a>
+                                <a href="<?= base_url('hapus/').$data->no; ?>" id="btn-delete" class="btn btn-sm btn-outline-dark waves-effect waves-light" onclick="<?= base_url('anggota') ?>">Hapus</a>
                               </td>
                             </tr>
                             <?php } ?>
