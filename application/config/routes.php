@@ -43,7 +43,7 @@ $route['cari_pinjaman']  = 'C_Pencarian/cari_anggota_pinjaman';
 
 
 // Operasional
-$route['operasional/cash_out']  = 'C_Operasional/cash_in';
+$route['operasional/cash_out']  = 'C_Operasional/cash_out';
 $route['operasional/p_cash_out']  = 'C_Operasional/update_cash_out';
 $route['operasional/cash_in']  = 'C_Operasional/cash_in';
 $route['operasional/p_cash_in']  = 'C_Operasional/update_cash_in';

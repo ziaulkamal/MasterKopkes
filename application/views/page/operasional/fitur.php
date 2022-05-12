@@ -14,10 +14,14 @@
       <?= validation_errors('<div class="alert alert-warning">','</div>'); ?>
       <?= $this->session->flashdata('message'); ?>
         <div class="card-body">
-            <form method="post" action="<?= base_url('operasional/p_cash_out') ?>" class="custom-validation">
+            <form method="post" action="<?= base_url('operasional/').$action ?>" class="custom-validation">
               <div class="row">
                 <div class="mb-3 col-xl-12">
-                  <label class="form-label">Keterangan Penggunaan</label>
+                  <label class="form-label">Keterangan <?php if ($action == 'p_cash_in') {
+                    echo "Pengembalian";
+                  }else {
+                    echo "Penggunaan";
+                  } ?></label>
                   <div>
                   <textarea name="keterangan" class="form-control" rows="2" cols="80"></textarea>
                   </div>
@@ -25,14 +29,19 @@
                 <div class="mb-3 col-xl-12">
                   <label class="form-label">Jenis</label>
                   <div>
-                    <select class="form-control" name="jenis" required>
-                        <option selected>-- Opsi --</option>
-                        <option value="1">Kebutuhan ATK</option>
-                        <option value="2">Pinjaman Petugas</option>
-                        <option value="3">Kebutuhan Operasional</option>
-                        <option value="4">Lainya</option>
-
-                    </select>
+                    <?php if ($action == 'p_cash_in') { ?>
+                      <select class="form-control" name="jenis" readonly>
+                          <option selected value="5">-- Pengembalian --</option>
+                      </select>
+                    <?php }elseif ($action == 'p_cash_out') {?>
+                      <select class="form-control" name="jenis" required>
+                          <option selected>-- Opsi --</option>
+                          <option value="1">Kebutuhan ATK</option>
+                          <option value="2">Pinjaman Petugas</option>
+                          <option value="3">Kebutuhan Operasional</option>
+                          <option value="4">Lainya</option>
+                      </select>
+                    <?php } ?>
                   </div>
                 </div>
                 <div class="mb-3 col-xl-12">

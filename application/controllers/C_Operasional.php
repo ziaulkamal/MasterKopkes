@@ -16,12 +16,25 @@ class C_Operasional extends CI_Controller{
 
   }
 
-  function index()
+  function cash_in()
   {
+    $load = array(
+      'kas'   => $this->mf->get_brangkas()->row(),
+      'logs' => $this->mf->log_last_operasional_limit()->result(),
+    );
 
+    $data = array(
+      'js'      =>  '',
+      'title'   =>  'Update Penambahan Kas Operasional',
+      'action'  => 'p_cash_in',
+      'kas'     =>  $this->conv->convRupiah($load['kas']->kas),
+      'logs'     =>  $load['logs'],
+      'page'    =>  'page/operasional/fitur'
+    );
+    $this->load->view('main', $data);
   }
 
-  function fitur_operasional()
+  function cash_out()
   {
     $load = array(
       'kas'   => $this->mf->get_brangkas()->row(),
@@ -31,6 +44,8 @@ class C_Operasional extends CI_Controller{
     $data = array(
       'js'      =>  '',
       'title'   =>  'Update Penggunaan Kas Operasional',
+      'action'  => 'p_cash_out',
+      'action'  => 'p_cash_out',
       'kas'     =>  $this->conv->convRupiah($load['kas']->kas),
       'logs'     =>  $load['logs'],
       'page'    =>  'page/operasional/fitur'
@@ -50,11 +65,13 @@ class C_Operasional extends CI_Controller{
     if ($jenis == 1) {
       $kode_jenis = "Kebutuhan ATK";
     }elseif ($jenis == 2) {
-      $kode_jenis = "Pinjaman Petugas";
+      $kode_jenis = "Biaya Honor";
     }elseif ($jenis == 3) {
-      $kode_jenis = "Kebutuhan Operasional";
+      $kode_jenis = "Biaya RAT";
     }elseif ($jenis == 4) {
-      $kode_jenis = "Kebutuhan Lainya";
+      $kode_jenis = "Beban  Tunjangan Hari Raya";
+    }elseif ($jenis == 5) {
+      $kode_jenis = "Biaya Penghapusan";
     }else {
       $this->session->set_flashdata('message', '<div class="alert alert-warning alert-dismissible fade show"><b>Opsi yang dikirimkan harus dipilih</b></div>');
       redirect('operasional/cash_out');
@@ -85,7 +102,7 @@ class C_Operasional extends CI_Controller{
     $keterangan     = $this->input->post('keterangan');
     $last_update    = date('Y-m-d');
 
-    if ($jenis == 1) {
+    if ($jenis == 6) {
       $kode_jenis = "Dana Sisa Pengembalian SHU";
     }else {
       $this->session->set_flashdata('message', '<div class="alert alert-warning alert-dismissible fade show"><b>Opsi yang dikirimkan harus dipilih</b></div>');
@@ -105,6 +122,11 @@ class C_Operasional extends CI_Controller{
     $this->mu->add_log($log);
     $this->mu->update_brangkas($brangkas);
     $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show">'.$log['keterangan'].'</div>');
-    redirect('operasional/cash_out');
+    redirect('operasional/cash_in');
+  }
+
+  function neraca()
+  {
+    // code...
   }
 }
