@@ -12,8 +12,8 @@ class M_function extends CI_Model{
 
   function log_last_operasional_limit()
   {
-    $query = $this->db->query('SELECT * FROM tb_operasional ORDER BY id DESC LIMIT 4');
-    return $query->result();
+    $this->db->order_by('id','DESC');
+    return $this->db->get('log_operasional', 4);
   }
 
 

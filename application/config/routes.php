@@ -26,6 +26,7 @@ $route['tambah_simpanan'] = 'C_Akutansi/tambah_simpanan';
 //Pinjaman
 $route['pinjaman'] = 'C_Akutansi/pinjaman';
 $route['tambah_pinjaman'] = 'C_Akutansi/tambah_pinjaman';
+$route['tambah_pinjaman/(:any)'] = 'C_Akutansi/tambah_pinjaman_dengan_norek/$1';
 $route['proses_pinjaman/(:any)'] = 'C_Akutansi/simpan_pinjaman/$1';
 
 // Angsuran

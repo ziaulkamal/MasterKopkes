@@ -53,7 +53,7 @@
                                           <td><center><?php if ($data->status_pinjam == 1) { ?>
                                             <span class="badge bg-success">Ada</span>
                                           <?php }else { ?>
-                                            <span class="badge bg-info">Tidak Ada</span>
+                                            <a class="badge bg-info" href="<?= base_url('tambah_pinjaman/').$data->no_rekening ?>">Tidak Ada</a>
                                           <?php } ?></center></td>
                                           <td><center><a href="<?= base_url('simpanan_pertama/').$data->no_rekening ?>" class="badge bg-primary">  Update Simpanan  </a></center></td>
                                         </tr>
