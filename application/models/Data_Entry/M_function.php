@@ -13,8 +13,26 @@ class M_function extends CI_Model{
   {
     $this->db->select('kode_instansi');
     $this->db->order_by('id', 'DESC');
-    $this->db->get('tb_instansi', 1);
+    $query = $this->db->get('tb_instansi', 1);
     return $query->row();
+  }
+
+  function get_instansi($kode_instansi)
+  {
+    $this->db->where('kode_instansi', $kode_instansi);
+    return $this->db->get('tb_instansi')->row();
+  }
+
+  function update_instansi($kode_instansi, $data)
+  {
+    $this->db->where('kode_instansi', $kode_instansi);
+    $this->db->update('tb_instansi', $data);
+  }
+
+  function delete_instansi($kode_instansi)
+  {
+      $this->db->where('kode_instansi', $kode_instansi);
+      $this->db->delete('tb_instansi');
   }
 
   function jumlah_instansi()

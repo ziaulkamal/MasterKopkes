@@ -14,8 +14,11 @@ $route['update_proses']  = 'C_Anggota/update_proses';
 $route['hapus/(:any)']   = 'C_Anggota/delete/$1';
 
 //Instansi
-$route['Instansi']        = 'C_Instansi/index';
-$route['tambah_instansi'] = 'C_Instansi/tambah_instansi';
+$route['Instansi']                = 'C_Instansi/index';
+$route['tambah_instansi']         = 'C_Instansi/tambah_instansi';
+$route['update_instansi/(:any)']  = 'C_Instansi/update_instansi/$1';
+$route['proses_instansi']         = 'C_Instansi/proses_instansi';
+$route['delete/(:any)']           = 'C_Instansi/delete/$1';
 
 //Simpanan
 $route['simpanan_pertama/(:any)'] = 'C_Pencarian/add_simpanan/$1';

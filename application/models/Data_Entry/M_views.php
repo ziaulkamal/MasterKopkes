@@ -35,8 +35,10 @@ class M_views extends CI_Model{
 
   function get_detail_rekening($no_rekening)
   {
-    $query = $this->db->query("SELECT * FROM tb_rekening WHERE no_rekening='$no_rekening'");
-    return $query->row();
+    $this->db->select('*');
+    $this->db->from('tb_rekening');
+    $this->db->where('no_rekening', $no_rekening);
+    return $this->db->get('tb_rekening')->row();
   }
 
   function invoice_pinjaman($kode_pinjaman)
