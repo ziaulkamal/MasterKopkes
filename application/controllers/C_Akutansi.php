@@ -88,7 +88,7 @@ class C_Akutansi extends CI_Controller{
       $total_hutang = $this->total_hutang;
       $total_piutang = $this->total_piutang;
       // IDEA: Akhir Penguraian Dari Function Global kas
-      
+
       $load = $this->mv->get_detail_rekening($no_rekening);
       $log_load = $this->mv->master_view_rekening($no_rekening);
       $kode_log = time();
@@ -165,7 +165,7 @@ class C_Akutansi extends CI_Controller{
       redirect('simpanan');
     }
 
-    function tambah_pinjaman_dengan_($no_rekening)
+    function tambah_pinjaman_dengan_norek($no_rekening)
     {
       $load = $this->mf->detail_anggota_simpanan($no_rekening);
       $data = array(

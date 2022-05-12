@@ -2,8 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 $route['default_controller'] = 'Home';
-$route['dashboard'] = 'Home/index';
-
+$route['dashboard'] = 'Home';
 
 //Anggota
 $route['anggota']        = 'C_Anggota/index';
@@ -44,8 +43,10 @@ $route['cari_pinjaman']  = 'C_Pencarian/cari_anggota_pinjaman';
 
 
 // Operasional
-$route['operasional/cash_out']  = 'C_Operasional/fitur_operasional';
+$route['operasional/cash_out']  = 'C_Operasional/cash_in';
 $route['operasional/p_cash_out']  = 'C_Operasional/update_cash_out';
+$route['operasional/cash_in']  = 'C_Operasional/cash_in';
+$route['operasional/p_cash_in']  = 'C_Operasional/update_cash_in';
 
 // Cetak
 $route['cetak']        = 'C_Cetak/index';

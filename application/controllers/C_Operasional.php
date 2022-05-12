@@ -74,6 +74,37 @@ class C_Operasional extends CI_Controller{
     $this->mu->update_brangkas($brangkas);
     $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show">'.$log['keterangan'].'</div>');
     redirect('operasional/cash_out');
+  }
 
+  function update_cash_in()
+  {
+    $load           = $this->mf->get_brangkas()->row();
+    $kas            = $load->kas;
+    $jumlah         = $this->input->post('nominal');
+    $jenis          = $this->input->post('jenis');
+    $keterangan     = $this->input->post('keterangan');
+    $last_update    = date('Y-m-d');
+
+    if ($jenis == 1) {
+      $kode_jenis = "Dana Sisa Pengembalian SHU";
+    }else {
+      $this->session->set_flashdata('message', '<div class="alert alert-warning alert-dismissible fade show"><b>Opsi yang dikirimkan harus dipilih</b></div>');
+      redirect('operasional/cash_in');
+    }
+
+    $log = array(
+      'nominal'       => $jumlah,
+      'jenis'         => $jenis,
+      'keterangan'    => $kode_jenis .' '. $this->conv->convRupiah($jumlah) .' Pada Tanggal '. $last_update . '( '.$keterangan.' )',
+      'last_update'   => $last_update,
+    );
+
+    $brangkas['kas'] = $kas + $jumlah;
+    $brangkas['last_update'] = $last_update;
+
+    $this->mu->add_log($log);
+    $this->mu->update_brangkas($brangkas);
+    $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show">'.$log['keterangan'].'</div>');
+    redirect('operasional/cash_out');
   }
 }
