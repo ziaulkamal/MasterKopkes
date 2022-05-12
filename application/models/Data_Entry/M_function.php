@@ -13,7 +13,7 @@ class M_function extends CI_Model{
   {
     $this->db->select('kode_instansi');
     $this->db->order_by('id', 'DESC');
-    $this->db->get('tb_instansi', 1);
+    $query = $this->db->get('tb_instansi', 1);
     return $query->row();
   }
 
