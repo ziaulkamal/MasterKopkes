@@ -93,7 +93,7 @@
                         <span>Buku Laporan</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="ui-alerts.html">Neraca Tahunan</a></li>
+                        <li><a href="<?= base_url('neraca_tahunan'); ?>">Neraca Tahunan</a></li>
                         <li><a href="ui-badge.html">Neraca Perminggu</a></li>
                         <li><a href="ui-buttons.html">Laporan Perbulan</a></li>
                         <li><a href="ui-cards.html">Laporan Per 3 Bulan</a></li>

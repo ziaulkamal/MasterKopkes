@@ -22,6 +22,12 @@ class M_function extends CI_Model{
     return $this->db->get('tb_brangkas');
   }
 
+  function get_neraca_tahunan($tahun)
+  {
+    $this->db->where('tahun_neraca', $tahun);
+    return $this->db->get('tb_neraca_tahunan');
+  }
+
   function get_margin()
   {
     $tahun = date('Y');
@@ -77,5 +83,5 @@ class M_function extends CI_Model{
     return $this->db->get();
   }
 
-  
+
 }

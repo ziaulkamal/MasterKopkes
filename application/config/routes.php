@@ -50,6 +50,10 @@ $route['operasional/p_cash_in']  = 'C_Operasional/update_cash_in';
 $route['operasional/cash_out_inventaris']  = 'C_Operasional/cash_out_inventaris';
 $route['operasional/p_out_inventaris']  = 'C_Operasional/p_out_inventaris';
 
+// Neraca
+$route['neraca_tahunan']  = 'C_Operasional/neraca';
+$route['proses_neraca']   = 'C_Operasional/proses_neraca_tahunan';
+
 // Cetak
 $route['cetak']        = 'C_Cetak/index';
 // cetak Simpanan

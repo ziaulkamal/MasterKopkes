@@ -177,68 +177,100 @@ class C_Operasional extends CI_Controller{
 
   function neraca()
   {
-    // $margin_saving = $this->mf->get_margin()->result();
-    $akumulasi = $this->mf->sum_margin()->row()->total_margin;
-    $atk = $this->mf->sum_atk()->row()->atk;
-    $honor = $this->mf->sum_honor()->row()->honor;
-    $rat = $this->mf->sum_rat()->row()->rat;
-    $thr = $this->mf->sum_thr()->row()->thr;
-    $penghapusan = $this->mf->sum_penghapusan()->row()->penghapusan;
-
-    $brangkas = $this->mf->get_brangkas()->row();
-    $last_update = date('Y-m-d');
-
-    // IDEA: Rumus SHU
-    $operasional = $atk + $honor + $rat + $thr + $penghapusan;
-    $shu_sebelum_zakat = $akumulasi - ($atk + $honor + $rat + $thr + $penghapusan);
-    $zakat = $shu_sebelum_zakat * 0.025;
-    $shu_sesudah_zakat = $shu_sebelum_zakat - $zakat;
-
-
-    $x = $shu_sesudah_zakat;
-
-    $bagian_usaha_anggota = array(
-      'jasa_usaha' => $x * (25/100),
-      'jasa_simpanan' => $x * (20/100),
-      'dana_cadangan' => $x * (25/100),
-      'dana_pengurus' => $x * (10/100),
-      'dana_kesejahteraan' => $x * (5/100),
-      'dana_pendidikan' => $x * (5/100),
-      'dana_sosial' => $x * (5/100),
-      'dana_audit' => $x * (2.5/100),
-      'dana_pembangunan' => $x * (2.5/100),
-      'tahun_neraca' => date('Y'),
-      'keterangan' => 'Data Telah di Create pada tanggal '.date('d-m'Y),
-      'last_update' => $last_update,
+    $data = array(
+      'js'      =>  '',
+      'title'   =>  'Buat Neraca',
+      'action'  =>  'proses_neraca',
+      'page'    =>  'page/operasional/menu'
     );
-
-    $neraca_tahunan = array(
-      'pendapatan_jasa' => $akumulasi,
-      'pendapatan_lain' => '-',
-      'biaya_atk' => $atk,
-      'biaya_honor' => $honor,
-      'biaya_rat' => $rat,
-      'biaya_lebaran' => $thr,
-      'biaya_penghapusan' => $penghapusan,
-      'jumlah_biaya_adm' => $operasional,
-      'shu_sebelum_zakat' => $shu_sebelum_zakat,
-      'zakat' => $zakat,
-      'shu_setelah_zakat' => $shu_sesudah_zakat,
-      'tahun' => date('Y'),
-      'last_update' => $last_update,
-    );
-
-    $detail_neraca = array(
-      'kas' => $brangkas->kas,
-      'dana_gotongroyong' => $brangkas->dana_gotongroyong,
-      'dana_simpok' => $brangkas->dana_simpok,
-      'dana_simwa' => $brangkas->dana_simwa,
-      'dana_kusus' => $brangkas->dana_kusus,
-      'dana_lainya' => $brangkas->dana_lainya,
-      'total_hutang' => $brangkas->total_hutang,
-      'total_piutang' => $brangkas->total_piutang,
-      'last_update' => $brangkas->last_update,
-    );
+    $this->load->view('main', $data);
   }
 
+  function proses_neraca_tahunan()
+  {
+    $tahun = $this->input->post('tahun');
+
+    $get_neraca = $this->mf->get_neraca_tahunan($tahun)->row();
+    if ($tahun == $get_neraca->tahun_neraca) {
+      $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show">Neraca Untuk Tahun Ini sudah dibuat</div>');
+      redirect('neraca_tahunan');
+    }else {
+      require 'vendor/autoload.php';
+      // $margin_saving = $this->mf->get_margin()->result();
+      $akumulasi = $this->mf->sum_margin()->row()->total_margin;
+      $atk = $this->mf->sum_atk()->row()->atk;
+      $honor = $this->mf->sum_honor()->row()->honor;
+      $rat = $this->mf->sum_rat()->row()->rat;
+      $thr = $this->mf->sum_thr()->row()->thr;
+      $penghapusan = $this->mf->sum_penghapusan()->row()->penghapusan;
+      $brangkas = $this->mf->get_brangkas()->row();
+      $last_update = date('Y-m-d');
+
+      // IDEA: Rumus SHU
+      $operasional = $atk + $honor + $rat + $thr + $penghapusan;
+      $shu_sebelum_zakat = $akumulasi - ($atk + $honor + $rat + $thr + $penghapusan);
+      $zakat = $shu_sebelum_zakat * 0.025;
+      $shu_sesudah_zakat = $shu_sebelum_zakat - $zakat;
+
+      $x = $shu_sesudah_zakat;
+
+      $bagian_usaha_anggota = array(
+        'jasa_usaha' => $x * (25/100),
+        'jasa_simpanan' => $x * (20/100),
+        'dana_cadangan' => $x * (25/100),
+        'dana_pengurus' => $x * (10/100),
+        'dana_kesejahteraan' => $x * (5/100),
+        'dana_pendidikan' => $x * (5/100),
+        'dana_sosial' => $x * (5/100),
+        'dana_audit' => $x * (2.5/100),
+        'dana_pembangunan' => $x * (2.5/100),
+        'tahun_neraca' => date('Y'),
+        'keterangan' => 'Data Telah di Create pada tanggal '.date('d-m-Y'),
+        'last_update' => $last_update,
+      );
+
+      $neraca_tahunan = array(
+        'pendapatan_jasa' => $akumulasi,
+        'pendapatan_lain' => '-',
+        'biaya_atk' => $atk,
+        'biaya_honor' => $honor,
+        'biaya_rat' => $rat,
+        'biaya_lebaran' => $thr,
+        'biaya_penghapusan' => $penghapusan,
+        'jumlah_biaya_adm' => $operasional,
+        'shu_sebelum_zakat' => $shu_sebelum_zakat,
+        'zakat' => $zakat,
+        'shu_setelah_zakat' => $shu_sesudah_zakat,
+        'tahun' => date('Y'),
+        'last_update' => $last_update,
+      );
+
+      $detail_neraca = array(
+        'kas' => $brangkas->kas,
+        'dana_gotongroyong' => $brangkas->dana_gotongroyong,
+        'dana_simpok' => $brangkas->dana_simpok,
+        'dana_simwa' => $brangkas->dana_simwa,
+        'dana_kusus' => $brangkas->dana_kusus,
+        'dana_lainya' => $brangkas->dana_lainya,
+        'total_hutang' => $brangkas->total_hutang,
+        'total_piutang' => $brangkas->total_piutang,
+        'last_update' => $brangkas->last_update,
+      );
+
+      $template = new \PhpOffice\PhpWord\TemplateProcessor('./assets/template/daftar-pembagian-shu.docx');
+      $template->setValue('nomor_surat', $kop_head_num);
+
+
+      $filename = 'Daftar Pembagian SHU Tahun'. $tahun;
+
+      header('Content-type: application/vnd.ms-word');
+      header('Content-Disposition: attachment; filename="'. $filename .'.docx"');
+    	header('Cache-Control: max-age=0');
+      var_dump(header);
+      die();
+      $template->saveAs('php://output');
+    }
+
+
+  }
 }
