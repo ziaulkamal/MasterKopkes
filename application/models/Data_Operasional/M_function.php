@@ -22,4 +22,60 @@ class M_function extends CI_Model{
     return $this->db->get('tb_brangkas');
   }
 
+  function get_margin()
+  {
+    $tahun = date('Y');
+    $this->db->where('tahun', $tahun);
+    return $this->db->get('tb_margin_saving');
+  }
+
+  function sum_margin()
+  {
+    $tahun = date('Y');
+    $this->db->select("(SELECT SUM(tb_margin_saving.margin_saving) FROM tb_margin_saving WHERE tb_margin_saving.tahun=$tahun) AS total_margin", FALSE);
+    return $this->db->get();
+  }
+
+  function sum_atk()
+  {
+    $tahun = date('Y');
+    $this->db->select("(SELECT SUM(log_operasional.nominal) FROM log_operasional WHERE log_operasional.jenis = 1 && log_operasional.last_update LIKE '%$tahun%') AS atk", FALSE);
+    return $this->db->get();
+  }
+
+  function sum_honor()
+  {
+    $tahun = date('Y');
+    $this->db->select("(SELECT SUM(log_operasional.nominal) FROM log_operasional WHERE log_operasional.jenis = 2 && log_operasional.last_update LIKE '%$tahun%') AS honor", FALSE);
+    return $this->db->get();
+  }
+
+  function sum_rat()
+  {
+    $tahun = date('Y');
+    $this->db->select("(SELECT SUM(log_operasional.nominal) FROM log_operasional WHERE log_operasional.jenis = 3 && log_operasional.last_update LIKE '%$tahun%') AS rat", FALSE);
+    return $this->db->get();
+  }
+
+  function sum_thr()
+  {
+    $tahun = date('Y');
+    $this->db->select("(SELECT SUM(log_operasional.nominal) FROM log_operasional WHERE log_operasional.jenis = 4 && log_operasional.last_update LIKE '%$tahun%') AS thr", FALSE);
+    return $this->db->get();
+  }
+
+  function sum_penghapusan()
+  {
+    $tahun = date('Y');
+    $this->db->select("(SELECT SUM(log_operasional.nominal) FROM log_operasional WHERE log_operasional.jenis = 5 && log_operasional.last_update LIKE '%$tahun%') AS penghapusan", FALSE);
+    return $this->db->get();
+  }
+
+  function sum_dagoro()
+  {
+    $this->db->select("(SELECT SUM(tb_pinjaman.total_gotongroyong) FROM tb_pinjaman) AS gotong_royong", FALSE);
+    return $this->db->get();
+  }
+
+  
 }
