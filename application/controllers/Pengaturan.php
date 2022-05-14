@@ -48,7 +48,7 @@ class Pengaturan extends CI_Controller{
     $data = array(
       'js'      =>  '',
       'title'   =>  'Pengaturan Set Data Brangkas Awal',
-      'action'  =>  'p_pengaturan',
+      'action'  =>  'result_config',
       'page'    =>  'page/pengaturan/tabel'
     );
     $this->load->view('main', $data);

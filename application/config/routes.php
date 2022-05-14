@@ -48,6 +48,15 @@ $route['operasional/p_cash_out']  = 'C_Operasional/update_cash_out';
 $route['operasional/cash_in']  = 'C_Operasional/cash_in';
 $route['operasional/p_cash_in']  = 'C_Operasional/update_cash_in';
 
+// Pengelolaan Dana Lainya
+$route['kelola_dana/pengurus'] = 'C_Operasional/dana_pengurus';
+$route['kelola_dana/pendidikan'] = 'C_Operasional/dana_pendidikan';
+$route['kelola_dana/kes_pegawai'] = 'C_Operasional/dana_kes_pegawai';
+$route['kelola_dana/sosial'] = 'C_Operasional/dana_sosial';
+$route['kelola_dana/audit'] = 'C_Operasional/dana_audit';
+$route['kelola_dana/pembangunan'] = 'C_Operasional/dana_pembangunan';
+$route['kelola_dana/single_process/(:any)'] = 'C_Operasional/proses_pengelolaan_dana/$1';
+
 
 // Neraca
 $route['neraca_tahunan']  = 'C_Operasional/neraca';
@@ -64,6 +73,7 @@ $route['cetak/pinjaman/(:any)']        = 'C_Cetak/pinjaman/$1';
 
 $route['reset_kas'] = 'Pengaturan/reset_kas';
 $route['base_config'] = 'Pengaturan/konfigurasi_dasar';
+$route['result_config'] = 'Pengaturan/proses_setting';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

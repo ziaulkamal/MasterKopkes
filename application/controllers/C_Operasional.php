@@ -16,6 +16,139 @@ class C_Operasional extends CI_Controller{
 
   }
 
+  function dana_pengurus()
+  {
+    $load = $this->mf->get_brangkas()->row();
+
+    $data = array(
+      'js'      =>  '',
+      'title'   =>  'Update Penggunaan Dana Pengurus',
+      'action'  =>  'kelola_dana/single_process',
+      'tipe'    =>  'dana_pengurus',
+      'load'    =>  $load,
+      'page'    =>  'page/operasional/dana_lain'
+    );
+    $this->load->view('main', $data);
+  }
+
+  function dana_pendidikan()
+  {
+    $load = $this->mf->get_brangkas()->row();
+
+    $data = array(
+      'js'      =>  '',
+      'title'   =>  'Update Penggunaan Dana Pendidikan',
+      'action'  =>  'kelola_dana/single_process',
+      'tipe'    =>  'dana_pendidikan',
+      'load'    =>  $load,
+      'page'    =>  'page/operasional/dana_lain'
+    );
+    $this->load->view('main', $data);
+  }
+
+  function dana_kes_pegawai()
+  {
+    $load = $this->mf->get_brangkas()->row();
+
+    $data = array(
+      'js'      =>  '',
+      'title'   =>  'Update Penggunaan Dana Kesejahteraan Pegawai',
+      'action'  =>  'kelola_dana/single_process',
+      'tipe'    =>  'dana_kes_pegawai',
+      'load'    =>  $load,
+      'page'    =>  'page/operasional/dana_lain'
+    );
+    $this->load->view('main', $data);
+  }
+
+  function dana_sosial()
+  {
+    $load = $this->mf->get_brangkas()->row();
+
+    $data = array(
+      'js'      =>  '',
+      'title'   =>  'Update Penggunaan Dana Sosial',
+      'action'  =>  'kelola_dana/single_process',
+      'tipe'    =>  'dana_sosial',
+      'load'    =>  $load,
+      'page'    =>  'page/operasional/dana_lain'
+    );
+    $this->load->view('main', $data);
+  }
+
+  function dana_audit()
+  {
+    $load = $this->mf->get_brangkas()->row();
+
+    $data = array(
+      'js'      =>  '',
+      'title'   =>  'Update Penggunaan Dana Audit',
+      'action'  =>  'kelola_dana/single_process',
+      'tipe'    =>  'dana_audit',
+      'load'    =>  $load,
+      'page'    =>  'page/operasional/dana_lain'
+    );
+    $this->load->view('main', $data);
+  }
+
+  function dana_pembangunan()
+  {
+    $load = $this->mf->get_brangkas()->row();
+
+    $data = array(
+      'js'      =>  '',
+      'title'   =>  'Update Penggunaan Dana Pembangunan',
+      'action'  =>  'kelola_dana/single_process',
+      'tipe'    =>  'dana_pembangunan',
+      'load'    =>  $load,
+      'page'    =>  'page/operasional/dana_lain'
+    );
+    $this->load->view('main', $data);
+  }
+
+
+  function proses_pengelolaan_dana($tipe)
+  {
+    $load = $this->mf->get_brangkas()->row();
+    $kas = $load->kas;
+    $keterangan = $this->input->post('keterangan');
+    $nominal    = $this->input->post('nominal');
+    if ($tipe == 'dana_pengurus') {
+      $p_keterangan = 'Penggunaan Dana Kas untuk diserahkan ke pengurus dengan keterangan ('. $keterangan.') senilai '.$this->conv->convRupiah($nominal).' Pada tanggal '.$last_update;
+      $brangkas['dana_pengurus'] = $load->dana_pengurus - $nominal;
+    }elseif ($tipe == 'dana_pendidikan') {
+      $p_keterangan = 'Penggunaan Dana Kas untuk kebutuhan pendidikan dengan keterangan ('. $keterangan.') senilai '.$this->conv->convRupiah($nominal).' Pada tanggal '.$last_update;
+      $brangkas['dana_pendidikan'] = $load->dana_pendidikan - $nominal;
+    }elseif ($tipe == 'dana_kes_pegawai') {
+      $p_keterangan = 'Penggunaan Dana Kas untuk kesejahteraan Pegawai dengan keterangan ('. $keterangan.') senilai '.$this->conv->convRupiah($nominal).' Pada tanggal '.$last_update;
+      $brangkas['dana_kes_pegawai'] = $load->dana_kes_pegawai - $nominal;
+    }elseif ($tipe == 'dana_sosial') {
+      $p_keterangan = 'Penggunaan Dana Kas untuk sosial dengan keterangan ('. $keterangan.') senilai '.$this->conv->convRupiah($nominal).' Pada tanggal '.$last_update;
+      $brangkas['dana_sosial'] = $load->dana_sosial - $nominal;
+    }elseif ($tipe == 'dana_audit') {
+      $p_keterangan = 'Penggunaan Dana Kas untuk kebutuhan Audit dengan keterangan ('. $keterangan.') senilai '.$this->conv->convRupiah($nominal).' Pada tanggal '.$last_update;
+      $brangkas['dana_audit'] = $load->dana_audit - $nominal;
+    }elseif ($tipe == 'dana_pembangunan') {
+      $p_keterangan = 'Penggunaan Dana Kas untuk keutuhan pembangunan dengan keterangan ('. $keterangan.') senilai '.$this->conv->convRupiah($nominal).' Pada tanggal '.$last_update;
+      $brangkas['dana_pembangunan'] = $load->dana_pembangunan - $nominal;
+    }
+
+    $log = array(
+      'nominal'       => $nominal,
+      'jenis'         => 20,
+      'keterangan'    => $p_keterangan,
+      'last_update'   => $last_update,
+    );
+
+    $brangkas['kas'] = $kas - $nominal;
+    $brangkas['last_update'] = $last_update;
+
+    $this->mu->add_log($log);
+    $this->mu->update_brangkas($brangkas);
+    $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show">'.$log['keterangan'].'</div>');
+    redirect('/');
+  }
+
   function cash_in()
   {
     $load = array(

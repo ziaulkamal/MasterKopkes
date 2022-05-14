@@ -64,6 +64,21 @@
                         <li><a href="<?=base_url('operasional/cash_out_inventaris'); ?>">Update Data Inventaris</a></li>
                     </ul>
                 </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="mdi mdi-page-layout-header"></i>
+                        <span>Pengelolaan Dana </span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="<?=base_url('kelola_dana/pengurus'); ?>">Update Dana Pengurus</a></li>
+                        <li><a href="<?=base_url('kelola_dana/pendidikan'); ?>">Update Dana Pendidikan</a></li>
+                        <li><a href="<?=base_url('kelola_dana/kes_pegawai'); ?>">Update Dana Kesejahteraan Pegawai</a></li>
+                        <li><a href="<?=base_url('kelola_dana/sosial'); ?>">Update Dana Sosial</a></li>
+                        <li><a href="<?=base_url('kelola_dana/audit'); ?>">Update Dana Audit</a></li>
+                        <li><a href="<?=base_url('kelola_dana/pembangunan'); ?>">Update Dana Pembangunan Kerja</a></li>
+
+                    </ul>
+                </li>
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">

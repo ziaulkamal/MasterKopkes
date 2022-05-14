@@ -417,7 +417,6 @@ class C_Akutansi extends CI_Controller{
     function pinjaman()
     {
       $load = $this->mf->get_list_pinjaman();
-       // var_dump($load);die();
       $data = array(
         'js'    => 'dataTables',
         'title' => 'Pinjaman Anggota',
