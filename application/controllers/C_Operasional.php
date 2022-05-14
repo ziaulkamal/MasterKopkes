@@ -191,10 +191,10 @@ class C_Operasional extends CI_Controller{
     $tahun = $this->input->post('tahun');
 
     $get_neraca = $this->mf->get_neraca_tahunan($tahun)->row();
-    if ($tahun == $get_neraca->tahun_neraca) {
-      $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show">Neraca Untuk Tahun Ini sudah dibuat</div>');
-      redirect('neraca_tahunan');
-    }else {
+    $invent = $this->mf->get_inventaris($tahun);
+
+
+    if ($get_neraca == null) {
       require 'vendor/autoload.php';
       // $margin_saving = $this->mf->get_margin()->result();
       $akumulasi = $this->mf->sum_margin()->row()->total_margin;
@@ -258,7 +258,45 @@ class C_Operasional extends CI_Controller{
       );
 
       $template = new \PhpOffice\PhpWord\TemplateProcessor('./assets/template/daftar-pembagian-shu.docx');
-      $template->setValue('nomor_surat', $kop_head_num);
+      $d_in = $invent->result();
+      $start = 0;
+      foreach ($d_in as $data) {
+          $i[$start++] = array(
+            'harga_inventaris' => $this->conv->convRupiah($data->nominal),
+            'inventaris' => $data->keterangan
+          );
+
+      }
+
+      $template->cloneBlock('inventaris_block', 0, true, false, $i);
+
+      // IDEA: Page 2
+      $template->setValue('total_shu_bersih', $this->conv->convRupiah('0'));
+      $template->setValue('total_shu_kotor', $this->conv->convRupiah('0'));
+      $template->setValue('total_pendapatan_lain', $this->conv->convRupiah('0'));
+      $template->setValue('total_pendapatan_jumlah', $this->conv->convRupiah('0'));
+      $template->setValue('atk', $this->conv->convRupiah('0'));
+      $template->setValue('honor', $this->conv->convRupiah('0'));
+      $template->setValue('rat', $this->conv->convRupiah('0'));
+      $template->setValue('thr', $this->conv->convRupiah('0'));
+      $template->setValue('penghapusan', $this->conv->convRupiah('0'));
+      $template->setValue('total_adm', $this->conv->convRupiah('0'));
+
+
+      // IDEA: Page 1
+      $template->setValue('jasa_usaha', $this->conv->convRupiah('0'));
+      $template->setValue('jasa_simpanan', $this->conv->convRupiah('0'));
+      $template->setValue('dana_cadangan', $this->conv->convRupiah('0'));
+      $template->setValue('dana_pengurus', $this->conv->convRupiah('0'));
+      $template->setValue('dana_kesejahteraan', $this->conv->convRupiah('0'));
+      $template->setValue('dana_pendidikan', $this->conv->convRupiah('0'));
+      $template->setValue('dana_sosial', $this->conv->convRupiah('0'));
+      $template->setValue('dana_audit', $this->conv->convRupiah('0'));
+      $template->setValue('dana_pembangunan', $this->conv->convRupiah('0'));
+      $template->setValue('tahun_neraca', $tahun);
+      $template->setValue('last_update', $last_update);
+      $template->setValue('tanggal', date('d'));
+
 
 
       $filename = 'Daftar Pembagian SHU Tahun'. $tahun;
@@ -266,10 +304,14 @@ class C_Operasional extends CI_Controller{
       header('Content-type: application/vnd.ms-word');
       header('Content-Disposition: attachment; filename="'. $filename .'.docx"');
     	header('Cache-Control: max-age=0');
-      var_dump(header);
-      die();
       $template->saveAs('php://output');
+    }elseif ($get_neraca != null) {
+      if ($tahun == $get_neraca->tahun_neraca) {
+        $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show">Neraca Untuk Tahun Ini sudah dibuat</div>');
+        redirect('neraca_tahunan');
+      }
     }
+
 
 
   }

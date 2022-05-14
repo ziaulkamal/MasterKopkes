@@ -83,5 +83,11 @@ class M_function extends CI_Model{
     return $this->db->get();
   }
 
+  function get_inventaris($tahun)
+  {
+    $this->db->like('last_update', $tahun);
+    $this->db->where('jenis', 10);
+    return $this->db->get('log_operasional');
+  }
 
 }
