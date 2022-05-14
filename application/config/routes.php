@@ -47,8 +47,7 @@ $route['operasional/cash_out']  = 'C_Operasional/cash_out';
 $route['operasional/p_cash_out']  = 'C_Operasional/update_cash_out';
 $route['operasional/cash_in']  = 'C_Operasional/cash_in';
 $route['operasional/p_cash_in']  = 'C_Operasional/update_cash_in';
-$route['operasional/cash_out_inventaris']  = 'C_Operasional/cash_out_inventaris';
-$route['operasional/p_out_inventaris']  = 'C_Operasional/p_out_inventaris';
+
 
 // Neraca
 $route['neraca_tahunan']  = 'C_Operasional/neraca';

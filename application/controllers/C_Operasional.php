@@ -124,57 +124,6 @@ class C_Operasional extends CI_Controller{
     redirect('operasional/cash_in');
   }
 
-
-  function cash_out_inventaris()
-  {
-    $load = array(
-      'kas'   => $this->mf->get_brangkas()->row(),
-      'logs' => $this->mf->log_last_operasional_limit()->result(),
-    );
-
-    $data = array(
-      'js'      =>  '',
-      'title'   =>  'Update Belanja Inventaris',
-      'action'  => 'p_out_inventaris',
-      'kas'     =>  $this->conv->convRupiah($load['kas']->kas),
-      'logs'     =>  $load['logs'],
-      'page'    =>  'page/operasional/fitur'
-    );
-    $this->load->view('main', $data);
-  }
-
-  function p_out_inventaris()
-  {
-    $load           = $this->mf->get_brangkas()->row();
-    $kas            = $load->kas;
-    $jumlah         = $this->input->post('nominal');
-    $jenis          = $this->input->post('jenis');
-    $keterangan     = $this->input->post('keterangan');
-    $last_update    = date('Y-m-d');
-
-    if ($jenis == 10) {
-      $kode_jenis = "Update Belanja Inventaris";
-    }else {
-      $this->session->set_flashdata('message', '<div class="alert alert-warning alert-dismissible fade show"><b>Opsi yang dikirimkan harus dipilih</b></div>');
-      redirect('operasional/cash_out_inventaris');
-    }
-
-    $log = array(
-      'nominal'       => $jumlah,
-      'jenis'         => $jenis,
-      'keterangan'    => $keterangan,
-      'last_update'   => $last_update,
-    );
-
-    $brangkas['kas'] = $kas - $jumlah;
-    $brangkas['last_update'] = $last_update;
-
-    $this->mu->add_log($log);
-    $this->mu->update_brangkas($brangkas);
-    $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show">'.$log['keterangan'].'</div>');
-    redirect('operasional/cash_out_inventaris');
-  }
-
   function neraca()
   {
     $data = array(
