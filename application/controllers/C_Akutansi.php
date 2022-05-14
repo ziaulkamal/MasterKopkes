@@ -26,14 +26,24 @@ class C_Akutansi extends CI_Controller{
     {
       $load_brangkas = $this->mu->get_brangkas();
       $lb = $load_brangkas->row();
-      $this->b_kas = $lb->kas;
-      $this->b_dagoro = $lb->dana_gotongroyong;
-      $this->b_simpok = $lb->dana_simpok;
-      $this->b_simwa = $lb->dana_simwa;
-      $this->b_kusus = $lb->dana_kusus;
-      $this->b_lainya = $lb->dana_lainya;
-      $this->total_hutang = $lb->total_hutang;
-      $this->total_piutang = $lb->total_piutang;
+      $this->kas                = $lb->kas;
+      $this->dana_gotongroyong  = $lb->dana_gotongroyong;
+      $this->dana_simpok        = $lb->dana_simpok;
+      $this->dana_simwa         = $lb->dana_simwa;
+      $this->dana_kusus         = $lb->dana_kusus;
+      $this->dana_lainya        = $lb->dana_lainya;
+      $this->total_hutang       = $lb->total_hutang;
+      $this->total_piutang      = $lb->total_piutang;
+      $this->jasa_usaha         = $lb->jasa_usaha;
+      $this->jasa_simpanan      = $lb->jasa_simpanan;
+      $this->dana_cadangan      = $lb->dana_cadangan;
+      $this->dana_pengurus      = $lb->dana_pengurus;
+      $this->dana_pendidikan    = $lb->dana_pendidikan;
+      $this->dana_kes_pegawai   = $lb->dana_kes_pegawai;
+      $this->dana_sosial        = $lb->dana_sosial;
+      $this->dana_audit         = $lb->dana_audit;
+      $this->dana_pembangunan   = $lb->dana_pembangunan;
+      $this->dana_penghapusan   = $lb->dana_penghapusan;
       return;
     }
 
@@ -54,8 +64,7 @@ class C_Akutansi extends CI_Controller{
     function tambah_simpanan()
     {
       // IDEA: Tangkap Penampung Data ke Array Kosong
-      $q['s'] = [];      var_dump($b_kas);
-      die();
+      $q['s'] = [];
       if ($s = $this->mf->cari_anggota(htmlspecialchars($this->input->post('no_anggota')))) {
         $q['s'] = $s;
         foreach ($q['s'] as $s) { $no_rekening = $s->no_rekening;}
@@ -79,14 +88,12 @@ class C_Akutansi extends CI_Controller{
     {
       // IDEA: Uraikan Kedalam Variable Dari Function Global Kas
       $this->global_kas();
-      $b_kas = $this->b_kas;
-      $b_dagoro = $this->b_dagoro;
-      $b_simpok = $this->b_simpok;
-      $b_simwa = $this->b_simwa;
-      $b_kusus = $this->b_kusus;
-      $b_lainya = $this->b_lainya;
-      $total_hutang = $this->total_hutang;
-      $total_piutang = $this->total_piutang;
+      $d_kas        = $this->kas;
+      $d_gotong     = $this->dana_gotongroyong;
+      $d_simpok     = $this->dana_simpok;
+      $d_simwa      = $this->dana_simwa;
+      $d_kusus      = $this->dana_kusus;
+      $d_lain       = $this->dana_lainya;
       // IDEA: Akhir Penguraian Dari Function Global kas
 
       $load = $this->mv->get_detail_rekening($no_rekening);
@@ -107,7 +114,7 @@ class C_Akutansi extends CI_Controller{
             'last_update' => $last_update,
         );
         $jenis_log = 'Simpanan Pokok';
-        $brangkas['dana_simpok'] = $b_simpok+$jumlah;
+        $brangkas['dana_simpok'] = $d_simpok+$jumlah;
 
       }elseif ($this->input->post('jenis_simpanan') == 2) {
         $data = array(
@@ -116,7 +123,7 @@ class C_Akutansi extends CI_Controller{
             'last_update' => $last_update,
         );
         $jenis_log = 'Simpanan Wajib';
-        $brangkas['dana_simwa'] = $b_simwa+$jumlah;
+        $brangkas['dana_simwa'] = $d_simwa+$jumlah;
 
       }elseif ($this->input->post('jenis_simpanan') == 3) {
         $data = array(
@@ -125,7 +132,7 @@ class C_Akutansi extends CI_Controller{
             'last_update' => $last_update,
         );
         $jenis_log = 'Simpanan Khusus';
-        $brangkas['dana_kusus'] = $b_kusus+$jumlah;
+        $brangkas['dana_kusus'] = $d_kusus+$jumlah;
       }elseif ($this->input->post('jenis_simpanan') == 4) {
         $data = array(
             's_lain' => $l + $jumlah,
@@ -133,7 +140,7 @@ class C_Akutansi extends CI_Controller{
             'last_update' => $last_update,
         );
         $jenis_log = 'Simpanan Lain';
-        $brangkas['dana_lainya'] = $b_lainya+$jumlah;
+        $brangkas['dana_lainya'] = $d_lain+$jumlah;
       }else {
         $data = array(
             's_lain' => $l + $jumlah,
@@ -141,7 +148,7 @@ class C_Akutansi extends CI_Controller{
             'last_update' => $last_update,
         );
         $jenis_log = 'Simpanan Lain';
-        $brangkas['dana_lainya'] = $b_lainya+$jumlah;
+        $brangkas['dana_lainya'] = $d_lain+$jumlah;
       }
 
       $logs = array(
@@ -155,7 +162,7 @@ class C_Akutansi extends CI_Controller{
         'last_update' => $last_update,
       );
 
-      $brangkas['kas'] = $b_kas + $jumlah;
+      $brangkas['kas'] = $d_kas + $jumlah;
       $brangkas['last_update'] = $last_update;
 
       $this->mu->update_brangkas($brangkas);
@@ -211,14 +218,10 @@ class C_Akutansi extends CI_Controller{
     {
       // IDEA: Uraikan Kedalam Variable Dari Function Global Kas
       $this->global_kas();
-      $b_kas = $this->b_kas;
-      $b_dagoro = $this->b_dagoro;
-      $b_simpok = $this->b_simpok;
-      $b_simwa = $this->b_simwa;
-      $b_kusus = $this->b_kusus;
-      $b_lainya = $this->b_lainya;
-      $total_hutang = $this->total_hutang;
-      $total_piutang = $this->total_piutang;
+      $d_kas        = $this->kas;
+      $d_gotong     = $this->dana_gotongroyong;
+      $d_hutang     = $this->total_hutang;
+      $d_piutang    = $this->total_piutang;
       // IDEA: Akhir Penguraian Dari Function Global kas
 
       $kode_pinjaman	= 'P-'.time();
@@ -266,10 +269,11 @@ class C_Akutansi extends CI_Controller{
           'sts_pinjaman'    => 1,
         );
 
-        $brangkas['dana_gotongroyong'] = $b_dagoro+$total_gotongroyong;
-        $brangkas['total_piutang'] = $total_piutang+$plafon;
+        $brangkas['dana_gotongroyong'] = $d_gotong+$total_gotongroyong;
+        $brangkas['total_piutang'] = $d_piutang+$plafon;
+        $brangkas['total_hutang'] = $d_hutang+$plafon;
         $brangkas['last_update'] = $last_update;
-        $brangkas['kas'] = ($b_kas - $plafon) + $total_gotongroyong ;
+        $brangkas['kas'] = ($d_kas - $plafon) + $total_gotongroyong ;
 
         $this->mu->update_brangkas($brangkas);
         $this->mc->update_dagoro($no_rekening, $rekening);
@@ -321,17 +325,10 @@ class C_Akutansi extends CI_Controller{
 
     function proses_angsuran($kode_pinjaman)
     {
-      $this->global_kas();
       // IDEA: Uraikan Kedalam Variable Dari Function Global Kas
       $this->global_kas();
-      $b_kas = $this->b_kas;
-      $b_dagoro = $this->b_dagoro;
-      $b_simpok = $this->b_simpok;
-      $b_simwa = $this->b_simwa;
-      $b_kusus = $this->b_kusus;
-      $b_lainya = $this->b_lainya;
-      $total_hutang = $this->total_hutang;
-      $total_piutang = $this->total_piutang;
+      $d_kas        = $this->kas;
+      $d_piutang    = $this->total_piutang;
       // IDEA: Akhir Penguraian Dari Function Global kas
 
       $no_rekening = $this->input->post('no_rekening');
@@ -405,9 +402,9 @@ class C_Akutansi extends CI_Controller{
         'last_update'        => $last_update,
       );
 
-      $brangkas['kas'] = $b_kas + $angsuran_pokok + $angsuran_margin;
-      $brangkas['total_hutang'] = $total_hutang+$angsuran_pokok;
-      $brangkas['total_piutang'] = $total_piutang-$angsuran_pokok;
+      $brangkas['kas'] = $d_kas + $angsuran_pokok + $angsuran_margin;
+      // $brangkas['total_hutang'] = $total_hutang+$angsuran_pokok;
+      $brangkas['total_piutang'] = $d_piutang - $angsuran_pokok;
       $brangkas['last_update'] = $last_update;
 
       $this->mu->update_brangkas($brangkas);
@@ -479,14 +476,8 @@ class C_Akutansi extends CI_Controller{
     {
       // IDEA: Uraikan Kedalam Variable Dari Function Global Kas
       $this->global_kas();
-      $b_kas = $this->b_kas;
-      $b_dagoro = $this->b_dagoro;
-      $b_simpok = $this->b_simpok;
-      $b_simwa = $this->b_simwa;
-      $b_kusus = $this->b_kusus;
-      $b_lainya = $this->b_lainya;
-      $total_hutang = $this->total_hutang;
-      $total_piutang = $this->total_piutang;
+      $d_kas        = $this->kas;
+      $d_piutang    = $this->total_piutang;
       // IDEA: Akhir Penguraian Dari Function Global kas
 
       $no_rekening      = $this->input->post('no_rekening');
@@ -553,9 +544,9 @@ class C_Akutansi extends CI_Controller{
           $this->mc->update_margin($id, $is_margin);
         }
 
-        $brangkas['kas'] = $b_kas + $angsuran_pokok + $angsuran_margin;
-        $brangkas['total_hutang'] = $total_hutang+$angsuran_pokok;
-        $brangkas['total_piutang'] = $total_piutang-$angsuran_pokok;
+        $brangkas['kas'] = $d_kas + $angsuran_pokok + $angsuran_margin;
+        // $brangkas['total_hutang'] = $total_hutang+$angsuran_pokok;
+        $brangkas['total_piutang'] = $d_piutang-$angsuran_pokok;
         $brangkas['last_update'] = $last_update;
 
         $this->mu->update_brangkas($brangkas);
