@@ -102,10 +102,15 @@
                 </li>
                 <li class="menu-title">Pengaturan</li>
                 <li>
-                    <a href="<?=base_url('C_Pengaturan/index'); ?>">
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="mdi mdi-cog"></i>
                         <span> Pengaturan </span>
                     </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                      <li><a href="<?= base_url('reset_kas') ?>">Reset Kas</a></li>
+                      <li><a href="<?= base_url('base_config') ?>">Atur Master Brangkas</a></li>
+
+                    </ul>
                 </li>
                 <li>
                   <a href="javascript: void(0);" class="has-arrow waves-effect">

@@ -60,5 +60,10 @@ $route['cetak/simpanan/(:any)']        = 'C_Cetak/simpanan/$1';
 $route['cetak/angsuran/(:any)']        = 'C_Cetak/angsuran/$1';
 $route['cetak/pinjaman/(:any)']        = 'C_Cetak/pinjaman/$1';
 
+// Pengaturan
+
+$route['reset_kas'] = 'Pengaturan/reset_kas';
+$route['base_config'] = 'Pengaturan/konfigurasi_dasar';
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
