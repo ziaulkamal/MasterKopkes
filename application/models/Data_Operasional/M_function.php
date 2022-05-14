@@ -90,4 +90,10 @@ class M_function extends CI_Model{
     return $this->db->get('log_operasional');
   }
 
+  function sum_inventaris()
+  {
+    $tahun = date('Y');
+    $this->db->select("(SELECT SUM(log_operasional.nominal) FROM log_operasional WHERE log_operasional.jenis = 10 && log_operasional.last_update LIKE '%$tahun%') AS inventaris", FALSE);
+    return $this->db->get();
+  }
 }

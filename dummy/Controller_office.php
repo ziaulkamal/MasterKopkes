@@ -1,6 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-require 'vendor/autoload.php';
 
 class Controller_office extends CI_Controller{
 

@@ -258,14 +258,24 @@ class C_Operasional extends CI_Controller{
       );
 
       $template = new \PhpOffice\PhpWord\TemplateProcessor('./assets/template/daftar-pembagian-shu.docx');
+
+      // IDEA: Page 3
+      $template->setValue('kas', $this->conv->convRupiah('0'));
+      $template->setValue('piutang', $this->conv->convRupiah('0'));
+      $template->setValue('piutang_lain', $this->conv->convRupiah('0'));
+      $template->setValue('inventaris', $this->conv->convRupiah('0'));
+
       $d_in = $invent->result();
       $start = 0;
-      foreach ($d_in as $data) {
-          $i[$start++] = array(
-            'harga_inventaris' => $this->conv->convRupiah($data->nominal),
-            'inventaris' => $data->keterangan
-          );
-
+      if ($invent->num_rows() == 0) {
+        $i = array('harga_inventaris' => '','inventaris' => '' );
+      }else {
+        foreach ($d_in as $data) {
+            $i[$start++] = array(
+              'harga_inventaris' => $this->conv->convRupiah($data->nominal),
+              'inventaris' => $data->keterangan
+            );
+        }
       }
 
       $template->cloneBlock('inventaris_block', 0, true, false, $i);
