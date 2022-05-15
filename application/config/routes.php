@@ -57,5 +57,15 @@ $route['cetak/simpanan/(:any)']        = 'C_Cetak/simpanan/$1';
 $route['cetak/angsuran/(:any)']        = 'C_Cetak/angsuran/$1';
 $route['cetak/pinjaman/(:any)']        = 'C_Cetak/pinjaman/$1';
 
+
+//Instansi
+$route['inventaris'] = 'C_Inventaris/index';
+$route['proses_insert'] = 'C_Inventaris/proses_insert';
+$route['proses_edit'] = 'C_Inventaris/proses_edit';
+$route['tambah_inventaris'] = 'C_Inventaris/insert';
+$route['edit_inventaris/(:any)'] = 'C_Inventaris/edit_inventaris/$1';
+
+
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

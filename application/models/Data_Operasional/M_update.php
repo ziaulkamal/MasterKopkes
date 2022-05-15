@@ -30,4 +30,11 @@ class M_update extends CI_Model{
   {
     return $this->db->insert('log_operasional', $log);
   }
+
+  function update_inventaris($id, $data)
+  {
+    $this->db->where('id', $id);
+    $this->db->update('tb_inventaris', $data);
+  }
+
 }

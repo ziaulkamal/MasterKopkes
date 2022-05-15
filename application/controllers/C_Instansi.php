@@ -65,7 +65,7 @@ class C_Instansi extends CI_Controller{
     $kode_instansi = $this->input->post('kode_instansi');
     $data = array(
       'kode_instansi'  => $kode_instansi,
-      'nama_instansi'  =>  $this->input->post('nama_instansi'),
+      'nama_instansi'  => $this->input->post('nama_instansi'),
       'alamat_instansi'=> $this->input->post('alamat_instansi'),
       'registration'   => $this->input->post('registration'),
     );
