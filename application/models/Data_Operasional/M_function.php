@@ -23,6 +23,12 @@ class M_function extends CI_Model{
     return $this->db->get('tb_inventaris');
   }
 
+  function get_inventaris($tahun)
+  {
+    $this->db->select("(SELECT SUM(tb_inventaris.harga_sekarang) FROM tb_inventaris WHERE tb_inventaris.last_update LIKE '%$tahun%') AS inventaris", FALSE);
+    return $this->db->get();
+  }
+
   function get_id_inventaris($id)
   {
     $this->db->where('id', $id);
