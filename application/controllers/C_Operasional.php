@@ -78,20 +78,22 @@ class C_Operasional extends CI_Controller{
   {
 
     $id = $this->input->post('id');
-    $harga_beli = $this->input->post('harga_beli');
-    $harga_sekarang = $this->input->post('harga_sekarang');
+    $harga_beli = str_replace('.','', $this->input->post('harga_beli'));
+    $harga_sekarang = str_replace('.','', $this->input->post('harga_sekarang'));
+    $dana_hapus = $harga_beli - $harga_sekarang;
     $data = array(
       'id'          => $id,
       'nama_barang' => $this->input->post('nama_barang'),
       'satuan'      => $this->input->post('satuan'),
       'jumlah'      => $this->input->post('jumlah'),
-      'harga_beli'  => str_replace('.','', $harga_beli),
-      'harga_sekarang' => str_replace('.','', $harga_sekarang),
+      'harga_beli'  => $harga_beli,
+      'harga_sekarang' => $harga_sekarang,
       'keterangan'  => $this->input->post('keterangan'),
       'last_update' => date('Y-m-d'),
+
     );
 
-    $brangkas['dana_penghapusan'] = $harga_beli - $harga_sekarang;
+    $brangkas['dana_penghapusan'] = $load->dana_penghapusan + $dana_hapus;
     $this->mu->update_brangkas($brangkas);
     $this->mu->update_inventaris($data, $id);
     $this->session->set_flashdata('message', '<div class="alert alert-success"> Data berhasil di Ubah berupa '.$nama_barang.' sejumlah '.$jumlah.' '. $satuan.' dengan harga '. $this->conv->convRupiah($harga).'</div>');

@@ -45,9 +45,9 @@
                                             </div>
                                           </div>
                                           <div class="mb-3 col-xl-12">
-                                            <label class="form-label">Harga Beli</label>
+                                            <label class="form-label">Harga Sekarang</label>
                                             <div>
-                                              <input type="hidden" class="form-control" name="harga_beli" value="<?= $id->harga_beli ?>" />
+                                              <input type="hidden" class="form-control uang" name="harga_beli" value="<?= $id->harga_beli ?>" />
                                               <input type="text" class="form-control uang" name="harga_sekarang" value="<?= $id->harga_sekarang ?>" />
                                             </div>
                                           </div>
@@ -80,7 +80,7 @@
                                         <div class="mb-3 col-xl-12">
                                           <label class="form-label">Harga Beli</label>
                                           <div>
-                                            <input type="text" class="form-control" name="harga_beli" maxlength="16"  placeholder="Harga Barang" />
+                                            <input type="text" class="form-control uang" name="harga_beli" maxlength="16"  placeholder="Harga Barang" />
                                           </div>
                                         </div>
                                         <div class="mb-3 col-xl-12">
