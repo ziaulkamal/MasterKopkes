@@ -67,6 +67,16 @@
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="mdi mdi-page-layout-header"></i>
+                        <span>Kelola Inventaris</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="<?=base_url('list_inventaris'); ?>">Data Inventaris</a></li>
+                        <li><a href="<?=base_url('add_inventaris'); ?>">Tambah Inventaris</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="mdi mdi-page-layout-header"></i>
                         <span>Pengelolaan Dana </span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">

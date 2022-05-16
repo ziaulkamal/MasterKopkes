@@ -75,5 +75,12 @@ $route['reset_kas'] = 'Pengaturan/reset_kas';
 $route['base_config'] = 'Pengaturan/konfigurasi_dasar';
 $route['result_config'] = 'Pengaturan/proses_setting';
 
+//Instansi
+$route['add_inventaris'] = 'C_Operasional/add_inventaris';
+$route['list_inventaris'] = 'C_Operasional/list_inventaris';
+$route['proses_inventaris'] = 'C_Operasional/proses_inventaris';
+$route['edit_inventaris/(:any)'] = 'C_Operasional/update_inventaris_proses/$1';
+$route['update_inventaris'] = 'C_Operasional/update_inventaris';
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

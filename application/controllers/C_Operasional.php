@@ -16,6 +16,88 @@ class C_Operasional extends CI_Controller{
 
   }
 
+  function list_inventaris()
+  {
+    $load = $this->mf->get_list_inventaris()->result();
+    $data = array(
+      'js'         => 'dataTables',
+      'title'      => 'Data Inventaris',
+      'inventaris' =>  $load,
+      'page'       =>  'page/inventaris/list',
+     );
+     $this->load->view('main', $data);
+  }
+
+  function add_inventaris()
+  {
+    $data = array(
+      'js'          => '',
+      'title'       => 'Data Inventaris',
+      'action'      => 'proses_inventaris',
+      'page'        => 'page/inventaris/form'
+    );
+    $this->load->view('main', $data);
+  }
+
+  function proses_inventaris()
+  {
+    $load = $this->mf->get_brangkas()->row();
+    $kas = $load->kas;
+    $data = array(
+      'id'    => time(),
+      'nama_barang' => $this->input->post('nama_barang'),
+      'satuan' => $this->input->post('satuan'),
+      'jumlah' => $this->input->post('jumlah'),
+      'harga_beli' => str_replace('.','',$this->input->post('harga_beli')),
+      'harga_sekarang' => str_replace('.','',$this->input->post('harga_beli')),
+      'keterangan' => $this->input->post('keterangan'),
+      'last_update' => date('Y-m-d'),
+    );
+
+    $brangkas['kas'] = $kas - $data['harga_beli'];
+    $this->mu->update_brangkas($brangkas);
+    $this->mu->add_inventaris($data);
+    $this->session->set_flashdata('message', '<div class="alert alert-success"> Data berhasil di tambahkan berupa '.$nama_barang.' sejumlah '.$jumlah.' '. $satuan.' dengan harga '. $this->conv->convRupiah($harga_beli).'</div>');
+    redirect('list_inventaris');
+  }
+
+  function update_inventaris_proses($id)
+  {
+    $id = $this->mf->get_id_inventaris($id)->row();
+    $data = array(
+      'js'          => '',
+      'title'       => 'Data Inventaris',
+      'id'          =>  $id,
+      'action'      => 'update_inventaris',
+      'page'        => 'page/inventaris/form'
+    );
+    $this->load->view('main', $data);
+  }
+
+  function update_inventaris()
+  {
+
+    $id = $this->input->post('id');
+    $harga_beli = $this->input->post('harga_beli');
+    $harga_sekarang = $this->input->post('harga_sekarang');
+    $data = array(
+      'id'          => $id,
+      'nama_barang' => $this->input->post('nama_barang'),
+      'satuan'      => $this->input->post('satuan'),
+      'jumlah'      => $this->input->post('jumlah'),
+      'harga_beli'  => str_replace('.','', $harga_beli),
+      'harga_sekarang' => str_replace('.','', $harga_sekarang),
+      'keterangan'  => $this->input->post('keterangan'),
+      'last_update' => date('Y-m-d'),
+    );
+
+    $brangkas['dana_penghapusan'] = $harga_beli - $harga_sekarang;
+    $this->mu->update_brangkas($brangkas);
+    $this->mu->update_inventaris($data, $id);
+    $this->session->set_flashdata('message', '<div class="alert alert-success"> Data berhasil di Ubah berupa '.$nama_barang.' sejumlah '.$jumlah.' '. $satuan.' dengan harga '. $this->conv->convRupiah($harga).'</div>');
+    redirect('list_inventaris');
+  }
+
   function dana_pengurus()
   {
     $load = $this->mf->get_brangkas()->row();
@@ -112,7 +194,7 @@ class C_Operasional extends CI_Controller{
     $load = $this->mf->get_brangkas()->row();
     $kas = $load->kas;
     $keterangan = $this->input->post('keterangan');
-    $nominal    = $this->input->post('nominal');
+    $nominal    = str_replace('.','',$this->input->post('nominal'));
     if ($tipe == 'dana_pengurus') {
       $p_keterangan = 'Penggunaan Dana Kas untuk diserahkan ke pengurus dengan keterangan ('. $keterangan.') senilai '.$this->conv->convRupiah($nominal).' Pada tanggal '.$last_update;
       $brangkas['dana_pengurus'] = $load->dana_pengurus - $nominal;
@@ -189,7 +271,7 @@ class C_Operasional extends CI_Controller{
   {
     $load           = $this->mf->get_brangkas()->row();
     $kas            = $load->kas;
-    $jumlah         = $this->input->post('nominal');
+    $jumlah         = str_replace('.','',$this->input->post('nominal'));
     $jenis          = $this->input->post('jenis');
     $keterangan     = $this->input->post('keterangan');
     $last_update    = date('Y-m-d');
@@ -229,7 +311,7 @@ class C_Operasional extends CI_Controller{
   {
     $load           = $this->mf->get_brangkas()->row();
     $kas            = $load->kas;
-    $jumlah         = $this->input->post('nominal');
+    $jumlah         = str_replace('.','',$this->input->post('nominal'));
     $jenis          = $this->input->post('jenis');
     $keterangan     = $this->input->post('keterangan');
     $last_update    = date('Y-m-d');
@@ -342,29 +424,51 @@ class C_Operasional extends CI_Controller{
       $template = new \PhpOffice\PhpWord\TemplateProcessor('./assets/template/daftar-pembagian-shu.docx');
 
       // IDEA: Page 3
+
       $template->setValue('kas', $this->conv->convRupiah('0'));
       $template->setValue('piutang', $this->conv->convRupiah('0'));
       $template->setValue('piutang_lain', $this->conv->convRupiah('0'));
-      $template->setValue('inventaris', $this->conv->convRupiah('0'));
+      $template->setValue('inventaris_total', $this->conv->convRupiah('0'));
+      $template->setValue('gotong_royong', $this->conv->convRupiah('0'));
+      $template->setValue('rupa_dana', $this->conv->convRupiah('0'));
+
+      $template->setValue('t_dana_pengurus', $this->conv->convRupiah('0'));
+      $template->setValue('t_dana_pendidikan', $this->conv->convRupiah('0'));
+      $template->setValue('t_dana_kes_pegawai', $this->conv->convRupiah('0'));
+      $template->setValue('t_dana_sosial', $this->conv->convRupiah('0'));
+      $template->setValue('t_dana_audit', $this->conv->convRupiah('0'));
+      $template->setValue('t_dana_pembangunan', $this->conv->convRupiah('0'));
+
+      $template->setValue('dana_lainya', $this->conv->convRupiah('0'));
+      $template->setValue('sisa_shu_anggota', $this->conv->convRupiah('0'));
+      $template->setValue('simpok', $this->conv->convRupiah('0'));
+      $template->setValue('simwa', $this->conv->convRupiah('0'));
+      $template->setValue('simkusus', $this->conv->convRupiah('0'));
+      $template->setValue('dana_cadangan', $this->conv->convRupiah('0'));
+      $template->setValue('tahun_sebelum', $tahun -1);
+
 
       $d_in = $invent->result();
       $start = 0;
       if ($invent->num_rows() == 0) {
-        $i = array('harga_inventaris' => '','inventaris' => '' );
+        $i = '';
       }else {
         foreach ($d_in as $data) {
             $i[$start++] = array(
               'harga_inventaris' => $this->conv->convRupiah($data->nominal),
-              'inventaris' => $data->keterangan
+              'inventaris_item' => $data->keterangan
             );
         }
       }
 
       $template->cloneBlock('inventaris_block', 0, true, false, $i);
 
+
       // IDEA: Page 2
+      $template->setValue('total_adm', $this->conv->convRupiah('0'));
       $template->setValue('total_shu_bersih', $this->conv->convRupiah('0'));
       $template->setValue('total_shu_kotor', $this->conv->convRupiah('0'));
+      $template->setValue('zakat', $this->conv->convRupiah('0'));
       $template->setValue('total_pendapatan_lain', $this->conv->convRupiah('0'));
       $template->setValue('total_pendapatan_jumlah', $this->conv->convRupiah('0'));
       $template->setValue('atk', $this->conv->convRupiah('0'));

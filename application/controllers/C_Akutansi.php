@@ -105,7 +105,7 @@ class C_Akutansi extends CI_Controller{
       $l = $load->s_lain;
       $t = $load->total_akumulasi;
       $last_update = date('Y-m-d');
-      $jumlah = $this->input->post('jml_simpan');
+      $jumlah = str_replace('.','',$this->input->post('jml_simpan'));
 
       if ($this->input->post('jenis_simpanan') == 1) {
         $data = array(
@@ -225,7 +225,7 @@ class C_Akutansi extends CI_Controller{
       // IDEA: Akhir Penguraian Dari Function Global kas
 
       $kode_pinjaman	= 'P-'.time();
-      $plafon	        = $this->input->post('jumlah');
+      $plafon	        = str_replace('.','',$this->input->post('jumlah'));
       $tenor	        = $this->input->post('tenor');
       $margin	        = 0.08; // 8%
 
@@ -336,8 +336,8 @@ class C_Akutansi extends CI_Controller{
       $anggota     = $this->mf->get_detail_rekening($no_rekening);
       $last_update = date('Y-m-d');
       $kode_pinjaman = $this->input->post('kode_pinjaman');
-      $angsuran_pokok = $this->input->post('pokok');
-      $angsuran_margin = $this->input->post('margin');
+      $angsuran_pokok = str_replace('.','',$this->input->post('pokok'));
+      $angsuran_margin = str_replace('.','',$this->input->post('margin'));
       $tahun = date('Y');
 
       $data_margin = $this->mf->get_id_margin($no_rekening, $tahun);
@@ -484,8 +484,8 @@ class C_Akutansi extends CI_Controller{
       $anggota          = $this->mf->get_detail_rekening($no_rekening);
       $last_update      = date('Y-m-d');
       $kode_pinjaman    = $this->input->post('kode_pinjaman');
-      $angsuran_pokok   = $this->input->post('pokok');
-      $angsuran_margin  = $this->input->post('margin');
+      $angsuran_pokok   = str_replace('.','',$this->input->post('pokok'));
+      $angsuran_margin  = str_replace('.','',$this->input->post('margin'));
 
       if ($this->input->post('jenis') != 3) {
         $this->session->set_flashdata('message', '<div class="alert alert-warning alert-dismissible fade show">Parameter yang dikirimkan salah  </div>');

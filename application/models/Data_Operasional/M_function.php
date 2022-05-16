@@ -16,6 +16,20 @@ class M_function extends CI_Model{
     return $this->db->get('log_operasional', 4);
   }
 
+// IDEA: Update Penambahan Inventaris
+
+  function get_list_inventaris()
+  {
+    return $this->db->get('tb_inventaris');
+  }
+
+  function get_id_inventaris($id)
+  {
+    $this->db->where('id', $id);
+    return $this->db->get('tb_inventaris');
+  }
+// IDEA: End Update Penambahan Inventaris
+
 
   function get_brangkas()
   {
@@ -83,17 +97,5 @@ class M_function extends CI_Model{
     return $this->db->get();
   }
 
-  function get_inventaris($tahun)
-  {
-    $this->db->like('last_update', $tahun);
-    $this->db->where('jenis', 10);
-    return $this->db->get('log_operasional');
-  }
 
-  function sum_inventaris()
-  {
-    $tahun = date('Y');
-    $this->db->select("(SELECT SUM(log_operasional.nominal) FROM log_operasional WHERE log_operasional.jenis = 10 && log_operasional.last_update LIKE '%$tahun%') AS inventaris", FALSE);
-    return $this->db->get();
-  }
 }
