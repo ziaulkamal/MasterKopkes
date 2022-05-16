@@ -47,7 +47,7 @@
                     <div class="mb-3 col-xl-12">
                       <label class="form-label">Jumlah Simpanan</label>
                       <div>
-                        <input type="text" class="form-control" name="jml_simpan" />
+                        <input type="text" class="form-control uang" name="jml_simpan" />
                       </div>
                     </div>
                     <div>

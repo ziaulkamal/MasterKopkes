@@ -40,7 +40,7 @@
                     <div class="mb-3 col-xl-12">
                       <label class="form-label">Jumlah Pinjaman</label>
                       <div>
-                        <input type="text" class="form-control" name="jumlah" />
+                        <input type="text" class="form-control uang" name="jumlah" />
                       </div>
                     </div>
                     <div>
