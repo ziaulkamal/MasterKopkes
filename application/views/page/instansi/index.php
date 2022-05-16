@@ -17,6 +17,7 @@
           </div>
             <div class="row">
                 <div class="col-12">
+                  <?php echo $this->session->flashdata('message'); ?>
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive">
@@ -38,7 +39,10 @@
                                             <td><?= $data->kode_instansi ?></td>
                                             <td><?= $data->nama_instansi ?></td>
                                             <td><?= $data->registration ?></td>
-                                            <td>aksi</td>
+                                            <td>
+                                              <a href="<?= base_url('update_instansi/').$data->kode_instansi; ?>" class="btn btn-sm btn-outline-danger waves-effect waves-light">Edit</a>
+                                              <a href="<?= base_url('delete/').$data->kode_instansi; ?>" id="btn-delete" class="btn btn-sm btn-outline-dark waves-effect waves-light" onclick="<?= base_url('anggota') ?>">Hapus</a>
+                                            </td>
 
                                         </tr>
                                       <?php }
