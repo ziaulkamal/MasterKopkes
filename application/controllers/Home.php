@@ -7,8 +7,11 @@ class Home extends CI_Controller{
   {
     parent::__construct();
     $this->load->model(array(
-      'Data_Entry/M_function' => 'mf',
-      'Data_Entry/M_views' => 'mv',
+      'Data_Entry/M_function' => 'amf',
+      'Data_Entry/M_views' => 'amv',
+      'Starter' => 'own',
+
+
     ));
     $this->load->library(array('Curency_indo_helper' => 'conv'));
 
@@ -20,11 +23,9 @@ class Home extends CI_Controller{
     $data = array(
         'js'  => 'charts',
         'title' => 'Dashboard',
-        'jumlah_instansi' => $this->mf->jumlah_instansi(),
-        'jumlah_anggota'  => $this->mf->jumlah_anggota(),
-        'jumlah_simpanan'  => $this->mf->jumlah_simpanan(),
-        'total_pinjaman'  => $this->mf->jumlah_anggota_pinjam(),
-        'total_angsuran'  => $this->mf->jumlah_anggota_angsur(),
+        'jumlah_instansi' => $this->amf->jumlah_instansi(),
+        'jumlah_anggota'  => $this->amf->jumlah_anggota(),
+        'brangkas' => $this->own->get_brangkas()->row(),
         'page' => 'page/starter',
         // 'total_anggota' => $tl_anggota,
         // 'total_simpanan' => $tl_simpanan,

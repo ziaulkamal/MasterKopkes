@@ -2,6 +2,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
+              <?php echo $this->session->flashdata('message'); ?>
                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                     <h4 class="mb-sm-0"><?= $title ?></h4>
                     <div class="page-title-right">
@@ -12,14 +13,14 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-sm-6">
+            <div class="col-xl-6 col-sm-6">
               <div class="card">
                   <div class="card-body">
                       <div class="d-flex text-muted">
                           <div class="flex-shrink-0  me-3 align-self-center">
                               <div class="avatar-sm">
                                   <div class="avatar-title bg-light rounded-circle text-primary font-size-20">
-                                      <i class="ri-group-line"></i>
+                                      <i class="ri-briefcase-2-fill"></i>
                                   </div>
                               </div>
                           </div>
@@ -31,7 +32,7 @@
                   </div>
               </div>
           </div>
-            <div class="col-xl-3 col-sm-6">
+            <div class="col-xl-6 col-sm-6">
               <div class="card">
                   <div class="card-body">
                       <div class="d-flex text-muted">
@@ -50,24 +51,119 @@
                   </div>
               </div>
           </div>
-            <div class="col-xl-3 col-sm-6">
+            <div class="col-xl-6 col-sm-6">
               <div class="card">
                   <div class="card-body">
                       <div class="d-flex text-muted">
                           <div class="flex-shrink-0  me-3 align-self-center">
                               <div class="avatar-sm">
                                   <div class="avatar-title bg-light rounded-circle text-primary font-size-20">
-                                      <i class="ri-group-line"></i>
+                                      <i class="ri-exchange-dollar-line"></i>
                                   </div>
                               </div>
                           </div>
                           <div class="flex-grow-1 overflow-hidden">
-                              <p class="mb-1">Total Keseluruhan Pinjaman</p>
-                              <h5 class="mb-3"><?= $total_pinjaman->total ?></h5>
+                              <p class="mb-1">Total Hutang</p>
+                              <h5 class="mb-3"><?= $this->conv->convRupiah($brangkas->total_hutang) ?></h5>
                           </div>
                       </div>
                   </div>
               </div>
+          </div>
+          <div class="col-xl-6 col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex text-muted">
+                        <div class="flex-shrink-0  me-3 align-self-center">
+                            <div class="avatar-sm">
+                                <div class="avatar-title bg-light rounded-circle text-primary font-size-20">
+                                    <i class="ri-funds-line"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 overflow-hidden">
+                            <p class="mb-1">Total Piutang</p>
+                            <h5 class="mb-3"><?= $this->conv->convRupiah($brangkas->total_piutang) ?></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div class="col-xl-12 col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex text-muted">
+                        <div class="flex-shrink-0  me-3 align-self-center">
+                            <div class="avatar-sm">
+                                <div class="avatar-title bg-light rounded-circle text-primary font-size-20">
+                                    <i class="ri-hand-heart-line"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 overflow-hidden">
+                            <p class="mb-1">Total Dana Cadangan</p>
+                            <h5 class="mb-3"><?= $this->conv->convRupiah($brangkas->dana_cadangan) ?></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div class="col-xl-4 col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex text-muted">
+                        <div class="flex-shrink-0  me-3 align-self-center">
+                            <div class="avatar-sm">
+                                <div class="avatar-title bg-light rounded-circle text-primary font-size-20">
+                                    <i class="ri-map-pin-user-line"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 overflow-hidden">
+                            <p class="mb-1">Total Dana Pengurus</p>
+                            <h5 class="mb-3"><?= $this->conv->convRupiah($brangkas->dana_pengurus) ?></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div class="col-xl-4 col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex text-muted">
+                        <div class="flex-shrink-0  me-3 align-self-center">
+                            <div class="avatar-sm">
+                                <div class="avatar-title bg-light rounded-circle text-primary font-size-20">
+                                    <i class="ri-suitcase-line"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 overflow-hidden">
+                            <p class="mb-1">Total Dana Pendidikan</p>
+                            <h5 class="mb-3"><?= $this->conv->convRupiah($brangkas->dana_pendidikan) ?></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div class="col-xl-4 col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex text-muted">
+                        <div class="flex-shrink-0  me-3 align-self-center">
+                            <div class="avatar-sm">
+                                <div class="avatar-title bg-light rounded-circle text-primary font-size-20">
+                                    <i class="ri-thumb-up-line"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 overflow-hidden">
+                            <p class="mb-1">Total Dana Kesejahteraan Pegawai</p>
+                            <h5 class="mb-3"><?= $this->conv->convRupiah($brangkas->dana_kes_pegawai) ?></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
           </div>
           <div class="col-xl-3 col-sm-6">
             <div class="card">
@@ -76,49 +172,76 @@
                         <div class="flex-shrink-0  me-3 align-self-center">
                             <div class="avatar-sm">
                                 <div class="avatar-title bg-light rounded-circle text-primary font-size-20">
-                                    <i class="ri-group-line"></i>
+                                    <i class="ri-leaf-line"></i>
                                 </div>
                             </div>
                         </div>
                         <div class="flex-grow-1 overflow-hidden">
-                            <p class="mb-1">Total Keseluruhan Angsuran</p>
-                            <h5 class="mb-3"><?= $total_angsuran->total ?></h5>
+                            <p class="mb-1">Total Dana Sosial</p>
+                            <h5 class="mb-3"><?= $this->conv->convRupiah($brangkas->dana_sosial) ?></h5>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-            <div class="col-xl-3 col-sm-6">
-              <div class="card">
-                  <div class="card-body">
-                      <div class="d-flex text-muted">
-                          <div class="flex-shrink-0  me-3 align-self-center">
-                              <div class="avatar-sm">
-                                  <div class="avatar-title bg-light rounded-circle text-primary font-size-20">
-                                      <i class="ri-group-line"></i>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="flex-grow-1 overflow-hidden">
-                              <p class="mb-1">Jumlah Simpanan Anggota </p>
-                              <h5 class="mb-3"><?= $this->conv->convRupiah($jumlah_simpanan->total) ?></h5>
-                          </div>
-                      </div>
-                  </div>
-              </div>
+          </div>
+          <div class="col-xl-3 col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex text-muted">
+                        <div class="flex-shrink-0  me-3 align-self-center">
+                            <div class="avatar-sm">
+                                <div class="avatar-title bg-light rounded-circle text-primary font-size-20">
+                                    <i class="ri-user-voice-line"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 overflow-hidden">
+                            <p class="mb-1">Total Dana Audit</p>
+                            <h5 class="mb-3"><?= $this->conv->convRupiah($brangkas->dana_audit) ?></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex text-muted">
+                        <div class="flex-shrink-0  me-3 align-self-center">
+                            <div class="avatar-sm">
+                                <div class="avatar-title bg-light rounded-circle text-primary font-size-20">
+                                    <i class="ri-building-2-line"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 overflow-hidden">
+                            <p class="mb-1">Total Dana Pembangunan</p>
+                            <h5 class="mb-3"><?= $this->conv->convRupiah($brangkas->dana_pembangunan) ?></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex text-muted">
+                        <div class="flex-shrink-0  me-3 align-self-center">
+                            <div class="avatar-sm">
+                                <div class="avatar-title bg-light rounded-circle text-primary font-size-20">
+                                    <i class="ri-delete-bin-5-line"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 overflow-hidden">
+                            <p class="mb-1">Total Dana Penghapusan</p>
+                            <h5 class="mb-3"><?= $this->conv->convRupiah($brangkas->dana_penghapusan) ?></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
           </div>
 
-        </div>
-        <div class="row">
-          <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title mb-4">Spline Area</h4>
 
-                                <div id="spline_area" class="apex-charts" dir="ltr"></div>
-                            </div>
-                        </div><!--end card-->
-                    </div>
-                  </div>
-              </div>
+        </div>
 </div>

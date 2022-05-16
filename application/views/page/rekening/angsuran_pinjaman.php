@@ -41,14 +41,14 @@
                     <div class="mb-3 col-xl-12">
                       <label class="form-label">Plafon Pinjaman</label>
                       <div>
-                        <input type="text" class="form-control" value="<?= $this->conv->convRupiah($pinjaman->plafon) ?>" readonly/>
+                        <input type="text" class="form-control uang" value="<?= $this->conv->convRupiah($pinjaman->plafon) ?>" readonly/>
                       </div>
                     </div>
                     <div class="mb-3 col-xl-12">
                       <label class="form-label">Margin</label>
                       <div>
                         <input type="hidden" class="form-control" name="margin" value="<?= $pinjaman->margin ?>" readonly/>
-                        <input type="text" class="form-control" value="<?= $this->conv->convRupiah($pinjaman->margin) ?>" readonly/>
+                        <input type="text" class="form-control uang" value="<?= $this->conv->convRupiah($pinjaman->margin) ?>" readonly/>
                       </div>
                     </div>
                     <div class="mb-3 col-xl-12">
@@ -56,11 +56,11 @@
                       <div>
                         <?php if ($jenis == 1) { ?>
                           <input type="hidden" class="form-control" name="pokok" value="<?= $pinjaman->pokok_murabahan ?>" readonly/>
-                          <input type="text" class="form-control"value="<?= $this->conv->convRupiah($pinjaman->pokok_murabahan) ?>" readonly/>
+                          <input type="text" class="form-control uang"value="<?= $this->conv->convRupiah($pinjaman->pokok_murabahan) ?>" readonly/>
 
                         <?php }else { ?>
                           <input type="hidden" class="form-control" name="pokok" value="<?= ($pinjaman->tenor-$pinjaman->angsuran_ke)*$pinjaman->pokok_murabahan ?>" readonly/>
-                          <input type="text" class="form-control"value="<?= $this->conv->convRupiah(($pinjaman->tenor-$pinjaman->angsuran_ke)*$pinjaman->pokok_murabahan) ?>" readonly/>
+                          <input type="text" class="form-control uang"value="<?= $this->conv->convRupiah(($pinjaman->tenor-$pinjaman->angsuran_ke)*$pinjaman->pokok_murabahan) ?>" readonly/>
 
                         <?php } ?>
                       </div>

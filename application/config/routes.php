@@ -2,8 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 $route['default_controller'] = 'Home';
-$route['dashboard'] = 'Home/index';
-
+$route['dashboard'] = 'Home';
 
 //Anggota
 $route['anggota']        = 'C_Anggota/index';
@@ -14,11 +13,8 @@ $route['update_proses']  = 'C_Anggota/update_proses';
 $route['hapus/(:any)']   = 'C_Anggota/delete/$1';
 
 //Instansi
-$route['Instansi']                = 'C_Instansi/index';
-$route['tambah_instansi']         = 'C_Instansi/tambah_instansi';
-$route['update_instansi/(:any)']  = 'C_Instansi/update_instansi/$1';
-$route['proses_instansi']         = 'C_Instansi/proses_instansi';
-$route['delete/(:any)']           = 'C_Instansi/delete/$1';
+$route['Instansi']        = 'C_Instansi/index';
+$route['tambah_instansi'] = 'C_Instansi/tambah_instansi';
 
 //Simpanan
 $route['simpanan_pertama/(:any)'] = 'C_Pencarian/add_simpanan/$1';
@@ -47,8 +43,24 @@ $route['cari_pinjaman']  = 'C_Pencarian/cari_anggota_pinjaman';
 
 
 // Operasional
-$route['operasional/cash_out']  = 'C_Operasional/fitur_operasional';
+$route['operasional/cash_out']  = 'C_Operasional/cash_out';
 $route['operasional/p_cash_out']  = 'C_Operasional/update_cash_out';
+$route['operasional/cash_in']  = 'C_Operasional/cash_in';
+$route['operasional/p_cash_in']  = 'C_Operasional/update_cash_in';
+
+// Pengelolaan Dana Lainya
+$route['kelola_dana/pengurus'] = 'C_Operasional/dana_pengurus';
+$route['kelola_dana/pendidikan'] = 'C_Operasional/dana_pendidikan';
+$route['kelola_dana/kes_pegawai'] = 'C_Operasional/dana_kes_pegawai';
+$route['kelola_dana/sosial'] = 'C_Operasional/dana_sosial';
+$route['kelola_dana/audit'] = 'C_Operasional/dana_audit';
+$route['kelola_dana/pembangunan'] = 'C_Operasional/dana_pembangunan';
+$route['kelola_dana/single_process/(:any)'] = 'C_Operasional/proses_pengelolaan_dana/$1';
+
+
+// Neraca
+$route['neraca_tahunan']  = 'C_Operasional/neraca';
+$route['proses_neraca']   = 'C_Operasional/proses_neraca_tahunan';
 
 // Cetak
 $route['cetak']        = 'C_Cetak/index';
@@ -57,15 +69,18 @@ $route['cetak/simpanan/(:any)']        = 'C_Cetak/simpanan/$1';
 $route['cetak/angsuran/(:any)']        = 'C_Cetak/angsuran/$1';
 $route['cetak/pinjaman/(:any)']        = 'C_Cetak/pinjaman/$1';
 
+// Pengaturan
+
+$route['reset_kas'] = 'Pengaturan/reset_kas';
+$route['base_config'] = 'Pengaturan/konfigurasi_dasar';
+$route['result_config'] = 'Pengaturan/proses_setting';
 
 //Instansi
-$route['inventaris'] = 'C_Inventaris/index';
-$route['proses_insert'] = 'C_Inventaris/proses_insert';
-$route['proses_edit'] = 'C_Inventaris/proses_edit';
-$route['tambah_inventaris'] = 'C_Inventaris/insert';
-$route['edit_inventaris/(:any)'] = 'C_Inventaris/edit_inventaris/$1';
-
-
+$route['add_inventaris'] = 'C_Operasional/add_inventaris';
+$route['list_inventaris'] = 'C_Operasional/list_inventaris';
+$route['proses_inventaris'] = 'C_Operasional/proses_inventaris';
+$route['edit_inventaris/(:any)'] = 'C_Operasional/update_inventaris_proses/$1';
+$route['update_inventaris'] = 'C_Operasional/update_inventaris';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

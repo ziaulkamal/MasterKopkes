@@ -61,8 +61,32 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="<?=base_url('operasional/cash_out'); ?>">Update Data Kas Keluar</a></li>
                         <li><a href="<?=base_url('operasional/cash_in'); ?>">Update Data Kas Masuk</a></li>
-                        <li><a href="<?= base_url() ?>">Data Bulana</a></li>
-                        <li><a href="<?= base_url() ?>">Data Harian</a></li>
+                        <li><a href="<?=base_url('operasional/cash_out_inventaris'); ?>">Update Data Inventaris</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="mdi mdi-page-layout-header"></i>
+                        <span>Kelola Inventaris</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="<?=base_url('list_inventaris'); ?>">Data Inventaris</a></li>
+                        <li><a href="<?=base_url('add_inventaris'); ?>">Tambah Inventaris</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="mdi mdi-page-layout-header"></i>
+                        <span>Pengelolaan Dana </span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="<?=base_url('kelola_dana/pengurus'); ?>">Update Dana Pengurus</a></li>
+                        <li><a href="<?=base_url('kelola_dana/pendidikan'); ?>">Update Dana Pendidikan</a></li>
+                        <li><a href="<?=base_url('kelola_dana/kes_pegawai'); ?>">Update Dana Kesejahteraan Pegawai</a></li>
+                        <li><a href="<?=base_url('kelola_dana/sosial'); ?>">Update Dana Sosial</a></li>
+                        <li><a href="<?=base_url('kelola_dana/audit'); ?>">Update Dana Audit</a></li>
+                        <li><a href="<?=base_url('kelola_dana/pembangunan'); ?>">Update Dana Pembangunan Kerja</a></li>
+
                     </ul>
                 </li>
 
@@ -94,7 +118,7 @@
                         <span>Buku Laporan</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="ui-alerts.html">Neraca Tahunan</a></li>
+                        <li><a href="<?= base_url('neraca_tahunan'); ?>">Neraca Tahunan</a></li>
                         <li><a href="ui-badge.html">Neraca Perminggu</a></li>
                         <li><a href="ui-buttons.html">Laporan Perbulan</a></li>
                         <li><a href="ui-cards.html">Laporan Per 3 Bulan</a></li>
@@ -103,10 +127,15 @@
                 </li>
                 <li class="menu-title">Pengaturan</li>
                 <li>
-                    <a href="<?=base_url('C_Pengaturan/index'); ?>">
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="mdi mdi-cog"></i>
                         <span> Pengaturan </span>
                     </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                      <li><a href="<?= base_url('reset_kas') ?>">Reset Kas</a></li>
+                      <li><a href="<?= base_url('base_config') ?>">Atur Master Brangkas</a></li>
+
+                    </ul>
                 </li>
                 <li>
                   <a href="javascript: void(0);" class="has-arrow waves-effect">

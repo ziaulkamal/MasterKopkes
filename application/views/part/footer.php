@@ -18,6 +18,7 @@
 
 <?php // IDEA: Dasar Assets ?>
 <script src="<?= base_url(); ?>assets/libs/jquery/jquery.min.js"></script>
+<script src="<?= base_url(); ?>assets/js/jquery.mask.js"></script>
 <script src="<?= base_url(); ?>assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="<?= base_url(); ?>assets/libs/metismenu/metisMenu.min.js"></script>
 <script src="<?= base_url(); ?>assets/libs/simplebar/simplebar.min.js"></script>
@@ -45,7 +46,16 @@
 ?>
 <?php // IDEA: Penggunaan SweetAlert Pada tombol Hapus ?>
 <script src="<?= base_url(); ?>assets/libs/sweetalert2/sweetalert2.all.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        // Format mata uang.
+        $( '.uang' ).mask('000.000.000', {reverse: true});
+
+    })
+</script>
 <script>
+
 var flash = $('#flash').data('flash');
   if(flash) {
     swal.fire({
