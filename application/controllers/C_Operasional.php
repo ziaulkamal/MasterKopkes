@@ -76,11 +76,12 @@ class C_Operasional extends CI_Controller{
 
   function update_inventaris()
   {
-
+    $load = $this->mf->get_brangkas()->row();
+    $dana_hapus = $load->dana_penghapusan;
     $id = $this->input->post('id');
     $harga_beli = str_replace('.','', $this->input->post('harga_beli'));
     $harga_sekarang = str_replace('.','', $this->input->post('harga_sekarang'));
-    $dana_hapus = $harga_beli - $harga_sekarang;
+    $selisih = $harga_beli - $harga_sekarang;
     $data = array(
       'id'          => $id,
       'nama_barang' => $this->input->post('nama_barang'),
@@ -93,7 +94,7 @@ class C_Operasional extends CI_Controller{
 
     );
 
-    $brangkas['dana_penghapusan'] = $load->dana_penghapusan + $dana_hapus;
+    $brangkas['dana_penghapusan'] = $dana_hapus + $selisih;
     $this->mu->update_brangkas($brangkas);
     $this->mu->update_inventaris($data, $id);
     $this->session->set_flashdata('message', '<div class="alert alert-success"> Data berhasil di Ubah berupa '.$nama_barang.' sejumlah '.$jumlah.' '. $satuan.' dengan harga '. $this->conv->convRupiah($harga).'</div>');
