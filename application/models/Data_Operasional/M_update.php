@@ -9,7 +9,6 @@ class M_update extends CI_Model{
     //Codeigniter : Write Less Do More
   }
 
-
   function get_brangkas()
   {
     return $this->db->get('tb_brangkas');
