@@ -61,7 +61,6 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="<?=base_url('operasional/cash_out'); ?>">Update Data Kas Keluar</a></li>
                         <li><a href="<?=base_url('operasional/cash_in'); ?>">Update Data Kas Masuk</a></li>
-                        <li><a href="<?=base_url('operasional/cash_out_inventaris'); ?>">Update Data Inventaris</a></li>
                     </ul>
                 </li>
                 <li>
