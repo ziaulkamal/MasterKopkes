@@ -71,7 +71,7 @@ class C_Instansi extends CI_Controller{
 
     $this->mc->insert_instansi($data);
 
-    $this->session->set_flashdata('message', '<div class="alert alert-success"> Data dengan kode instansi<b>'.$data['kode_instansi'].'</b> Berhasil Ditambahkan </div>');
+    $this->session->set_flashdata('message', '<div class="alert alert-success"> Data dengan kode instansi <b>'.$data['kode_instansi'].'</b> Berhasil Ditambahkan </div>');
     redirect ('instansi');
   }
 
@@ -86,7 +86,7 @@ class C_Instansi extends CI_Controller{
 
     $this->mc->update_instansi($kode_instansi,$data);
 
-    $this->session->set_flashdata('message', '<div class="alert alert-success"> Data dengan kode instansi<b>'.$kode_instansi.'</b> Berhasil di ubah </div>');
+    $this->session->set_flashdata('message', '<div class="alert alert-success"> Data dengan kode instansi <b>'.$kode_instansi.'</b> Berhasil di ubah </div>');
     redirect ('instansi');
   }
 

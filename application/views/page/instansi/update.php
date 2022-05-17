@@ -23,12 +23,12 @@
                                         </div>
                                         <div>
                                             <div>
-                                                <button class="btn btn-primary waves-effect waves-light me-1">
+                                                <button type="submit" class="btn btn-primary waves-effect waves-light me-1">
                                                     Submit
                                                 </button>
-                                                <button class="btn btn-secondary waves-effect">
+                                                <a href="<?= base_url('instansi'); ?>" class="btn btn-secondary waves-effect">
                                                     Cancel
-                                                </button>
+                                                </a>
                                             </div>
                                         </div>
                                         </div>

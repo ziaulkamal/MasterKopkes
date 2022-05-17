@@ -360,7 +360,8 @@ class C_Operasional extends CI_Controller{
     $get_neraca = $this->mf->get_neraca_tahunan($tahun)->row();
     $invent = $this->mf->get_inventaris($tahun);
 
-
+    var_dump($get_neraca);
+    die();
     if ($get_neraca == null) {
       require 'vendor/autoload.php';
       // $margin_saving = $this->mf->get_margin()->result();
@@ -375,7 +376,7 @@ class C_Operasional extends CI_Controller{
 
       // IDEA: Rumus SHU
       $operasional = $atk + $honor + $rat + $thr + $penghapusan;
-      $shu_sebelum_zakat = $akumulasi - ($atk + $honor + $rat + $thr + $penghapusan);
+      $shu_sebelum_zakat = $akumulasi - $operasional;
       $zakat = $shu_sebelum_zakat * 0.025;
       $shu_sesudah_zakat = $shu_sebelum_zakat - $zakat;
 
