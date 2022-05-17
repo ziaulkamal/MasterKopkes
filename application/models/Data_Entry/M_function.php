@@ -23,12 +23,6 @@ class M_function extends CI_Model{
     return $this->db->get('tb_instansi')->row();
   }
 
-  function update_instansi($kode_instansi, $data)
-  {
-    $this->db->where('kode_instansi', $kode_instansi);
-    $this->db->update('tb_instansi', $data);
-  }
-
   function delete_instansi($kode_instansi)
   {
       $this->db->where('kode_instansi', $kode_instansi);

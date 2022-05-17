@@ -82,4 +82,15 @@ class M_create extends CI_Model{
   {
     return $this->db->insert('tb_margin_saving', $is_margin);
   }
+
+  function insert_instansi($data)
+  {
+    return $this->db->insert('tb_instansi', $data);
+  }
+
+  function update_instansi($kode_instansi, $data)
+  {
+    $this->db->where('kode_instansi', $kode_instansi);
+    return $this->db->update('tb_instansi', $data);
+  }
 }

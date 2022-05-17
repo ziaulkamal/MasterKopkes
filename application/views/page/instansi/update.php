@@ -6,9 +6,8 @@
                                 <div class="card-body">
                                     <h4 class="card-title"><?= $title; ?></h4>
                                     <?php echo validation_errors('<div class="alert alert-warning">','</div>'); ?>
-                                    <form method="post" action="<?=base_url('proses_instansi'); ?>" class="custom-validation">
+                                    <form method="post" action="<?=base_url('update_instansi'); ?>" class="custom-validation">
                                       <input type="hidden" name="kode_instansi" value="<?= $kode_instansi; ?>">
-                                      <input type="hidden" name="registration" value="<?= $registration; ?>">
                                       <div class="row">
                                         <div class="mb-3 col-xl-4">
                                           <label class="form-label">Nama Instansi</label>

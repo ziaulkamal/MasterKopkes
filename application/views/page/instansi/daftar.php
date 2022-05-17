@@ -20,24 +20,24 @@
                             <div class="card">
                               <?php echo validation_errors('<div class="alert alert-warning">','</div>'); ?>
                                 <div class="card-body">
-                                    <form method="post" action="<?=base_url('C_Anggota/daftar_anggota') ?>" class="custom-validation">
+                                    <form method="post" action="<?= base_url('proses_instansi') ?>" class="custom-validation">
                                       <div class="row">
                                         <div class="mb-3 col-xl-12">
                                           <label class="form-label">Kode Instansi</label>
                                           <div>
-                                            <input type="text" class="form-control" name="nama_lengkap" maxlength="30" value="<?= $instansi+1 ?>" required readonly/>
+                                            <input type="text" class="form-control" name="kode_instansi" maxlength="30" value="<?= $instansi+1 ?>" required readonly/>
                                           </div>
                                         </div>
                                         <div class="mb-3 col-xl-12">
                                           <label class="form-label">Nama Instansi</label>
                                           <div>
-                                            <input type="text" class="form-control" name="nik" maxlength="16" value="" />
+                                            <input type="text" class="form-control" name="nama_instansi" maxlength="16" value="" />
                                           </div>
                                         </div>
                                         <div class="mb-3 col-xl-12">
                                           <label class="form-label">Alamat</label>
                                           <div>
-                                            <input type="text" class="form-control" name="nik" maxlength="16" value="" />
+                                            <input type="text" class="form-control" name="alamat_instansi" maxlength="16" value="" />
                                           </div>
                                         </div>
                                         <div>

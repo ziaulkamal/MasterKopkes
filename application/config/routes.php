@@ -13,8 +13,12 @@ $route['update_proses']  = 'C_Anggota/update_proses';
 $route['hapus/(:any)']   = 'C_Anggota/delete/$1';
 
 //Instansi
-$route['Instansi']        = 'C_Instansi/index';
+$route['instansi']        = 'C_Instansi/index';
 $route['tambah_instansi'] = 'C_Instansi/tambah_instansi';
+$route['proses_instansi'] = 'C_Instansi/proses_instansi';
+$route['hapus_instansi/(:any)'] = 'C_Instansi/delete/$1';
+$route['update_instansi/(:any)'] = 'C_Instansi/update_instansi/$1';
+$route['update_instansi'] = 'C_Instansi/proses_update_instansi';
 
 //Simpanan
 $route['simpanan_pertama/(:any)'] = 'C_Pencarian/add_simpanan/$1';
@@ -82,5 +86,5 @@ $route['proses_inventaris'] = 'C_Operasional/proses_inventaris';
 $route['edit_inventaris/(:any)'] = 'C_Operasional/update_inventaris_proses/$1';
 $route['update_inventaris'] = 'C_Operasional/update_inventaris';
 
-$route['404_override'] = 'Pengaturan/error';
+// $route['404_override'] = 'Pengaturan/error';
 $route['translate_uri_dashes'] = FALSE;
