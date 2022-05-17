@@ -82,5 +82,5 @@ $route['proses_inventaris'] = 'C_Operasional/proses_inventaris';
 $route['edit_inventaris/(:any)'] = 'C_Operasional/update_inventaris_proses/$1';
 $route['update_inventaris'] = 'C_Operasional/update_inventaris';
 
-$route['404_override'] = '';
+$route['404_override'] = 'Pengaturan/error';
 $route['translate_uri_dashes'] = FALSE;

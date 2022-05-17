@@ -84,4 +84,10 @@ class Pengaturan extends CI_Controller{
     redirect('/');
   }
 
+  function error()
+  {
+    $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show">Parameter yang di input tidak dikenal</div>');
+    redirect('/');
+
+  }
 }
