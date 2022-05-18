@@ -57,7 +57,7 @@ class C_Operasional extends CI_Controller{
     $brangkas['kas'] = $kas - $data['harga_beli'];
     $this->mu->update_brangkas($brangkas);
     $this->mu->add_inventaris($data);
-    $this->session->set_flashdata('message', '<div class="alert alert-success"> Data berhasil di tambahkan berupa '.$nama_barang.' sejumlah '.$jumlah.' '. $satuan.' dengan harga '. $this->conv->convRupiah($harga_beli).'</div>');
+    $this->session->set_flashdata('message', '<div class="alert alert-success"> Data berhasil di tambahkan berupa '.$nama_barang.' sejumlah '.$data['jumlah'].' '. $data['satuan'].' dengan harga '. $this->conv->convRupiah($data['harga_beli']).'</div>');
     redirect('list_inventaris');
   }
 
@@ -80,6 +80,7 @@ class C_Operasional extends CI_Controller{
     $dana_hapus = $load->dana_penghapusan;
     $id = $this->input->post('id');
     $harga_beli = str_replace('.','', $this->input->post('harga_beli'));
+    $harga_terakhir = str_replace('.','', $this->input->post('harga_terakhir'));
     $harga_sekarang = str_replace('.','', $this->input->post('harga_sekarang'));
     $selisih = $harga_beli - $harga_sekarang;
     $data = array(
@@ -94,10 +95,10 @@ class C_Operasional extends CI_Controller{
 
     );
 
-    $brangkas['dana_penghapusan'] = $dana_hapus + $selisih;
+    $brangkas['dana_penghapusan'] = $dana_hapus - ($harga_beli-$harga_terakhir) + $selisih;
     $this->mu->update_brangkas($brangkas);
     $this->mu->update_inventaris($data, $id);
-    $this->session->set_flashdata('message', '<div class="alert alert-success"> Data berhasil di Ubah berupa '.$nama_barang.' sejumlah '.$jumlah.' '. $satuan.' dengan harga '. $this->conv->convRupiah($harga).'</div>');
+    $this->session->set_flashdata('message', '<div class="alert alert-success"> Data berhasil di Ubah berupa '.$data['nama_barang'].' sejumlah '.$data['jumlah'].' '. $data['satuan'].' dengan harga '. $this->conv->convRupiah($harga_sekarang).'</div>');
     redirect('list_inventaris');
   }
 
@@ -360,29 +361,29 @@ class C_Operasional extends CI_Controller{
     $get_neraca = $this->mf->get_neraca_tahunan($tahun)->row();
     $invent = $this->mf->get_inventaris($tahun);
 
-    var_dump($get_neraca);
-    die();
+
     if ($get_neraca == null) {
       require 'vendor/autoload.php';
       // $margin_saving = $this->mf->get_margin()->result();
-      $akumulasi = $this->mf->sum_margin()->row()->total_margin;
+      // $akumulasi = $this->mf->sum_margin()->row()->total_margin;
+      $akumulasi = '1022454794';
       $atk = $this->mf->sum_atk()->row()->atk;
       $honor = $this->mf->sum_honor()->row()->honor;
       $rat = $this->mf->sum_rat()->row()->rat;
       $thr = $this->mf->sum_thr()->row()->thr;
-      $penghapusan = $this->mf->sum_penghapusan()->row()->penghapusan;
+      $penghapusan = $this->mf->sum_penghapusan()->row()->dana_penghapusan;
       $brangkas = $this->mf->get_brangkas()->row();
       $last_update = date('Y-m-d');
 
       // IDEA: Rumus SHU
       $operasional = $atk + $honor + $rat + $thr + $penghapusan;
       $shu_sebelum_zakat = $akumulasi - $operasional;
-      $zakat = $shu_sebelum_zakat * 0.025;
+      $zakat = round($shu_sebelum_zakat * 0.025,0,PHP_ROUND_HALF_UP);
       $shu_sesudah_zakat = $shu_sebelum_zakat - $zakat;
 
       $x = $shu_sesudah_zakat;
 
-      $bagian_usaha_anggota = array(
+      $t_shu = array(
         'jasa_usaha' => $x * (25/100),
         'jasa_simpanan' => $x * (20/100),
         'dana_cadangan' => $x * (25/100),
@@ -397,6 +398,7 @@ class C_Operasional extends CI_Controller{
         'last_update' => $last_update,
       );
 
+      die(number_format($t_shu['dana_pembangunan']));
       $neraca_tahunan = array(
         'pendapatan_jasa' => $akumulasi,
         'pendapatan_lain' => '-',

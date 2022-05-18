@@ -14,4 +14,5 @@ class Starter extends CI_Model{
     return $this->db->get('tb_brangkas');
   }
 
+
 }

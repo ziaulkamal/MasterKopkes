@@ -27,7 +27,7 @@
                   <div>
                     <?php if ($action == 'p_cash_in') { ?>
                       <select class="form-control" name="jenis" readonly>
-                          <option selected value="6">-- Pengembalian --</option>
+                          <option selected value="5">-- Pengembalian --</option>
                       </select>
                     <?php }elseif ($action == 'p_cash_out') {?>
                       <select class="form-control" name="jenis" required>
@@ -36,11 +36,10 @@
                           <option value="2">Kebutuhan Honor</option>
                           <option value="3">Kebutuhan RAT</option>
                           <option value="4">Kebutuhan THR</option>
-                          <option value="5">Biaya Penghapusan</option>
                       </select>
                     <?php }else {?>
-                      <select class="form-control" name="jenis" readonly>
-                          <option selected value="10">-- Inventaris --</option>
+                      <select class="form-control" name="" readonly>
+                          <option selected value="0">-- Inventaris --</option>
                       </select>
                     <?php } ?>
                   </div>
@@ -48,7 +47,7 @@
                 <div class="mb-3 col-xl-12">
                   <label class="form-label">Nominal</label>
                   <div>
-                    <input type="text"class="form-control" name="nominal"/>
+                    <input type="text"class="form-control uang" name="nominal"/>
                   </div>
                 </div>
                 <div>

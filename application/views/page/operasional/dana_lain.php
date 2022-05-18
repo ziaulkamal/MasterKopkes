@@ -25,7 +25,7 @@
                 <div class="mb-3 col-xl-12">
                   <label class="form-label">Nominal</label>
                   <div>
-                    <input type="text"class="form-control" name="nominal"/>
+                    <input type="text"class="form-control uang" name="nominal"/>
                   </div>
                 </div>
                 <div>

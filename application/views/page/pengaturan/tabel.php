@@ -12,109 +12,109 @@
                                         <div class="mb-3 col-xl-4">
                                           <label class="form-label">Dana Kas</label>
                                           <div>
-                                            <input type="text" class="form-control" name="kas"/>
+                                            <input type="text" class="form-control uang" name="kas" value="<?= $load->kas ?>"/>
                                           </div>
                                         </div>
                                         <div class="mb-3 col-xl-4">
                                           <label class="form-label">Dana Gotong Royong</label>
                                           <div>
-                                            <input type="text" class="form-control" name="dana_gotongroyong"/>
+                                            <input type="text" class="form-control uang" name="dana_gotongroyong" value="<?= $load->dana_gotongroyong ?>"/>
                                           </div>
                                         </div>
                                         <div class="mb-3 col-xl-4">
                                           <label class="form-label">Dana Simpanan Pokok</label>
                                           <div>
-                                            <input type="text" class="form-control" name="dana_simpok"/>
+                                            <input type="text" class="form-control uang" name="dana_simpok" value="<?= $load->dana_simpok ?>"/>
                                           </div>
                                         </div>
                                         <div class="mb-3 col-xl-4">
                                           <label class="form-label">Dana Simpanan Wajib</label>
                                           <div>
-                                            <input type="text" class="form-control" name="dana_simwa"/>
+                                            <input type="text" class="form-control uang" name="dana_simwa" value="<?= $load->dana_simwa ?>"/>
                                           </div>
                                         </div>
                                         <div class="mb-3 col-xl-4">
                                           <label class="form-label">Dana Simpanan Khusus</label>
                                           <div>
-                                            <input type="text" class="form-control" name="dana_kusus"/>
+                                            <input type="text" class="form-control uang" name="dana_kusus" value="<?= $load->dana_kusus ?>"/>
                                           </div>
                                         </div>
                                         <div class="mb-3 col-xl-4">
                                           <label class="form-label">Dana Lainya</label>
                                           <div>
-                                            <input type="text" class="form-control" name="dana_lainya"/>
+                                            <input type="text" class="form-control uang" name="dana_lainya" value="<?= $load->dana_lainya ?>"/>
                                           </div>
                                         </div>
                                         <div class="mb-3 col-xl-4">
                                           <label class="form-label">Total Hutang</label>
                                           <div>
-                                            <input type="text" class="form-control" name="total_hutang"/>
+                                            <input type="text" class="form-control uang" name="total_hutang" value="<?= $load->total_hutang ?>"/>
                                           </div>
                                         </div>
                                         <div class="mb-3 col-xl-4">
                                           <label class="form-label">Total Piutang</label>
                                           <div>
-                                            <input type="text" class="form-control" name="total_piutang"/>
+                                            <input type="text" class="form-control uang" name="total_piutang" value="<?= $load->total_piutang ?>"/>
                                           </div>
                                         </div>
                                         <div class="mb-3 col-xl-4">
                                           <label class="form-label">Jasa Usaha</label>
                                           <div>
-                                            <input type="text" class="form-control" name="jasa_usaha"/>
+                                            <input type="text" class="form-control uang" name="jasa_usaha" value="<?= $load->jasa_usaha ?>"/>
                                           </div>
                                         </div>
                                         <div class="mb-3 col-xl-4">
                                           <label class="form-label">Jasa Simpanan</label>
                                           <div>
-                                            <input type="text" class="form-control" name="jasa_simpanan"/>
+                                            <input type="text" class="form-control uang" name="jasa_simpanan" value="<?= $load->jasa_simpanan ?>"/>
                                           </div>
                                         </div>
                                         <div class="mb-3 col-xl-4">
                                           <label class="form-label">Dana Cadangan</label>
                                           <div>
-                                            <input type="text" class="form-control" name="dana_cadangan"/>
+                                            <input type="text" class="form-control uang" name="dana_cadangan" value="<?= $load->dana_cadangan ?>"/>
                                           </div>
                                         </div>
                                         <div class="mb-3 col-xl-4">
                                           <label class="form-label">Dana Pengurus</label>
                                           <div>
-                                            <input type="text" class="form-control" name="dana_pengurus"/>
+                                            <input type="text" class="form-control uang" name="dana_pengurus" value="<?= $load->dana_pengurus ?>"/>
                                           </div>
                                         </div>
                                         <div class="mb-3 col-xl-4">
                                           <label class="form-label">Dana Pendidikan</label>
                                           <div>
-                                            <input type="text" class="form-control" name="dana_pendidikan"/>
+                                            <input type="text" class="form-control uang" name="dana_pendidikan" value="<?= $load->dana_pendidikan ?>"/>
                                           </div>
                                         </div>
                                         <div class="mb-3 col-xl-4">
                                           <label class="form-label">Dana Kesejahteraan Pegawai</label>
                                           <div>
-                                            <input type="text" class="form-control" name="dana_kes_pegawai"/>
+                                            <input type="text" class="form-control uang" name="dana_kes_pegawai" value="<?= $load->dana_kes_pegawai ?>"/>
                                           </div>
                                         </div>
                                         <div class="mb-3 col-xl-4">
                                           <label class="form-label">Dana Sosial</label>
                                           <div>
-                                            <input type="text" class="form-control" name="dana_sosial"/>
+                                            <input type="text" class="form-control uang" name="dana_sosial" value="<?= $load->dana_sosial ?>"/>
                                           </div>
                                         </div>
                                         <div class="mb-3 col-xl-4">
                                           <label class="form-label">Dana Audit</label>
                                           <div>
-                                            <input type="text" class="form-control" name="dana_audit"/>
+                                            <input type="text" class="form-control uang" name="dana_audit" value="<?= $load->dana_audit ?>"/>
                                           </div>
                                         </div>
                                         <div class="mb-3 col-xl-4">
                                           <label class="form-label">Dana Pembangunan</label>
                                           <div>
-                                            <input type="text" class="form-control" name="dana_pembangunan"/>
+                                            <input type="text" class="form-control uang" name="dana_pembangunan" value="<?= $load->dana_pembangunan ?>"/>
                                           </div>
                                         </div>
                                         <div class="mb-3 col-xl-4">
                                           <label class="form-label">Dana Penghapusan</label>
                                           <div>
-                                            <input type="text" class="form-control" name="dana_penghapusan"/>
+                                            <input type="text" class="form-control uang" name="dana_penghapusan" value="<?= $load->dana_penghapusan ?>"/>
                                           </div>
                                         </div>
                                         <div>

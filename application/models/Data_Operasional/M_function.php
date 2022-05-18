@@ -20,6 +20,7 @@ class M_function extends CI_Model{
 
   function get_list_inventaris()
   {
+    $this->db->order_by('id', 'DESC');
     return $this->db->get('tb_inventaris');
   }
 
@@ -92,8 +93,8 @@ class M_function extends CI_Model{
 
   function sum_penghapusan()
   {
-    $tahun = date('Y');
-    $this->db->select("(SELECT SUM(log_operasional.nominal) FROM log_operasional WHERE log_operasional.jenis = 5 && log_operasional.last_update LIKE '%$tahun%') AS penghapusan", FALSE);
+    $this->db->select('dana_penghapusan');
+    $this->db->from('tb_brangkas');
     return $this->db->get();
   }
 

@@ -48,6 +48,7 @@
                                             <label class="form-label">Harga Sekarang</label>
                                             <div>
                                               <input type="hidden" class="form-control uang" name="harga_beli" value="<?= $id->harga_beli ?>" />
+                                              <input type="hidden" class="form-control uang" name="harga_terakhir" value="<?= $id->harga_sekarang ?>" />
                                               <input type="text" class="form-control uang" name="harga_sekarang" value="<?= $id->harga_sekarang ?>" />
                                             </div>
                                           </div>

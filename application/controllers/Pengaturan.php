@@ -10,6 +10,7 @@ class Pengaturan extends CI_Controller{
     $this->load->model(array(
       'Data_Operasional/M_update' => 'mu',
       'Data_Operasional/M_function' => 'mf',
+      'Starter' => 'own',
     ));
   }
 
@@ -45,10 +46,12 @@ class Pengaturan extends CI_Controller{
 
   function konfigurasi_dasar()
   {
+    $load = $this->own->get_brangkas()->row();
     $data = array(
       'js'      =>  '',
       'title'   =>  'Pengaturan Set Data Brangkas Awal',
       'action'  =>  'result_config',
+      'load'    =>  $load,
       'page'    =>  'page/pengaturan/tabel'
     );
     $this->load->view('main', $data);
@@ -59,24 +62,24 @@ class Pengaturan extends CI_Controller{
     $last_update = date('Y-m-d');
 
     $brangkas = array(
-      'kas' => $this->input->post('kas'),
-      'dana_gotongroyong' => $this->input->post('dana_gotongroyong'),
-      'dana_simpok' => $this->input->post('dana_simpok'),
-      'dana_simwa' => $this->input->post('dana_simwa'),
-      'dana_kusus' => $this->input->post('dana_kusus'),
-      'dana_lainya' => $this->input->post('dana_lainya'),
-      'total_hutang' => $this->input->post('total_hutang'),
-      'total_piutang' => $this->input->post('total_piutang'),
-      'jasa_usaha' => $this->input->post('jasa_usaha'),
-      'jasa_simpanan' => $this->input->post('jasa_simpanan'),
-      'dana_cadangan' => $this->input->post('dana_cadangan'),
-      'dana_pengurus' => $this->input->post('dana_pengurus'),
-      'dana_pendidikan' => $this->input->post('dana_pendidikan'),
-      'dana_kes_pegawai' => $this->input->post('dana_kes_pegawai'),
-      'dana_sosial' => $this->input->post('dana_sosial'),
-      'dana_audit' => $this->input->post('dana_audit'),
-      'dana_pembangunan' => $this->input->post('dana_pembangunan'),
-      'dana_penghapusan' => $this->input->post('dana_penghapusan'),
+      'kas' => str_replace('.','',$this->input->post('kas')),
+      'dana_gotongroyong' => str_replace('.','',$this->input->post('dana_gotongroyong')),
+      'dana_simpok' => str_replace('.','',$this->input->post('dana_simpok')),
+      'dana_simwa' => str_replace('.','',$this->input->post('dana_simwa')),
+      'dana_kusus' => str_replace('.','',$this->input->post('dana_kusus')),
+      'dana_lainya' => str_replace('.','',$this->input->post('dana_lainya')),
+      'total_hutang' => str_replace('.','',$this->input->post('total_hutang')),
+      'total_piutang' => str_replace('.','',$this->input->post('total_piutang')),
+      'jasa_usaha' => str_replace('.','',$this->input->post('jasa_usaha')),
+      'jasa_simpanan' => str_replace('.','',$this->input->post('jasa_simpanan')),
+      'dana_cadangan' => str_replace('.','',$this->input->post('dana_cadangan')),
+      'dana_pengurus' => str_replace('.','',$this->input->post('dana_pengurus')),
+      'dana_pendidikan' => str_replace('.','',$this->input->post('dana_pendidikan')),
+      'dana_kes_pegawai' => str_replace('.','',$this->input->post('dana_kes_pegawai')),
+      'dana_sosial' => str_replace('.','',$this->input->post('dana_sosial')),
+      'dana_audit' => str_replace('.','',$this->input->post('dana_audit')),
+      'dana_pembangunan' => str_replace('.','',$this->input->post('dana_pembangunan')),
+      'dana_penghapusan' => str_replace('.','',$this->input->post('dana_penghapusan')),
       'last_update' => $last_update,
     );
 
