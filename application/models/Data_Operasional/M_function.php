@@ -104,5 +104,31 @@ class M_function extends CI_Model{
     return $this->db->get();
   }
 
+  function sum_danalain()
+  {
+    $this->db->select("(SELECT SUM(tb_rekening.s_lain) FROM tb_rekening) AS dana_lain", FALSE);
+    return $this->db->get();
+  }
 
+  function get_anggota()
+  {
+    return $this->db->get('tb_anggota');
+  }
+
+  function sum_simpanan()
+  {
+    $this->db->select("(SELECT SUM(tb_rekening.total_akumulasi) FROM tb_rekening) AS simpanan", FALSE);
+    return $this->db->get();
+  }
+
+  function get_margin_saving($tahun)
+  {
+    $this->db->where('tahun', $tahun);
+    return  $this->db->get('tb_margin_saving');
+  }
+
+  function anggota()
+  {
+    return $this->db->get('anggota_master_data');
+  }
 }

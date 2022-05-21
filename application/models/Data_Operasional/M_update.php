@@ -40,4 +40,15 @@ class M_update extends CI_Model{
     $this->db->where('id', $id);
     return $this->db->update('tb_inventaris', $data);
   }
+
+  function insert_neraca_tahunan($t_shu)
+  {
+    return $this->db->insert('tb_neraca_tahunan', $t_shu);
+  }
+
+  function insert_neraca_phu($neraca_tahunan)
+  {
+    return $this->db->insert('tb_phu', $neraca_tahunan);
+  }
+
 }

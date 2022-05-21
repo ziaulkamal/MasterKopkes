@@ -346,13 +346,16 @@ class C_Operasional extends CI_Controller{
   function neraca()
   {
     $data = array(
-      'js'      =>  '',
-      'title'   =>  'Buat Neraca',
-      'action'  =>  'proses_neraca',
-      'page'    =>  'page/operasional/menu'
+      'js'                    =>  '',
+      'title'                 =>  'Buat Neraca',
+      'action_neraca'         =>  'proses_neraca',
+      'action_jasa_usaha'     =>  'proses_jasa_usaha',
+      'action_jasa_simpanan'  =>  'proses_jasa_simpanan',
+      'page'                  =>  'page/operasional/menu'
     );
     $this->load->view('main', $data);
   }
+
 
   function proses_neraca_tahunan()
   {
@@ -360,6 +363,7 @@ class C_Operasional extends CI_Controller{
 
     $get_neraca = $this->mf->get_neraca_tahunan($tahun)->row();
     $invent = $this->mf->get_inventaris($tahun);
+    $total_anggota = $this->mf->get_anggota()->num_rows();
 
 
     if ($get_neraca == null) {
@@ -384,35 +388,36 @@ class C_Operasional extends CI_Controller{
       $x = $shu_sesudah_zakat;
 
       $t_shu = array(
-        'jasa_usaha' => $x * (25/100),
-        'jasa_simpanan' => $x * (20/100),
-        'dana_cadangan' => $x * (25/100),
-        'dana_pengurus' => $x * (10/100),
-        'dana_kesejahteraan' => $x * (5/100),
-        'dana_pendidikan' => $x * (5/100),
-        'dana_sosial' => $x * (5/100),
-        'dana_audit' => $x * (2.5/100),
-        'dana_pembangunan' => $x * (2.5/100),
-        'tahun_neraca' => date('Y'),
-        'keterangan' => 'Data Telah di Create pada tanggal '.date('d-m-Y'),
-        'last_update' => $last_update,
+        'jasa_usaha'          => round($x * (25/100),0,PHP_ROUND_HALF_UP),
+        'jasa_simpanan'       => round($x * (20/100),0,PHP_ROUND_HALF_UP),
+        'dana_cadangan'       => round($x * (25/100),0,PHP_ROUND_HALF_UP),
+        'dana_pengurus'       => round($x * (10/100),0,PHP_ROUND_HALF_UP),
+        'dana_kesejahteraan'  => round($x * (5/100),0,PHP_ROUND_HALF_UP),
+        'dana_pendidikan'     => round($x * (5/100),0,PHP_ROUND_HALF_UP),
+        'dana_sosial'         => round($x * (5/100),0,PHP_ROUND_HALF_UP),
+        'dana_audit'          => round($x * (2.5/100),0,PHP_ROUND_HALF_UP),
+        'dana_pembangunan'    => round($x * (2.5/100),0,PHP_ROUND_HALF_UP),
+        'tahun_neraca'        => date('Y'),
+        'keterangan'          => 'Data Telah di Create pada tanggal '.date('d-m-Y'),
+        'last_update'         => $last_update,
       );
 
-      die(number_format($t_shu['dana_pembangunan']));
+      $set_dana_cadangan    = $t_shu['dana_cadangan'];
+
       $neraca_tahunan = array(
-        'pendapatan_jasa' => $akumulasi,
-        'pendapatan_lain' => '-',
-        'biaya_atk' => $atk,
-        'biaya_honor' => $honor,
-        'biaya_rat' => $rat,
-        'biaya_lebaran' => $thr,
-        'biaya_penghapusan' => $penghapusan,
-        'jumlah_biaya_adm' => $operasional,
-        'shu_sebelum_zakat' => $shu_sebelum_zakat,
-        'zakat' => $zakat,
-        'shu_setelah_zakat' => $shu_sesudah_zakat,
-        'tahun' => date('Y'),
-        'last_update' => $last_update,
+        'pendapatan_jasa'       => round($akumulasi,0,PHP_ROUND_HALF_UP),
+        'pendapatan_lain'       => '-',
+        'biaya_atk'             => round($atk,0,PHP_ROUND_HALF_UP),
+        'biaya_honor'           => round($honor,0,PHP_ROUND_HALF_UP),
+        'biaya_rat'             => round($rat,0,PHP_ROUND_HALF_UP),
+        'biaya_lebaran'         => round($thr,0,PHP_ROUND_HALF_UP),
+        'biaya_penghapusan'     => round($penghapusan,0,PHP_ROUND_HALF_UP),
+        'jumlah_biaya_adm'      => round($operasional,0,PHP_ROUND_HALF_UP),
+        'shu_sebelum_zakat'     => round($shu_sebelum_zakat,0,PHP_ROUND_HALF_UP),
+        'zakat'                 => round($zakat,0,PHP_ROUND_HALF_UP),
+        'shu_setelah_zakat'     => round($shu_sesudah_zakat,0,PHP_ROUND_HALF_UP),
+        'tahun'                 => date('Y'),
+        'last_update'           => $last_update,
       );
 
       $detail_neraca = array(
@@ -424,45 +429,91 @@ class C_Operasional extends CI_Controller{
         'dana_lainya' => $brangkas->dana_lainya,
         'total_hutang' => $brangkas->total_hutang,
         'total_piutang' => $brangkas->total_piutang,
-        'last_update' => $brangkas->last_update,
+
+        'jasa_usaha' => $t_shu['jasa_usaha'],
+        'jasa_simpanan' => $t_shu['jasa_simpanan'],
+        'dana_cadangan' => $t_shu['dana_cadangan'],
+        'dana_pengurus' => $t_shu['dana_pengurus'],
+        'dana_pendidikan' => $t_shu['dana_pendidikan'],
+        'dana_kes_pegawai' => $t_shu['dana_kesejahteraan'],
+        'dana_sosial' => $t_shu['dana_sosial'],
+        'dana_audit' => $t_shu['dana_audit'],
+        'dana_pembangunan' => $t_shu['dana_pembangunan'],
+        'dana_penghapusan' => $brangkas->dana_penghapusan
       );
+
+      $brankas = array(
+        'jasa_usaha' => $brangkas->jasa_usaha + $t_shu['jasa_usaha'],
+        'jasa_simpanan' => $brangkas->jasa_simpanan + $t_shu['jasa_simpanan'],
+        'dana_cadangan' => $brangkas->dana_cadangan + $t_shu['dana_cadangan'],
+        'dana_pengurus' => $brangkas->dana_pengurus + $t_shu['dana_pengurus'],
+        'dana_pendidikan' => $brangkas->dana_pendidikan + $t_shu['dana_pendidikan'],
+        'dana_kes_pegawai' => $brangkas->dana_kes_pegawai + $t_shu['dana_kesejahteraan'],
+        'dana_sosial' => $brangkas->dana_sosial + $t_shu['dana_sosial'],
+        'dana_audit' => $brangkas->dana_audit + $t_shu['dana_audit'],
+        'dana_pembangunan' => $brangkas->dana_pembangunan + $t_shu['dana_pembangunan'],
+        'dana_penghapusan' => $brangkas->dana_penghapusan
+      );
+
+
+      // IDEA: Rumus Untuk Dapat Pembagian Jasa Simpanan
+      $get_data_simpanan = $this->mf->sum_simpanan()->row()->simpanan;
+      $jasa_simpanan = $detail_neraca['jasa_simpanan'];
+      $rumus_jasa_simpanan = substr($jasa_simpanan/$get_data_simpanan,0,7);
+
+      // IDEA: Rumus Untuk Dapat Pembagian Jasa Usaha
+      $jasa_usaha = $detail_neraca['jasa_usaha'];
+      $rumus_jasa_usaha = substr($jasa_usaha/$akumulasi,0,7);
+
+      $t_shu['rumus_jasa_usaha']    = $rumus_jasa_usaha;
+      $t_shu['rumus_jasa_simpanan'] = $rumus_jasa_simpanan;
+
+      $this->mu->insert_neraca_tahunan($t_shu);
+      $this->mu->insert_neraca_phu($neraca_tahunan);
+      $this->mu->update_brangkas($brankas);
+      $rupa_dana = $brangkas->dana_pengurus + $brangkas->dana_pendidikan + $brangkas->dana_kes_pegawai + $brangkas->dana_sosial + $brangkas->dana_audit + $brangkas->dana_pembangunan;
+      $inventaris_total = $invent->row()->inventaris;
+      $set_danalainya = $this->mf->sum_danalain()->row()->dana_lain;
+      $call_produk_inventaris = $this->mf->get_list_inventaris();
 
       $template = new \PhpOffice\PhpWord\TemplateProcessor('./assets/template/daftar-pembagian-shu.docx');
 
       // IDEA: Page 3
 
-      $template->setValue('kas', $this->conv->convRupiah('0'));
-      $template->setValue('piutang', $this->conv->convRupiah('0'));
-      $template->setValue('piutang_lain', $this->conv->convRupiah('0'));
-      $template->setValue('inventaris_total', $this->conv->convRupiah('0'));
-      $template->setValue('gotong_royong', $this->conv->convRupiah('0'));
-      $template->setValue('rupa_dana', $this->conv->convRupiah('0'));
+      $template->setValue('jml_aggota', $total_anggota);
+      $template->setValue('kas', $this->conv->convRupiah($detail_neraca['kas']));
+      $template->setValue('piutang', $this->conv->convRupiah($detail_neraca['total_piutang']));
+      $template->setValue('piutang_lain', '-');
+      $template->setValue('inventaris_total', $this->conv->convRupiah($inventaris_total));
+      $template->setValue('gotong_royong', $this->conv->convRupiah($detail_neraca['dana_gotongroyong']));
+      $template->setValue('rupa_dana', $this->conv->convRupiah($rupa_dana));
 
-      $template->setValue('t_dana_pengurus', $this->conv->convRupiah('0'));
-      $template->setValue('t_dana_pendidikan', $this->conv->convRupiah('0'));
-      $template->setValue('t_dana_kes_pegawai', $this->conv->convRupiah('0'));
-      $template->setValue('t_dana_sosial', $this->conv->convRupiah('0'));
-      $template->setValue('t_dana_audit', $this->conv->convRupiah('0'));
-      $template->setValue('t_dana_pembangunan', $this->conv->convRupiah('0'));
+      $template->setValue('t_dana_pengurus', $this->conv->convRupiah($brangkas->dana_pengurus));
+      $template->setValue('t_dana_pendidikan', $this->conv->convRupiah($brangkas->dana_pendidikan));
+      $template->setValue('t_dana_kes_pegawai', $this->conv->convRupiah($brangkas->dana_kes_pegawai));
+      $template->setValue('t_dana_sosial', $this->conv->convRupiah($brangkas->dana_sosial));
+      $template->setValue('t_dana_audit', $this->conv->convRupiah($brangkas->dana_audit));
+      $template->setValue('t_dana_pembangunan', $this->conv->convRupiah($brangkas->dana_pembangunan));
 
-      $template->setValue('dana_lainya', $this->conv->convRupiah('0'));
+      $template->setValue('dana_lainya', $this->conv->convRupiah($detail_neraca['dana_lainya']));
       $template->setValue('sisa_shu_anggota', $this->conv->convRupiah('0'));
-      $template->setValue('simpok', $this->conv->convRupiah('0'));
-      $template->setValue('simwa', $this->conv->convRupiah('0'));
-      $template->setValue('simkusus', $this->conv->convRupiah('0'));
-      $template->setValue('dana_cadangan', $this->conv->convRupiah('0'));
+      $template->setValue('simpok', $this->conv->convRupiah($detail_neraca['dana_simpok']));
+      $template->setValue('simwa', $this->conv->convRupiah($detail_neraca['dana_simwa']));
+      $template->setValue('simkusus', $this->conv->convRupiah($detail_neraca['dana_kusus']));
+      $template->setValue('dana_cadangan', $this->conv->convRupiah($brangkas->dana_cadangan));
       $template->setValue('tahun_sebelum', $tahun -1);
 
 
-      $d_in = $invent->result();
+      $d_in = $call_produk_inventaris->result();
+
       $start = 0;
-      if ($invent->num_rows() == 0) {
+      if ($call_produk_inventaris->num_rows() == 0) {
         $i = '';
       }else {
         foreach ($d_in as $data) {
             $i[$start++] = array(
-              'harga_inventaris' => $this->conv->convRupiah($data->nominal),
-              'inventaris_item' => $data->keterangan
+              'harga_inventaris' => $this->conv->convRupiah($data->harga_sekarang),
+              'inventaris_item' => $data->jumlah . ' '. $data->satuan . ' ' . $data->nama_barang
             );
         }
       }
@@ -471,35 +522,32 @@ class C_Operasional extends CI_Controller{
 
 
       // IDEA: Page 2
-      $template->setValue('total_adm', $this->conv->convRupiah('0'));
-      $template->setValue('total_shu_bersih', $this->conv->convRupiah('0'));
-      $template->setValue('total_shu_kotor', $this->conv->convRupiah('0'));
-      $template->setValue('zakat', $this->conv->convRupiah('0'));
-      $template->setValue('total_pendapatan_lain', $this->conv->convRupiah('0'));
-      $template->setValue('total_pendapatan_jumlah', $this->conv->convRupiah('0'));
-      $template->setValue('atk', $this->conv->convRupiah('0'));
-      $template->setValue('honor', $this->conv->convRupiah('0'));
-      $template->setValue('rat', $this->conv->convRupiah('0'));
-      $template->setValue('thr', $this->conv->convRupiah('0'));
-      $template->setValue('penghapusan', $this->conv->convRupiah('0'));
-      $template->setValue('total_adm', $this->conv->convRupiah('0'));
+      $template->setValue('total_adm', $this->conv->convRupiah($operasional));
+      $template->setValue('total_shu_bersih', $this->conv->convRupiah($shu_sesudah_zakat));
+      $template->setValue('total_shu_kotor', $this->conv->convRupiah($akumulasi));
+      $template->setValue('zakat', $this->conv->convRupiah($zakat));
+      $template->setValue('total_pendapatan_lain', '-');
+      $template->setValue('total_pendapatan_jumlah', $this->conv->convRupiah($akumulasi));
+      $template->setValue('atk', $this->conv->convRupiah($atk));
+      $template->setValue('honor', $this->conv->convRupiah($honor));
+      $template->setValue('rat', $this->conv->convRupiah($rat));
+      $template->setValue('thr', $this->conv->convRupiah($thr));
+      $template->setValue('penghapusan', $this->conv->convRupiah($penghapusan));
 
 
       // IDEA: Page 1
-      $template->setValue('jasa_usaha', $this->conv->convRupiah('0'));
-      $template->setValue('jasa_simpanan', $this->conv->convRupiah('0'));
-      $template->setValue('dana_cadangan', $this->conv->convRupiah('0'));
-      $template->setValue('dana_pengurus', $this->conv->convRupiah('0'));
-      $template->setValue('dana_kesejahteraan', $this->conv->convRupiah('0'));
-      $template->setValue('dana_pendidikan', $this->conv->convRupiah('0'));
-      $template->setValue('dana_sosial', $this->conv->convRupiah('0'));
-      $template->setValue('dana_audit', $this->conv->convRupiah('0'));
-      $template->setValue('dana_pembangunan', $this->conv->convRupiah('0'));
+      $template->setValue('jasa_usaha', $this->conv->convRupiah($t_shu['jasa_usaha']));
+      $template->setValue('jasa_simpanan', $this->conv->convRupiah($t_shu['jasa_simpanan']));
+      $template->setValue('set_dana_cadangan', $this->conv->convRupiah($set_dana_cadangan));
+      $template->setValue('dana_pengurus', $this->conv->convRupiah($t_shu['dana_pengurus']));
+      $template->setValue('dana_kesejahteraan', $this->conv->convRupiah($t_shu['dana_kesejahteraan']));
+      $template->setValue('dana_pendidikan', $this->conv->convRupiah($t_shu['dana_pendidikan']));
+      $template->setValue('dana_sosial', $this->conv->convRupiah($t_shu['dana_sosial']));
+      $template->setValue('dana_audit', $this->conv->convRupiah($t_shu['dana_audit']));
+      $template->setValue('dana_pembangunan', $this->conv->convRupiah($t_shu['dana_pembangunan']));
       $template->setValue('tahun_neraca', $tahun);
       $template->setValue('last_update', $last_update);
       $template->setValue('tanggal', date('d'));
-
-
 
       $filename = 'Daftar Pembagian SHU Tahun'. $tahun;
 
@@ -507,14 +555,66 @@ class C_Operasional extends CI_Controller{
       header('Content-Disposition: attachment; filename="'. $filename .'.docx"');
     	header('Cache-Control: max-age=0');
       $template->saveAs('php://output');
+
+
+
     }elseif ($get_neraca != null) {
       if ($tahun == $get_neraca->tahun_neraca) {
         $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show">Neraca Untuk Tahun Ini sudah dibuat</div>');
         redirect('neraca_tahunan');
       }
     }
-
-
-
   }
+
+  function proses_jasa_usaha()
+  {
+    $tahun = date('Y');
+    $neraca_tahunan = $this->mf->get_neraca_tahunan($tahun)->row();
+    $k_jasa_usaha = $neraca_tahunan->rumus_jasa_usaha;
+
+
+    $margin_anggota = $this->mf->get_margin_saving($tahun);
+    $parsing = $margin_anggota->result();
+    $data = array();
+
+
+    foreach ($parsing as $q) {
+      $data[] = $this->db->query("UPDATE tb_bht SET total_margin=$q->margin_saving, persen_jasa_usaha=$q->margin_saving*$k_jasa_usaha WHERE no_rekening=$q->no_rekening");
+
+    }
+    $this->session->set_flashdata('message', '<div class="alert alert-primary alert-dismissible fade show">Data Pembagian Simpanan Sudah Di Generate, Silahkan Lakukan Generate Data Pembagian Usaha</div>');
+    redirect('/');
+  }
+
+  function proses_jasa_simpanan()
+  {
+    $tahun = date('Y');
+    $neraca_tahunan = $this->mf->get_neraca_tahunan($tahun)->row();
+    $k_simpanan = $neraca_tahunan->rumus_jasa_simpanan;
+
+    $anggota = $this->mf->anggota();
+
+    $margin_anggota = $this->mf->get_margin_saving($tahun);
+    $parsing = $anggota->result();
+
+    $data = array();
+
+
+    foreach ($parsing as $q) {
+
+      $data[] = $this->db->insert('tb_bht', [
+        'no_anggota' => $q->no_anggota,
+        'no_rekening' => $q->no_rekening,
+        'nama_anggota' => $q->nama_anggota,
+        'status_pinjaman' => $q->status_pinjaman,
+        'total_simpanan' => $q->total_simpanan,
+        'persen_jasa_simpanan' => $q->total_simpanan*$k_simpanan,
+        'last_update' => date('Y-m-d'),
+        'tahun' => $tahun,
+      ]);
+    }
+    $this->session->set_flashdata('message', '<div class="alert alert-primary alert-dismissible fade show">Data Pembagian Simpanan Sudah Di Generate, Silahkan Lakukan Generate Data Pembagian Usaha</div>');
+    redirect('/');
+  }
+
 }

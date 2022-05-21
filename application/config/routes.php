@@ -65,6 +65,8 @@ $route['kelola_dana/single_process/(:any)'] = 'C_Operasional/proses_pengelolaan_
 // Neraca
 $route['neraca_tahunan']  = 'C_Operasional/neraca';
 $route['proses_neraca']   = 'C_Operasional/proses_neraca_tahunan';
+$route['proses_jasa_usaha']   = 'C_Operasional/proses_jasa_usaha';
+$route['proses_jasa_simpanan']   = 'C_Operasional/proses_jasa_simpanan';
 
 // Cetak
 $route['cetak']        = 'C_Cetak/index';
