@@ -51,4 +51,9 @@ class M_update extends CI_Model{
     return $this->db->insert('tb_phu', $neraca_tahunan);
   }
 
+  function update_anggota_phu($data, $id)
+  {
+    $this->db->where('id', $id);
+    return $this->db->update('tb_bht', $data);
+  }
 }

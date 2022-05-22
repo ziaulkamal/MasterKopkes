@@ -347,7 +347,7 @@ class C_Operasional extends CI_Controller{
   {
     $data = array(
       'js'                    =>  '',
-      'title'                 =>  'Buat Neraca',
+      'title'                 =>  'Pengolahan Data Tahunan',
       'action_neraca'         =>  'proses_neraca',
       'action_jasa_usaha'     =>  'proses_jasa_usaha',
       'action_jasa_simpanan'  =>  'proses_jasa_simpanan',
@@ -561,7 +561,7 @@ class C_Operasional extends CI_Controller{
     }elseif ($get_neraca != null) {
       if ($tahun == $get_neraca->tahun_neraca) {
         $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show">Neraca Untuk Tahun Ini sudah dibuat</div>');
-        redirect('neraca_tahunan');
+        redirect('olah_data');
       }
     }
   }
@@ -569,52 +569,109 @@ class C_Operasional extends CI_Controller{
   function proses_jasa_usaha()
   {
     $tahun = date('Y');
-    $neraca_tahunan = $this->mf->get_neraca_tahunan($tahun)->row();
-    $k_jasa_usaha = $neraca_tahunan->rumus_jasa_usaha;
+    $cek_bht = $this->mf->get_bht_data();
+    if ($cek_bht->num_rows() < 1) {
+      $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show">Data jasa simpanan belum di generate !</div>');
+      redirect('olah_data');
+    }else {
+      $neraca_tahunan = $this->mf->get_neraca_tahunan($tahun)->row();
+      $k_jasa_usaha = $neraca_tahunan->rumus_jasa_usaha;
+      $margin_anggota = $this->mf->get_margin_saving($tahun);
+      $parsing = $margin_anggota->result();
 
-
-    $margin_anggota = $this->mf->get_margin_saving($tahun);
-    $parsing = $margin_anggota->result();
-    $data = array();
-
-
-    foreach ($parsing as $q) {
-      $data[] = $this->db->query("UPDATE tb_bht SET total_margin=$q->margin_saving, persen_jasa_usaha=$q->margin_saving*$k_jasa_usaha WHERE no_rekening=$q->no_rekening");
-
+      // $var_dump($pars)
+      $data = array();
+      foreach ($parsing as $q) {
+        $persen = round($q->margin_saving*$k_jasa_usaha,0,PHP_ROUND_HALF_UP);
+        $data[] = $this->db->query("UPDATE tb_bht SET total_margin=$q->margin_saving, persen_jasa_usaha=$persen WHERE no_rekening=$q->no_rekening AND tahun=$tahun");
+      }
+        $this->session->set_flashdata('message', '<div class="alert alert-primary alert-dismissible fade show">Data Pembagian Simpanan Sudah Di Generate, Silahkan Lakukan Generate Data Pembagian Usaha</div>');
+        redirect('/');
     }
-    $this->session->set_flashdata('message', '<div class="alert alert-primary alert-dismissible fade show">Data Pembagian Simpanan Sudah Di Generate, Silahkan Lakukan Generate Data Pembagian Usaha</div>');
-    redirect('/');
   }
 
   function proses_jasa_simpanan()
   {
     $tahun = date('Y');
-    $neraca_tahunan = $this->mf->get_neraca_tahunan($tahun)->row();
-    $k_simpanan = $neraca_tahunan->rumus_jasa_simpanan;
-
-    $anggota = $this->mf->anggota();
-
-    $margin_anggota = $this->mf->get_margin_saving($tahun);
-    $parsing = $anggota->result();
-
-    $data = array();
-
-
-    foreach ($parsing as $q) {
-
-      $data[] = $this->db->insert('tb_bht', [
-        'no_anggota' => $q->no_anggota,
-        'no_rekening' => $q->no_rekening,
-        'nama_anggota' => $q->nama_anggota,
-        'status_pinjaman' => $q->status_pinjaman,
-        'total_simpanan' => $q->total_simpanan,
-        'persen_jasa_simpanan' => $q->total_simpanan*$k_simpanan,
-        'last_update' => date('Y-m-d'),
-        'tahun' => $tahun,
-      ]);
+    $cek_bht = $this->mf->get_bht($tahun);
+    if ($cek_bht->num_rows() > 0 ) {
+      $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show">Data sudah di generate untuk tahun ini !</div>');
+      redirect('olah_data');
+    }else {
+      $neraca_tahunan = $this->mf->get_neraca_tahunan($tahun)->row();
+      $k_simpanan = $neraca_tahunan->rumus_jasa_simpanan;
+      $anggota = $this->mf->anggota();
+      $margin_anggota = $this->mf->get_margin_saving($tahun);
+      $parsing = $anggota->result();
+      $data = array();
+      foreach ($parsing as $q) {
+        $data[] = $this->db->insert('tb_bht', [
+          'no_anggota' => $q->no_anggota,
+          'no_rekening' => $q->no_rekening,
+          'nama_anggota' => $q->nama_anggota,
+          'total_simpanan' => $q->total_simpanan,
+          'persen_jasa_simpanan' => round($q->total_simpanan*$k_simpanan,0,PHP_ROUND_HALF_UP),
+          'last_update' => date('Y-m-d'),
+          'tahun' => $tahun,
+        ]);
+      }
+      $this->session->set_flashdata('message', '<div class="alert alert-primary alert-dismissible fade show">Data Pembagian Simpanan Sudah Di Generate, Silahkan Lakukan Generate Data Pembagian Usaha</div>');
+      redirect('/');
     }
-    $this->session->set_flashdata('message', '<div class="alert alert-primary alert-dismissible fade show">Data Pembagian Simpanan Sudah Di Generate, Silahkan Lakukan Generate Data Pembagian Usaha</div>');
-    redirect('/');
   }
 
+  function data_anggota_phu()
+  {
+    $load = $this->mf->get_bht_data()->result();
+
+    $data = array(
+      'js'                    =>  'dataTables',
+      'title'                 =>  'Tabel Pembagian Hasil Usaha',
+      'load'                  =>  $load,
+      'page'                  =>  'page/operasional/data_phu'
+    );
+    $this->load->view('main', $data);
+  }
+
+  function detail_anggota_phu($id)
+  {
+    $cek = $this->mf->detail_bht_data($id);
+
+    if ($cek->num_rows() < 1) {
+      echo "Parameter Salah";
+    }else {
+      $load = $this->mf->detail_bht_data($id)->row();
+      $data = array(
+        'js'                    =>  '',
+        'title'                 =>  'Pembagian Jasa Untuk Anggota',
+        'load'                  =>  $load,
+        'page'                  =>  'page/operasional/form_phu'
+      );
+      $this->load->view('main', $data);
+    }
+  }
+
+  function proses_anggota_phu()
+  {
+    $id               = $this->input->post('id');
+    $nominal_sebelum  = str_replace('.','',$this->input->post('nominal_sebelum'));
+    $total_diserahkan = str_replace('.','',$this->input->post('total_diserahkan'));
+    $cek              = $this->mf->detail_bht_data($id);
+    $pembagian        = $nominal_sebelum - $total_diserahkan;
+    if ($cek->num_rows() < 1) {
+      echo "Parameter Salah";
+    }else {
+      $data = array(
+        'total_diserahkan' => $total_diserahkan,
+        'sisa_pembagian'   => $pembagian,
+        'sudah_diserahkan' => 1,
+        'last_update'      => date('Y-m-d'),
+      );
+      $detail = $cek->row();
+      $nama = $detail->nama_anggota;
+      $this->mu->update_anggota_phu($data, $id);
+      $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show">Berhasil diserahkan untuk '. $nama .' dengan sisa '. $this->conv->convRupiah($pembagian).' </div>');
+      redirect('data_phu');
+    }
+  }
 }

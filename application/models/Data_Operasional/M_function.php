@@ -131,4 +131,22 @@ class M_function extends CI_Model{
   {
     return $this->db->get('anggota_master_data');
   }
+
+  function get_bht($tahun)
+  {
+    $this->db->where('tahun', $tahun);
+    return $this->db->get('tb_bht');
+  }
+
+  function get_bht_data()
+  {
+    $this->db->order_by('no_anggota', 'ASC');
+    return $this->db->get('tb_bht');
+  }
+
+  function detail_bht_data($id)
+  {
+    $this->db->where('id', $id);
+    return $this->db->get('tb_bht');
+  }
 }

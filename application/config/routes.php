@@ -60,13 +60,16 @@ $route['kelola_dana/sosial'] = 'C_Operasional/dana_sosial';
 $route['kelola_dana/audit'] = 'C_Operasional/dana_audit';
 $route['kelola_dana/pembangunan'] = 'C_Operasional/dana_pembangunan';
 $route['kelola_dana/single_process/(:any)'] = 'C_Operasional/proses_pengelolaan_dana/$1';
+$route['kelola_dana/proses_anggota_phu'] = 'C_Operasional/proses_anggota_phu';
 
 
 // Neraca
-$route['neraca_tahunan']  = 'C_Operasional/neraca';
+$route['olah_data']  = 'C_Operasional/neraca';
 $route['proses_neraca']   = 'C_Operasional/proses_neraca_tahunan';
 $route['proses_jasa_usaha']   = 'C_Operasional/proses_jasa_usaha';
 $route['proses_jasa_simpanan']   = 'C_Operasional/proses_jasa_simpanan';
+$route['data_phu']   = 'C_Operasional/data_anggota_phu';
+$route['detail_phu/(:any)']   = 'C_Operasional/detail_anggota_phu/$1';
 
 // Cetak
 $route['cetak']        = 'C_Cetak/index';
