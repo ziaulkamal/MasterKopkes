@@ -2495,7 +2495,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `master_view_anggota_all`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `master_view_anggota_all`  AS SELECT `tb_anggota`.`no_anggota` AS `no`, `tb_anggota`.`nama_anggota` AS `nama`, `tb_anggota`.`nik` AS `nik`, `tb_anggota`.`nip` AS `nip`, `tb_anggota`.`tp_lahir` AS `lahir`, `tb_anggota`.`tgl_lahir` AS `tanggal`, `tb_anggota`.`alamat` AS `alamat`, `tb_instansi`.`nama_instansi` AS `instansi`, `tb_anggota`.`status` AS `status`, `tb_anggota`.`registration` AS `terdaftar` FROM (`tb_anggota` join `tb_instansi`) WHERE `tb_anggota`.`instansi` = `tb_instansi`.`kode_instansi``kode_instansi`  ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `master_view_anggota_all`  AS SELECT `tb_anggota`.`no_anggota` AS `no`, `tb_anggota`.`nama_anggota` AS `nama`, `tb_anggota`.`nik` AS `nik`, `tb_anggota`.`nip` AS `nip`, `tb_anggota`.`tp_lahir` AS `lahir`, `tb_anggota`.`tgl_lahir` AS `tanggal`, `tb_anggota`.`alamat` AS `alamat`, `tb_instansi`.`nama_instansi` AS `instansi`, `tb_anggota`.`status` AS `status`, `tb_anggota`.`registration` AS `terdaftar` FROM (`tb_anggota` join `tb_instansi`) WHERE `tb_anggota`.`instansi` = `tb_instansi`.`kode_instansi`  ;
 
 -- --------------------------------------------------------
 
