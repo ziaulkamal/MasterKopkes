@@ -91,5 +91,9 @@ $route['proses_inventaris'] = 'C_Operasional/proses_inventaris';
 $route['edit_inventaris/(:any)'] = 'C_Operasional/update_inventaris_proses/$1';
 $route['update_inventaris'] = 'C_Operasional/update_inventaris';
 
+
+// Export Report
+$route['export/neraca_saldo'] = 'Excel_report/export_neraca_saldo';
+
 // $route['404_override'] = 'Pengaturan/error';
 $route['translate_uri_dashes'] = FALSE;
