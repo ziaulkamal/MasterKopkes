@@ -468,6 +468,54 @@ class C_Operasional extends CI_Controller{
       $t_shu['rumus_jasa_usaha']    = $rumus_jasa_usaha;
       $t_shu['rumus_jasa_simpanan'] = $rumus_jasa_simpanan;
 
+      $masterKolektif = array(
+        'id_master' => 'm-'.date('Ymsi'),
+        'tahun_neraca' => $tahun,
+        'akumulasi_kas' => $brangkas->kas,
+        'dana_simpok' => $brangkas->dana_simpok,
+        'dana_simwa' => $brangkas->dana_simwa,
+        'dana_khusus' => $brangkas->dana_kusus,
+        'dana_lainya' => $brangkas->dana_lainya,
+        'dana_gotongroyong' => $brangkas->dana_gotongroyong,
+        'total_piutang' => $brangkas->total_piutang,
+        'jasa_simpanan' => $t_shu['jasa_simpanan'],
+        'jasa_usaha' => $t_shu['jasa_usaha'],
+        'dana_cadangan' => $t_shu['dana_cadangan'],
+        'dana_pengurus' => $t_shu['dana_pengurus'],
+        'dana_pendidikan' => $t_shu['dana_pendidikan'],
+        'dana_kes_pegawai' => $t_shu['dana_kesejahteraan'],
+        'dana_sosial' => $t_shu['dana_sosial'],
+        'dana_audit' => $t_shu['dana_audit'],
+        'dana_pembangunan' => $t_shu['dana_pembangunan'],
+        'dana_penghapusan' => $brangkas->dana_penghapusan,
+        'neraca_usaha' => $t_shu['jasa_usaha'],
+        'neraca_simpanan' => $t_shu['jasa_simpanan'],
+        'neraca_cadangan' => $brangkas->dana_cadangan,
+        'neraca_pengurus' => $brangkas->dana_pengurus,
+        'neraca_kesejahteraan' => $brangkas->dana_kes_pegawai,
+        'neraca_pendidikan' => $brangkas->dana_pendidikan,
+        'neraca_sosial' => $brangkas->dana_sosial,
+        'neraca_audit' => $brangkas->dana_audit,
+        'neraca_pembangunan' => $brangkas->dana_pembangunan,
+        'persentase_jasa_usaha' => $rumus_jasa_usaha,
+        'persentase_jasa_simpanan' => $rumus_jasa_simpanan,
+        'akumulasi_margin' => $akumulasi,
+        'akumulasi_lain' => '-',
+        'biaya_atk' => $neraca_tahunan['biaya_atk'],
+        'biaya_honor' => $neraca_tahunan['biaya_honor'],
+        'biaya_rat' => $neraca_tahunan['biaya_rat'],
+        'biaya_lebaran' => $neraca_tahunan['biaya_lebaran'],
+        'biaya_penghapusan' => $penghapusan,
+        'akumulasi_operasional' => $operasional,
+        'akumulasi_shu_kotor' => $shu_sebelum_zakat,
+        'akumulasi_shu_bersih' => $shu_sesudah_zakat,
+        'akumulasi_zakat' => $zakat,
+        'last_update' => date('Y-m-d')
+      );
+      echo "<pre>";
+      var_dump($masterKolektif);
+      echo "</pre>";
+      die();
       $this->mu->insert_neraca_tahunan($t_shu);
       $this->mu->insert_neraca_phu($neraca_tahunan);
       $this->mu->update_brangkas($brankas);
