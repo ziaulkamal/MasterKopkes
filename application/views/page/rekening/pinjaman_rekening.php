@@ -38,6 +38,12 @@
                       </div>
                     </div>
                     <div class="mb-3 col-xl-12">
+                      <label class="form-label">Margin <code>*Angka Dalam Hitungan Persen</code></label>
+                      <div>
+                        <input type="number" class="form-control" name="margin" />
+                      </div>
+                    </div>
+                    <div class="mb-3 col-xl-12">
                       <label class="form-label">Jumlah Pinjaman</label>
                       <div>
                         <input type="text" class="form-control uang" name="jumlah" />

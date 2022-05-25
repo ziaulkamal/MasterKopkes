@@ -56,4 +56,9 @@ class M_update extends CI_Model{
     $this->db->where('id', $id);
     return $this->db->update('tb_bht', $data);
   }
+
+  function insert_master_kolektif($masterKolektif)
+  {
+    return $this->db->insert('master_kolektif', $masterKolektif);
+  }
 }

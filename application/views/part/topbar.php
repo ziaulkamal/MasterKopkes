@@ -3,20 +3,20 @@
         <div class="d-flex">
             <!-- LOGO -->
             <div class="navbar-brand-box text-center">
-                <a href="index.html" class="logo logo-dark">
+                <a href="<?= base_url() ?>" class="logo logo-dark">
                     <span class="logo-sm">
-                        <img src="<?= base_url(); ?>assets/images/logo-sm.png" alt="logo-sm-dark" height="22">
+                        <img src="<?= base_url(); ?>assets/images/logo-sm.png" alt="logo-sm-dark" height="50">
                     </span>
                     <span class="logo-lg">
-                        <img src="<?= base_url(); ?>assets/images/logo-dark.png" alt="logo-dark" height="24">
+                        <img src="<?= base_url(); ?>assets/images/logo-sm.png" alt="logo-dark" height="50">
                     </span>
                 </a>
-                <a href="index.html" class="logo logo-light">
+                <a href="<?= base_url() ?>" class="logo logo-light">
                     <span class="logo-sm">
-                        <img src="<?= base_url(); ?>assets/images/logo-sm.png" alt="logo-sm-light" height="22">
+                        <img src="<?= base_url(); ?>assets/images/logo-sm.png" alt="logo-sm-light" height="50">
                     </span>
                     <span class="logo-lg">
-                        <img src="<?= base_url(); ?>assets/images/logo-light.png" alt="logo-light" height="24">
+                        <img src="<?= base_url(); ?>assets/images/logo-sm.png" alt="logo-light" height="50">
                     </span>
                 </a>
             </div>
@@ -145,9 +145,9 @@
             <div class="dropdown d-inline-block user-dropdown">
                 <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img class="rounded-circle header-profile-user" src="<?= base_url(); ?>assets/images/users/avatar-2.jpg"
+                    <img class="rounded-circle header-profile-user" src="<?= base_url(); ?>assets/images/logo-sm.png"
                         alt="Header Avatar">
-                    <span class="d-none d-xl-inline-block ms-1">Kevin</span>
+                    <span class="d-none d-xl-inline-block ms-1">Administrator</span>
                     <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-end">

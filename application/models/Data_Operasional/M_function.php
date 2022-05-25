@@ -30,6 +30,24 @@ class M_function extends CI_Model{
     return $this->db->get();
   }
 
+  function get_inventaris_sum()
+  {
+    $this->db->select("(SELECT SUM(tb_inventaris.harga_sekarang) FROM tb_inventaris) AS inventaris", FALSE);
+    return $this->db->get();
+  }
+
+  function get_inventaris_sum_beli()
+  {
+    $this->db->select("(SELECT SUM(tb_inventaris.harga_beli) FROM tb_inventaris) AS inventaris_beli", FALSE);
+    return $this->db->get();
+  }
+
+  function sum_sisa_shu()
+  {
+    $this->db->select("(SELECT SUM(tb_bht.sisa_pembagian) FROM tb_bht) AS sisa_shu", FALSE);
+    return $this->db->get();
+  }
+
   function get_id_inventaris($id)
   {
     $this->db->where('id', $id);
@@ -148,5 +166,27 @@ class M_function extends CI_Model{
   {
     $this->db->where('id', $id);
     return $this->db->get('tb_bht');
+  }
+
+  function get_master_kolektif()
+  {
+    return $this->db->get('master_kolektif');
+  }
+
+  function get_master_by_id($id)
+  {
+    $this->db->where('id_master', $id);
+    return $this->db->get('master_kolektif');
+  }
+
+  function jumlah_anggota()
+  {
+    $query = $this->db->query('SELECT COUNT(*) AS total FROM tb_anggota');
+    return $query->row();
+  }
+
+  function invetaris_data()
+  {
+    return $this->db->get('tb_inventaris');
   }
 }

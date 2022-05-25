@@ -22,14 +22,8 @@
       <div class="col-lg-4">
           <div class="card">
             <div class="card-body">
-                <form method="post" action="<?php if ($jenis != 3) {
-                  echo base_url('proses_angsuran/').$pinjaman->kode_pinjaman;
-                }else {
-                  echo base_url('proses_tutup_meninggal/').$pinjaman->kode_pinjaman;
-                } ?>" class="custom-validation" method="post" enctype="multipart/form-data">
+                <form method="post" action="<?= base_url('proses_update_margin')  ?>" class="custom-validation" method="post" enctype="multipart/form-data">
                   <div class="row">
-                    <input type="hidden" name="jenis" value="<?= $jenis ?>">
-                    <input type="hidden" name="no_rekening" value="<?= $pinjaman->no_rekening ?>">
                     <input type="hidden" name="kode_pinjaman" value="<?= $pinjaman->kode_pinjaman ?>">
                     <div class="mb-3 col-xl-12">
                       <label class="form-label">Nama Anggota</label>
@@ -47,8 +41,7 @@
                     <div class="mb-3 col-xl-12">
                       <label class="form-label">Margin</label>
                       <div>
-                        <input type="hidden" class="form-control" name="margin" value="<?= $pinjaman->margin ?>" readonly/>
-                        <input type="text" class="form-control" value="<?= $this->conv->convRupiah($pinjaman->margin) ?>" readonly/>
+                        <input type="text" class="form-control uang" name="margin" value="<?= $pinjaman->margin ?>" />
                       </div>
                     </div>
                     <div class="mb-3 col-xl-12">
@@ -60,25 +53,16 @@
 
                         <?php }else { ?>
                           <input type="hidden" class="form-control" name="pokok" value="<?= ($pinjaman->tenor-$pinjaman->angsuran_ke)*$pinjaman->pokok_murabahan ?>" readonly/>
-                          <input type="text" class="form-control"value="<?= $this->conv->convRupiah(($pinjaman->tenor-$pinjaman->angsuran_ke)*$pinjaman->pokok_murabahan) ?>" readonly/>
+                          <input type="text" class="form-control" value="<?= $this->conv->convRupiah(($pinjaman->tenor-$pinjaman->angsuran_ke)*$pinjaman->pokok_murabahan) ?>" readonly/>
 
                         <?php } ?>
                       </div>
                     </div>
                     <div>
                         <div>
-                          <?php if ($jenis != 3) {?>
-                            <button type="submit" class="btn btn-primary waves-effect waves-light me-1">
-                                Proses Data
-                            </button>
-                            <a href="<?= base_url('update_margin_angsuran/').$pinjaman->kode_pinjaman ?>" class="btn btn-warning waves-effect waves-light me-1">
-                                Edit Margin
-                            </a>
-                          <?php }else {?>
-                            <button type="submit" class="btn btn-outline-primary waves-effect waves-light me-1">
-                                Proses & Tutup Akun Anggota
-                            </button>
-                          <?php } ?>
+                          <button type="submit" class="btn btn-primary waves-effect waves-light me-1">
+                            Proses Data
+                          </button>
 
                         </div>
                     </div>
@@ -88,28 +72,6 @@
 
           </div>
       </div>
-        <div class="col-lg-8">
-            <div class="card">
-                <div class="card-body">
-                  <div class="">
-                    <?php
-                    if ($angsuran->row() != NULL) {
-                      foreach ($angsuran->result() as $a) {?>
-                        <div class="alert alert-primary" >
-                            Telah melakukan angsuran dengan kode <b><?= $a->kode_angsuran ?></b> dan angsuran ke  <b><?= $a->angsuran_ke ?></b> dengan jumlah <b><?= $this->conv->convRupiah($a->angsuran_pokok+$a->angsuran_margin) ?></b> pada Tanggal  <b><?= $a->last_update ?> </b>
-                        </div>
-                      <?php }
-                    }else { ?>
-                      <div class="alert alert-danger" >
-                            Anggota ini belum pernah melakukan Angsuran
-                      </div>
-                    <?php }
-                     ?>
-              </div>
-
-                </div>
-            </div>
-        </div> <!-- end col -->
     </div>
     </div>
   </div>

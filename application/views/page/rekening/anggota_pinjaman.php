@@ -57,6 +57,7 @@
                                           <td><a class="btn btn-outline-success waves-effect"> Telah Lunas </a></td>
                                         <?php }else { ?>
                                           <td>
+                                            <a href="<?= base_url('update_margin_angsuran/').$s->kode ?>" class="btn btn-outline-warning waves-effect">  Edit Margin </a>
                                             <a href="<?= base_url('angsuran/').$s->kode ?>" class="btn btn-outline-info waves-effect">  Bayar </a>
                                             <a href="<?= base_url('pelunasan/').$s->kode ?>" class="btn btn-outline-dark waves-effect"> Percepat Pelunasan </a>
                                           </td>

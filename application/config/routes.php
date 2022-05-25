@@ -26,6 +26,10 @@ $route['simpan_rekening/(:any)'] = 'C_Akutansi/simpan_rekening/$1';
 $route['simpanan'] = 'C_Akutansi/rekening';
 $route['tambah_simpanan'] = 'C_Akutansi/tambah_simpanan';
 
+// Edit Margin
+$route['update_margin_angsuran/(:any)'] = 'C_Akutansi/update_margin_angsuran/$1';
+$route['proses_update_margin'] = 'C_Akutansi/proses_update_margin';
+
 //Pinjaman
 $route['pinjaman'] = 'C_Akutansi/pinjaman';
 $route['tambah_pinjaman'] = 'C_Akutansi/tambah_pinjaman';
@@ -90,10 +94,13 @@ $route['list_inventaris'] = 'C_Operasional/list_inventaris';
 $route['proses_inventaris'] = 'C_Operasional/proses_inventaris';
 $route['edit_inventaris/(:any)'] = 'C_Operasional/update_inventaris_proses/$1';
 $route['update_inventaris'] = 'C_Operasional/update_inventaris';
+$route['master_neraca_kolektif'] = 'C_Operasional/master_neraca_kolektif';
 
 
 // Export Report
 $route['export/neraca_saldo'] = 'Excel_report/export_neraca_saldo';
+$route['export/pembagian_shu/(:any)'] = 'Office_report/export_docs/$1';
+$route['export/neraca_saldo/(:any)'] = 'Excel_report/export_neraca_saldo/$1';
 
 // $route['404_override'] = 'Pengaturan/error';
 $route['translate_uri_dashes'] = FALSE;

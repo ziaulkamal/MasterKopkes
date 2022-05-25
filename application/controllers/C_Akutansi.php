@@ -227,7 +227,7 @@ class C_Akutansi extends CI_Controller{
       $kode_pinjaman	= 'P-'.time();
       $plafon	        = str_replace('.','',$this->input->post('jumlah'));
       $tenor	        = $this->input->post('tenor');
-      $margin	        = 0.08; // 8%
+      $margin	        = $this->input->post('margin')/100; // 8%
 
       $rumus_margin   = ($plafon*$margin)/12; // Rumus untuk mendapatkan nilai margin perbulan
       $margin_angsur  = $rumus_margin/$tenor; // akumulasi nilai margin ke setiap bulan
@@ -557,5 +557,32 @@ class C_Akutansi extends CI_Controller{
       }
     }
 
+    function update_margin_angsuran($kode_pinjaman)
+    {
+      $load_pinjaman = $this->mf->get_pinjaman_kode($kode_pinjaman);
+      $no_rekening = $load_pinjaman->no_rekening;
+      $load_anggota = $this->mf->detail_anggota_simpanan($no_rekening);
+
+          $data = array(
+            'js'       => '',
+            'title'    => 'Tutup Angsuran Anggota Meninggal',
+            'anggota'  => $load_anggota,
+            'pinjaman' => $load_pinjaman,
+            'jenis'    => 3,
+            'page'     => 'page/rekening/edit_margin',
+          );
+        $this->load->view('main', $data);
+    }
+
+    function proses_update_margin()
+    {
+      $margin = str_replace('.','',$this->input->post('margin'));
+      $kode   = $this->input->post('kode_pinjaman');
+
+      $data['margin'] = $margin;
+      $this->mc->update_margin_edit($kode,$data);
+      $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show">Margin Telah Di Update </div>');
+      redirect('angsuran/'.$kode);
+    }
 
   }

@@ -93,4 +93,10 @@ class M_create extends CI_Model{
     $this->db->where('kode_instansi', $kode_instansi);
     return $this->db->update('tb_instansi', $data);
   }
+
+  function update_margin_edit($kode, $data)
+  {
+    $this->db->where('kode_pinjaman', $kode);
+    return $this->db->update('tb_pinjaman', $data);
+  }
 }

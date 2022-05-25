@@ -43,14 +43,11 @@
                 </li>
 
                 <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                    <a href="<?=base_url('pinjaman'); ?>" class="waves-effect">
                         <i class="mdi mdi-safe"></i>
                         <span>Pinjaman</span>
                     </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="<?=base_url('cari_pinjaman'); ?>">Cari Rekening Anggota</a></li>
-                        <li><a href="<?=base_url('pinjaman'); ?>">Data Pinjaman Anggota</a></li>
-                    </ul>
+
                 </li>
 
                 <li>
@@ -128,6 +125,7 @@
                         <span>Rincian Data Export</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="<?= base_url('master_neraca_kolektif') ?>">Hasil Proses Data Neraca</a></li>
                         <li><a href="#">Data Simpanan Anggota</a></li>
                         <li><a href="#">Data SHU Per PUSK</a></li>
                         <li><a href="#">Data Piutang Tahunan</a></li>
@@ -137,7 +135,7 @@
 
                     </ul>
                 </li>
-                <li class="menu-title">Pengaturan</li>
+                <!-- <li class="menu-title">Pengaturan</li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="mdi mdi-cog"></i>
@@ -165,7 +163,7 @@
                         <i class="mdi mdi-logout"></i>
                         <span> logout </span>
                     </a>
-                </li>
+                </li> -->
             </ul>
         </div>
     </div>
