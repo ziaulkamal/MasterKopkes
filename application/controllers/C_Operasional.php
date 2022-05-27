@@ -13,6 +13,7 @@ class C_Operasional extends CI_Controller{
       'Data_Operasional/M_function' => 'mf',
     ));
     $this->load->library(array('Curency_indo_helper' => 'conv'));
+    $this->load->helper('tgl_indo');
 
   }
 
@@ -200,22 +201,22 @@ class C_Operasional extends CI_Controller{
     $keterangan = $this->input->post('keterangan');
     $nominal    = str_replace('.','',$this->input->post('nominal'));
     if ($tipe == 'dana_pengurus') {
-      $p_keterangan = 'Penggunaan Dana Kas untuk diserahkan ke pengurus dengan keterangan ('. $keterangan.') senilai '.$this->conv->convRupiah($nominal).' Pada tanggal '.$last_update;
+      $p_keterangan = 'Penggunaan Dana Kas untuk diserahkan ke pengurus dengan keterangan ('. $keterangan.') senilai '.$this->conv->convRupiah($nominal).' Pada tanggal '.date_indo($last_update);
       $brangkas['dana_pengurus'] = $load->dana_pengurus - $nominal;
     }elseif ($tipe == 'dana_pendidikan') {
-      $p_keterangan = 'Penggunaan Dana Kas untuk kebutuhan pendidikan dengan keterangan ('. $keterangan.') senilai '.$this->conv->convRupiah($nominal).' Pada tanggal '.$last_update;
+      $p_keterangan = 'Penggunaan Dana Kas untuk kebutuhan pendidikan dengan keterangan ('. $keterangan.') senilai '.$this->conv->convRupiah($nominal).' Pada tanggal '.date_indo($last_update);
       $brangkas['dana_pendidikan'] = $load->dana_pendidikan - $nominal;
     }elseif ($tipe == 'dana_kes_pegawai') {
-      $p_keterangan = 'Penggunaan Dana Kas untuk kesejahteraan Pegawai dengan keterangan ('. $keterangan.') senilai '.$this->conv->convRupiah($nominal).' Pada tanggal '.$last_update;
+      $p_keterangan = 'Penggunaan Dana Kas untuk kesejahteraan Pegawai dengan keterangan ('. $keterangan.') senilai '.$this->conv->convRupiah($nominal).' Pada tanggal '.date_indo($last_update);
       $brangkas['dana_kes_pegawai'] = $load->dana_kes_pegawai - $nominal;
     }elseif ($tipe == 'dana_sosial') {
-      $p_keterangan = 'Penggunaan Dana Kas untuk sosial dengan keterangan ('. $keterangan.') senilai '.$this->conv->convRupiah($nominal).' Pada tanggal '.$last_update;
+      $p_keterangan = 'Penggunaan Dana Kas untuk sosial dengan keterangan ('. $keterangan.') senilai '.$this->conv->convRupiah($nominal).' Pada tanggal '.date_indo($last_update);
       $brangkas['dana_sosial'] = $load->dana_sosial - $nominal;
     }elseif ($tipe == 'dana_audit') {
-      $p_keterangan = 'Penggunaan Dana Kas untuk kebutuhan Audit dengan keterangan ('. $keterangan.') senilai '.$this->conv->convRupiah($nominal).' Pada tanggal '.$last_update;
+      $p_keterangan = 'Penggunaan Dana Kas untuk kebutuhan Audit dengan keterangan ('. $keterangan.') senilai '.$this->conv->convRupiah($nominal).' Pada tanggal '.date_indo($last_update);
       $brangkas['dana_audit'] = $load->dana_audit - $nominal;
     }elseif ($tipe == 'dana_pembangunan') {
-      $p_keterangan = 'Penggunaan Dana Kas untuk keutuhan pembangunan dengan keterangan ('. $keterangan.') senilai '.$this->conv->convRupiah($nominal).' Pada tanggal '.$last_update;
+      $p_keterangan = 'Penggunaan Dana Kas untuk keutuhan pembangunan dengan keterangan ('. $keterangan.') senilai '.$this->conv->convRupiah($nominal).' Pada tanggal '.date_indo($last_update);
       $brangkas['dana_pembangunan'] = $load->dana_pembangunan - $nominal;
     }
 
@@ -298,7 +299,7 @@ class C_Operasional extends CI_Controller{
     $log = array(
       'nominal'       => $jumlah,
       'jenis'         => $jenis,
-      'keterangan'    => 'Penggunaan Dana Kas Senilai '. $this->conv->convRupiah($jumlah) . ' Untuk ' .$kode_jenis .' Pada Tanggal '. $last_update . '( '.$keterangan.' )',
+      'keterangan'    => 'Penggunaan Dana Kas Senilai '. $this->conv->convRupiah($jumlah) . ' Untuk ' .$kode_jenis .' Pada Tanggal '. date_indo($last_update) . '( '.$keterangan.' )',
       'last_update'   => $last_update,
     );
 
@@ -330,7 +331,7 @@ class C_Operasional extends CI_Controller{
     $log = array(
       'nominal'       => $jumlah,
       'jenis'         => $jenis,
-      'keterangan'    => $kode_jenis .' '. $this->conv->convRupiah($jumlah) .' Pada Tanggal '. $last_update . '( '.$keterangan.' )',
+      'keterangan'    => $kode_jenis .' '. $this->conv->convRupiah($jumlah) .' Pada Tanggal '. date_indo($last_update) . '( '.$keterangan.' )',
       'last_update'   => $last_update,
     );
 
@@ -398,7 +399,7 @@ class C_Operasional extends CI_Controller{
         'dana_audit'          => round($x * (2.5/100),0,PHP_ROUND_HALF_UP),
         'dana_pembangunan'    => round($x * (2.5/100),0,PHP_ROUND_HALF_UP),
         'tahun_neraca'        => date('Y'),
-        'keterangan'          => 'Data Telah di Create pada tanggal '.date('d-m-Y'),
+        'keterangan'          => 'Data Telah di Create pada tanggal '.date_indo(date('Y-m-d')),
         'last_update'         => $last_update,
       );
 

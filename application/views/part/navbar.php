@@ -51,14 +51,14 @@
                 </li>
 
                 <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                    <a href="<?=base_url('operasional/cash_out'); ?>" class="waves-effect">
                         <i class="mdi mdi-page-layout-header"></i>
                         <span>Operasional</span>
                     </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="<?=base_url('operasional/cash_out'); ?>">Update Data Kas Keluar</a></li>
+                    <!-- <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="">Update Data Kas Keluar</a></li>
                         <li><a href="<?=base_url('operasional/cash_in'); ?>">Update Data Kas Masuk</a></li>
-                    </ul>
+                    </ul> -->
                 </li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">

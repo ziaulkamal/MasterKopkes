@@ -11,6 +11,7 @@ class C_Cetak extends CI_Controller{
         'Data_Entry/M_views' => 'mv',
     ));
     $this->load->library(array('Curency_indo_helper' => 'conv'));
+    $this->load->helper('tgl_indo');
   }
 
   function index()
@@ -40,7 +41,7 @@ class C_Cetak extends CI_Controller{
         'jumlah' => $this->conv->convRupiah($load->jumlah),
         'kode_jenis' => $load->kode_jenis,
         'jenis' => $load->jenis,
-        'last_update' => $load->last_update,
+        'last_update' => date_indo($load->last_update),
       );
       $this->load->view('cetak/invoice', $data);
     }
@@ -65,7 +66,7 @@ class C_Cetak extends CI_Controller{
         'pokok' => $load->pokok,
         'margin' => $load->margin,
         'keterangan' => $load->keterangan,
-        'last_update' => $load->tgl_update,
+        'last_update' => date_indo($load->tgl_update),
       );
       $this->load->view('cetak/invoice', $data);
     }
@@ -89,7 +90,7 @@ class C_Cetak extends CI_Controller{
         'margin'        => $load->margin,
         'pokok'         => $load->pokok,
         'gotong_royong' => $load->gotong_royong,
-        'last_update'   => $load->last_update,
+        'last_update'   => date_indo($load->last_update),
       );
       $this->load->view('cetak/invoice', $data);
     }

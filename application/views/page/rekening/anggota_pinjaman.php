@@ -52,7 +52,7 @@
                                         <td><?= $this->conv->convRupiah($s->pokok); ?></td>
                                         <!-- <td><?= $this->conv->convRupiah($s->sisa_angsuran); ?></td> -->
                                         <!-- <td><?= $this->conv->convRupiah($s->margin+$s->pokok); ?></td> -->
-                                        <td><?= $s->tgl_pengajuan; ?></td>
+                                        <td><?= longdate_indo($s->tgl_pengajuan); ?></td>
                                         <?php if ($s->tenor == $s->ke) { ?>
                                           <td><a class="btn btn-outline-success waves-effect"> Telah Lunas </a></td>
                                         <?php }else { ?>

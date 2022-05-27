@@ -19,7 +19,7 @@ class C_Akutansi extends CI_Controller{
       'Curency_indo_helper' => 'conv',
       'Parsing_bulan' => 'bulan'
     ));
-
+   $this->load->helper('tgl_indo');
   }
 
     function global_kas()
