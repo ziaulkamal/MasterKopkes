@@ -13,7 +13,7 @@ class C_Instansi extends CI_Controller{
         'Data_Entry/M_function' => 'mf',
         'Data_Entry/M_create' => 'mc',
     ));
-
+     $this->load->helper('tgl_indo');
   }
 
   function index()

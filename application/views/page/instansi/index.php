@@ -38,7 +38,7 @@
                                             <td><?= $start++ ?></td>
                                             <td><?= $data->kode_instansi ?></td>
                                             <td><?= $data->nama_instansi ?></td>
-                                            <td><?= $data->registration ?></td>
+                                            <td><?= date_indo($data->registration) ?></td>
                                             <td>
                                               <a href="<?= base_url('update_instansi/').$data->kode_instansi; ?>" class="btn btn-sm btn-outline-danger waves-effect waves-light">Edit</a>
                                               <a href="<?= base_url('hapus_instansi/').$data->kode_instansi; ?>" id="btn-delete" class="btn btn-sm btn-outline-dark waves-effect waves-light" onclick="<?= base_url('anggota') ?>">Hapus</a>

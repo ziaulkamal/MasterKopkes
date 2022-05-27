@@ -9,6 +9,11 @@ class M_function extends CI_Model{
     //Codeigniter : Write Less Do More
   }
 
+  function get_brangkas()
+  {
+    return $this->db->get('tb_brangkas')->row();
+  }
+
   function last_instansi()
   {
     $this->db->select('kode_instansi');
@@ -151,9 +156,19 @@ class M_function extends CI_Model{
 
   function delete($no_anggota)
   {
-    $query      = $this->db->query ("SELECT status from tb_anggota WHERE no_anggota ='$no_anggota'");
-    $set_update = $this->db->query("UPDATE tb_anggota SET status = 2 WHERE  no_anggota = '$no_anggota'");
-    $query_hasil = $query + $set_update;
-    return $query_hasil;
+    $this->db->where('no_anggota', $no_anggota);
+    return $this->db->delete('tb_anggota');
+  }
+
+  function delete_load_rekening($no_anggota)
+  {
+    $this->db->where('anggota_no', $no_anggota);
+    return $this->db->get('tb_rekening')->row();
+  }
+
+  function delete_rekening($no_anggota)
+  {
+    $this->db->where('anggota_no', $no_anggota);
+    $this->db->delete('tb_rekening');
   }
 }

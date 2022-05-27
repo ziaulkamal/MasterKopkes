@@ -9,7 +9,11 @@ class M_create extends CI_Model{
     //Codeigniter : Write Less Do More
   }
 
-
+  function update_brangkas($brangkas)
+  {
+    return $this->db->update('tb_brangkas', $brangkas);
+  }
+  
   // insert data
   function insert_anggota($data)
   {

@@ -5,40 +5,23 @@
                             <div class="card">
                                 <div class="card-body">
                                     <h4 class="card-title"><?= $title; ?></h4>
+                                    <?php echo $this->session->flashdata('message'); ?>
+
                                     <?php echo validation_errors('<div class="alert alert-warning">','</div>'); ?>
                                     <form method="post" action="<?=base_url('update_proses'); ?>" class="custom-validation">
-                                      <input type="hidden" name="no_anggota" value="<?= $no_anggota; ?>">
-                                      <input type="hidden" name="registration" value="<?= $registration; ?>">
+                                      <input type="hidden" name="no_anggota" value="<?= $load->no_anggota; ?>">
+                                      <input type="hidden" name="registration" value="<?= $load->registration; ?>">
                                       <div class="row">
                                         <div class="mb-3 col-xl-4">
                                           <label class="form-label">Nama Anggota</label>
                                           <div>
-                                            <input type="text" class="form-control" name="nama_anggota" id="Nama_anggota"  maxlength="30" value="<?= $nama_anggota; ?>" />
-                                          </div>
-                                        </div>
-                                        <div class="mb-3 col-xl-4">
-                                          <label class="form-label">NIK</label>
-                                          <div>
-                                            <input type="text" class="form-control" name="nik" id="nik"  maxlength="16" value="<?= $nik; ?>" />
-                                          </div>
-                                        </div>
-                                        <div class="mb-3 col-xl-4">
-                                          <label class="form-label">NIP</label>
-                                          <div>
-                                            <input type="text" class="form-control" name="nip" id="nip"  maxlength="16" value="<?= $nip; ?>" />
-                                          </div>
-                                        </div>
-                                        <div class="mb-3 col-xl-4">
-                                          <label class="form-label">Tanggal_lahir</label>
-                                          <div class="input-group" id="datepicker1">
-                                            <input type="date" class="form-control" name="tgl_lahir" id="Tgl_lahir" value="<?= $tgl_lahir; ?>"
-                                             data-date-format="dd M, yyyy" data-date-container="#datepicker1" data-provide="datepicker" placeholder="dd-mm-yy"/>
+                                            <input type="text" class="form-control" name="nama_anggota"  maxlength="30" value="<?= $load->nama_anggota; ?>" />
                                           </div>
                                         </div>
                                         <div class="mb-3 col-xl-4">
                                           <label class="form-label">Alamat</label>
                                           <div>
-                                            <input type="text" class="form-control" name="alamat" id="Alamat"  maxlength="40" value="<?php echo  $alamat; ?>"/>
+                                            <input type="text" class="form-control" name="alamat"  maxlength="40" value="<?= $load->alamat; ?>"/>
                                           </div>
                                         </div>
                                         <div class="mb-3 col-xl-4">
@@ -54,12 +37,12 @@
                                         </div>
                                         <div>
                                             <div>
-                                                <button class="btn btn-primary waves-effect waves-light me-1">
-                                                    Submit
+                                                <button type="submit" class="btn btn-primary waves-effect waves-light me-1">
+                                                    Proses Edit
                                                 </button>
-                                                <button class="btn btn-secondary waves-effect">
-                                                    Cancel
-                                                </button>
+                                                <a href="<?= base_url('anggota') ?>" class="btn btn-secondary waves-effect">
+                                                    Batalkan
+                                                </a>
                                             </div>
                                         </div>
                                         </div>

@@ -18,6 +18,7 @@
         <div class="row">
                     <div class="col-xl-6">
                             <div class="card">
+                              <?php echo $this->session->flashdata('message'); ?>
                               <?php echo validation_errors('<div class="alert alert-warning">','</div>'); ?>
                                 <div class="card-body">
                                     <form method="post" action="<?= base_url('daftar_baru') ?>" class="custom-validation">
