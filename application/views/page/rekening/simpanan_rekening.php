@@ -35,7 +35,7 @@
                       <label class="form-label">Jenis Simpanan</label>
                       <div>
                         <select class="form-control" name="jenis_simpanan" required>
-                            <option selected>-- Pilih Jenis Simpanan --</option>
+                            <option value="0" selected>-- Pilih Jenis Simpanan --</option>
                             <option value="1">Pokok</option>
                             <option value="2">Wajib</option>
                             <option value="3">Khusus</option>

@@ -96,6 +96,11 @@ class C_Akutansi extends CI_Controller{
       $d_lain       = $this->dana_lainya;
       // IDEA: Akhir Penguraian Dari Function Global kas
 
+      if ($this->input->post('jml_simpan') == NULL) {
+        $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show">Jumlah Harus Di isi !</div>');
+        redirect('simpanan_pertama/'.$no_rekening);
+      }
+
       $load = $this->mv->get_detail_rekening($no_rekening);
       $log_load = $this->mv->master_view_rekening($no_rekening);
       $kode_log = time();
@@ -156,7 +161,7 @@ class C_Akutansi extends CI_Controller{
         'nama_anggota' => $log_load->nama,
         'kode_log' => $kode_log,
         'jumlah' => $jumlah,
-        'kode_jenis' => 1,
+        'kode_jenis' => $this->input->post('jenis_simpanan'),
         'jenis' => $jenis_log,
         'keterangan' => 'Berhasil update '.$jenis_log.' dengan jumlah '.$jumlah,
         'last_update' => $last_update,
@@ -165,11 +170,16 @@ class C_Akutansi extends CI_Controller{
       $brangkas['kas'] = $d_kas + $jumlah;
       $brangkas['last_update'] = $last_update;
 
-      $this->mu->update_brangkas($brangkas);
-      $this->mc->add_log_simpanan($logs);
-      $this->mc->update_rekening($no_rekening, $data);
-      $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show">Berhasil mengupdate simpanan, <a class="btn btn-info waves-effect waves-light" href="'.base_url('cetak/simpanan/').$kode_log.'" target="_blank"> Download Invoice</a> </div>');
-      redirect('simpanan');
+      if ($this->input->post('jenis_simpanan') == 0 ) {
+        $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show">Jenis simpanan harus benar</div>');
+        redirect('simpanan_pertama/'.$no_rekening);
+      }else {
+        $this->mu->update_brangkas($brangkas);
+        $this->mc->add_log_simpanan($logs);
+        $this->mc->update_rekening($no_rekening, $data);
+        $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show">Berhasil mengupdate simpanan, <a class="btn btn-info waves-effect waves-light" href="'.base_url('cetak/simpanan/').$kode_log.'" target="_blank"> Download Invoice</a> </div>');
+        redirect('simpanan');
+      }
     }
 
     function tambah_pinjaman_dengan_norek($no_rekening)
@@ -271,7 +281,7 @@ class C_Akutansi extends CI_Controller{
 
         $brangkas['dana_gotongroyong'] = $d_gotong+$total_gotongroyong;
         $brangkas['total_piutang'] = $d_piutang+$plafon;
-        $brangkas['total_hutang'] = $d_hutang+$plafon;
+        // $brangkas['total_hutang'] = $d_hutang+$total_gotongroyong;
         $brangkas['last_update'] = $last_update;
         $brangkas['kas'] = ($d_kas - $plafon) + $total_gotongroyong ;
 
@@ -376,7 +386,7 @@ class C_Akutansi extends CI_Controller{
           $keterangan = 'Sudah Berhasil melunaskan Angsuran';
           $angsuran_ke = 'Lunas';
           $c_angsur = $pinjaman->tenor;
-          $sisa_angsuran = ($pinjaman->sisa_angsuran-$angsuran_pokok);
+          $sisa_angsuran = 0;
           $sts_pinjaman = 0;
           $status_pinjaman = array('sts_pinjaman' => $sts_pinjaman);
           $this->mc->update_status_rekening($no_rekening, $status_pinjaman);
@@ -403,7 +413,7 @@ class C_Akutansi extends CI_Controller{
       );
 
       $brangkas['kas'] = $d_kas + $angsuran_pokok + $angsuran_margin;
-      // $brangkas['total_hutang'] = $total_hutang+$angsuran_pokok;
+      $brangkas['total_hutang'] = $total_hutang+$angsuran_pokok;
       $brangkas['total_piutang'] = $d_piutang - $angsuran_pokok;
       $brangkas['last_update'] = $last_update;
 
@@ -473,10 +483,14 @@ class C_Akutansi extends CI_Controller{
 
     function proses_tutup_dagoro($kode_pinjaman)
     {
+      $tahun = date('Y');
+
       // IDEA: Uraikan Kedalam Variable Dari Function Global Kas
       $this->global_kas();
-      $d_kas        = $this->kas;
-      $d_piutang    = $this->total_piutang;
+      $d_kas             = $this->kas;
+      $d_piutang         = $this->total_piutang;
+      $d_hutang         = $this->total_hutang;
+      $d_gotongroyong    = $this->dana_gotongroyong;
       // IDEA: Akhir Penguraian Dari Function Global kas
 
       $no_rekening      = $this->input->post('no_rekening');
@@ -486,11 +500,14 @@ class C_Akutansi extends CI_Controller{
       $kode_pinjaman    = $this->input->post('kode_pinjaman');
       $angsuran_pokok   = str_replace('.','',$this->input->post('pokok'));
       $angsuran_margin  = str_replace('.','',$this->input->post('margin'));
-
-      if ($this->input->post('jenis') != 3) {
-        $this->session->set_flashdata('message', '<div class="alert alert-warning alert-dismissible fade show">Parameter yang dikirimkan salah  </div>');
-        redirect('angsuran_tertunda');
-      }else {
+      $jenis_angsuran   = $this->input->post('jenis');
+      // if ($jenis_angsuran != '1' && $jenis_angsuran != '2' ) {
+      //   // var_dump($jenis_angsuran);
+      //   echo "jenis angsuran salah";
+      //   die();
+      //   $this->session->set_flashdata('message', '<div class="alert alert-warning alert-dismissible fade show">Parameter yang dikirimkan salah  </div>');
+      //   redirect('angsuran_tertunda');
+      // }else {
         $angsur_kode    = 'C-'.time();
         $keterangan     = 'Sudah melakukan pembayaran Angsuran dari dana gotong royong';
         $angsuran_ke    = 'Lunas';
@@ -504,7 +521,7 @@ class C_Akutansi extends CI_Controller{
           'kode_pinjaman'   => $kode_pinjaman,
           'total_angsuran'  => ($pinjaman->total_angsuran+$angsuran_pokok+$angsuran_margin),
           'angsuran_ke'     => $c_angsur,
-          'sisa_angsuran'   => $sisa_angsuran,
+          'sisa_angsuran'   => 0,
           'last_update'     => $last_update,
         );
 
@@ -526,6 +543,7 @@ class C_Akutansi extends CI_Controller{
         );
 
         $data_margin = $this->mf->get_id_margin($no_rekening, $tahun);
+
         if ($data_margin == NULL) {
           $is_margin = array(
             'no_rekening' => $no_rekening,
@@ -544,17 +562,37 @@ class C_Akutansi extends CI_Controller{
         }
 
         $brangkas['kas'] = $d_kas + $angsuran_pokok + $angsuran_margin;
-        // $brangkas['total_hutang'] = $total_hutang+$angsuran_pokok;
-        $brangkas['total_piutang'] = $d_piutang-$angsuran_pokok;
+        $brangkas['dana_gotongroyong'] = $d_gotongroyong - $angsuran_pokok - $angsuran_margin;
+        $brangkas['total_hutang'] = $d_hutang + $angsuran_pokok;
+        $brangkas['total_piutang'] = $d_piutang - $angsuran_pokok;
         $brangkas['last_update'] = $last_update;
+        $rekening = $this->mf->delete_load_rekening($anggota->anggota_no);
+        $detail = $this->mv->detail_cek($no_rekening);
+        $log_delete = array(
+          'no_anggota'    => $detail->no_anggota,
+          'no_rekening'   => $detail->no_rekening,
+          'instansi'      => $detail->nama_instansi,
+          'nama_anggota'  => $detail->nama_anggota,
+          'keterangan'    => 'Dikeluarkan karena telah meninggal dunia',
+          's_pokok'       => $rekening->s_pokok,
+          's_wajib'       => $rekening->s_wajib,
+          's_khusus'      => $rekening->s_khusus,
+          's_lain'        => $rekening->s_lain,
+          'dana_gotongroyong' => 0,
+          'last_update'   => date('Y-m-d'),
+        );
+        $this->mf->delete_rekening($anggota->anggota_no);
+
+        $this->mf->delete($anggota->anggota_no);
 
         $this->mu->update_brangkas($brangkas);
         $this->mc->update_anggota($anggota->anggota_no, $u_anggota);
         $this->mc->insert_angsuran($data);
+        $this->mc->insert_log_delete($log_delete);
         $this->mc->update_angsuran_bulanan($kode_pinjaman, $update_p);
-        $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show">'.$keterangan.' </div>');
-        redirect('pinjaman');
-      }
+        $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show">Sudah selesai melunasi angsuran,Dana gotong royong digunakan untuk menutupi Angsuran anggota <b>'.$detail->nama_anggota.'</b></div>');
+        redirect('anggota_keluar');
+
     }
 
     function update_margin_angsuran($kode_pinjaman)

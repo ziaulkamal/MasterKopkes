@@ -22,6 +22,20 @@
                   <textarea name="keterangan" class="form-control" rows="2" cols="80"></textarea>
                   </div>
                 </div>
+                <?php if ($tipe == 'dana_sosial') { ?>
+                  <div class="mb-3 col-xl-12">
+                    <label class="form-label">Anggota </label>
+                    <div class="input-group">
+                      <select class="form-control select2" name="anggota_no" required>
+                        <option default>-- Pilih Anggota --</option>
+                        <?php foreach ($anggota as $q) { ?>
+                          <option value="<?= $q->no_anggota ?>"><?= $q->nama_anggota ?> - <?= $q->nama_instansi ?></option>
+                        <?php } ?>
+                      </select>
+                    </div>
+                  </div>
+                <?php } ?>
+
                 <div class="mb-3 col-xl-12">
                   <label class="form-label">Nominal</label>
                   <div>

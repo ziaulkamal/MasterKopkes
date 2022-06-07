@@ -11,6 +11,7 @@ $route['daftar_baru']    = 'C_Anggota/simpan_anggota';
 $route['update/(:any)']  = 'C_Anggota/update/$1';
 $route['update_proses']  = 'C_Anggota/update_proses';
 $route['hapus/(:any)']   = 'C_Anggota/delete/$1';
+$route['anggota_keluar']   = 'C_Anggota/cek_anggota_keluar';
 
 //Instansi
 $route['instansi']        = 'C_Instansi/index';
@@ -81,6 +82,7 @@ $route['cetak']        = 'C_Cetak/index';
 $route['cetak/simpanan/(:any)']        = 'C_Cetak/simpanan/$1';
 $route['cetak/angsuran/(:any)']        = 'C_Cetak/angsuran/$1';
 $route['cetak/pinjaman/(:any)']        = 'C_Cetak/pinjaman/$1';
+$route['cetak/anggota_keluar/(:any)']  = 'C_Cetak/anggota_keluar/$1';
 
 // Pengaturan
 
@@ -101,6 +103,15 @@ $route['master_neraca_kolektif'] = 'C_Operasional/master_neraca_kolektif';
 $route['export/neraca_saldo'] = 'Excel_report/export_neraca_saldo';
 $route['export/pembagian_shu/(:any)'] = 'Office_report/export_docs/$1';
 $route['export/neraca_saldo/(:any)'] = 'Excel_report/export_neraca_saldo/$1';
+$route['export/laporan_anggota'] = 'Excel_report/export_laporan_single';
+
+// Detail
+$route['detail_anggota_all/(:any)'] = 'C_Detail_anggota/cek_detail_anggota/$1';
+$route['detail_simpanan/(:any)'] = 'C_Detail_anggota/cek_detail_simpanan/$1';
+
+// Cari
+$route['cari'] = 'C_Detail_anggota/get_user_list/';
+
 
 // $route['404_override'] = 'Pengaturan/error';
 $route['translate_uri_dashes'] = FALSE;

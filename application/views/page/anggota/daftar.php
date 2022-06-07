@@ -23,27 +23,27 @@
                                 <div class="card-body">
                                     <form method="post" action="<?= base_url('daftar_baru') ?>" class="custom-validation">
                                       <?php if (isset($id_anggota)) { ?>
-                                        <input type="hidden" name="id_anggota" value="<?= $id_anggota; ?>">
+                                        <input type="hidden" name="id_anggota" value="<?= $id_anggota; ?>" required />
                                       <?php } ?>
 
                                       <div class="row">
                                         <div class="mb-3 col-xl-12">
                                           <label class="form-label">Nama Lengkap</label>
                                           <div>
-                                            <input type="text" class="form-control" name="nama_lengkap" />
+                                            <input type="text" class="form-control" name="nama_lengkap" required />
                                           </div>
                                         </div>
                                         <div class="mb-3 col-xl-12">
                                           <label class="form-label">Alamat</label>
                                           <div>
-                                            <input type="text" class="form-control" name="alamat" />
+                                            <input type="text" class="form-control" name="alamat" required />
                                           </div>
                                         </div>
                                         <div class="mb-3 col-xl-12">
                                           <label class="form-label">Instansi</label>
                                           <div class="input-group">
                                               <select class="form-control" name="instansi" required>
-                                                <option default>-- Pilih Instansi --</option>
+                                                <option value="0" selected>-- Pilih Instansi --</option>
                                                 <?php foreach ($instansi as $data) { ?>
                                                 <option value="<?= $data->kode_instansi ?>"><?= $data->nama_instansi ?></option>
                                                 <?php } ?>

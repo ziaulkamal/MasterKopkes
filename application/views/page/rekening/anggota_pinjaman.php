@@ -60,6 +60,7 @@
                                             <a href="<?= base_url('update_margin_angsuran/').$s->kode ?>" class="btn btn-outline-warning waves-effect">  Edit Margin </a>
                                             <a href="<?= base_url('angsuran/').$s->kode ?>" class="btn btn-outline-info waves-effect">  Bayar </a>
                                             <a href="<?= base_url('pelunasan/').$s->kode ?>" class="btn btn-outline-dark waves-effect"> Percepat Pelunasan </a>
+                                            <a href="<?= base_url('meninggal/').$s->kode ?>" class="btn btn-outline-danger waves-effect"> Meninggal </a>
                                           </td>
                                         <?php } ?>
 

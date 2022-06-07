@@ -33,7 +33,8 @@
                                         <th>Simpanan Lainya</th>
                                         <th>Total Simpanan</th>
                                         <th>Status Pinjaman</th>
-                                        <th>Tambah Simpanan</th>
+
+
                                       </tr>
                                   </thead>
                                   <tbody>
@@ -43,7 +44,34 @@
                                       if ($data->keanggotaan != 2) { ?>
                                         <tr>
                                           <th scope="row"><?= $start++ ?></th>
-                                          <td><?= $data->no_rekening ?></td>
+                                          <td>
+                                            <button type="button" class="btn btn-primary btn-sm waves-effect waves-light" data-bs-toggle="modal" data-bs-target=".bs-example-modal-sm"><?= $data->no_rekening ?></button>
+
+                                            <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                              <div class="modal-dialog modal-sm">
+                                                <div class="modal-content">
+                                                  <div class="modal-header">
+                                                    <h5 class="modal-title" id="mySmallModalLabel">Opsi</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                  </div>
+                                                  <div class="modal-body">
+                                                    <div class="button-items">
+                                                      <a href="<?= base_url('simpanan_pertama/') . $data->no_rekening ?>" class="btn btn-primary waves-effect waves-light">
+                                                        Update Simpanan <i class="ri-arrow-right-line align-middle ms-2"></i>
+                                                      </a><br>
+                                                      <a href="<?= base_url('detail_simpanan/') . $data->no_rekening ?>" class="btn btn-success waves-effect waves-light">
+                                                        Log Simpanan <i class="ri-check-line align-middle me-2"></i>
+                                                      </a><br>
+                                                      <a href="<?= base_url('detail_anggota_all/') . $data->no_rekening ?>" class="btn btn-warning waves-effect waves-light">
+                                                        Detail <i class="ri-error-warning-line align-middle me-2"></i>
+                                                      </a>
+                                                    </div>
+
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </td>
                                           <td><?= $data->nama ?></td>
                                           <td><?= $this->conv->convRupiah($data->pokok) ?></td>
                                           <td><?= $this->conv->convRupiah($data->wajib) ?></td>
@@ -51,11 +79,10 @@
                                           <td><?= $this->conv->convRupiah($data->lain) ?></td>
                                           <td><?= $this->conv->convRupiah($data->total) ?></td>
                                           <td><center><?php if ($data->status_pinjam == 1) { ?>
-                                            <span class="badge bg-success">Ada</span>
+                                            <a class="btn btn-primary btn-sm waves-effect waves-light">Ada</a>
                                           <?php }else { ?>
-                                            <a class="badge bg-info" href="<?= base_url('tambah_pinjaman/').$data->no_rekening ?>">Tidak Ada</a>
+                                            <a class="btn btn-dark btn-sm waves-effect waves-light" href="<?= base_url('tambah_pinjaman/').$data->no_rekening ?>">Tidak Ada</a>
                                           <?php } ?></center></td>
-                                          <td><center><a href="<?= base_url('simpanan_pertama/').$data->no_rekening ?>" class="badge bg-primary">  Update Simpanan  </a></center></td>
                                         </tr>
                                       <?php }
                                      }

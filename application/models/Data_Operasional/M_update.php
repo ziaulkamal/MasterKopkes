@@ -9,6 +9,10 @@ class M_update extends CI_Model{
     //Codeigniter : Write Less Do More
   }
 
+  function add_log_pengelolaan_dana($data){
+    return $this->db->insert('log_penglolaan_dana', $data);
+  }
+
   function get_brangkas()
   {
     return $this->db->get('tb_brangkas');

@@ -31,13 +31,13 @@
                                         <div class="mb-3 col-xl-12">
                                           <label class="form-label">Nama Instansi</label>
                                           <div>
-                                            <input type="text" class="form-control" name="nama_instansi" maxlength="16" value="" />
+                                            <input type="text" class="form-control" name="nama_instansi" maxlength="16" value="" required/>
                                           </div>
                                         </div>
                                         <div class="mb-3 col-xl-12">
                                           <label class="form-label">Alamat</label>
                                           <div>
-                                            <input type="text" class="form-control" name="alamat_instansi" maxlength="16" value="" />
+                                            <input type="text" class="form-control" name="alamat_instansi" maxlength="16" value="" required/>
                                           </div>
                                         </div>
                                         <div>

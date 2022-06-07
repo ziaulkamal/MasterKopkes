@@ -89,7 +89,7 @@
                 </div>
             </div>
           </div>
-          <div class="col-xl-6 col-sm-6">
+          <div class="col-xl-4 col-sm-4">
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex text-muted">
@@ -108,7 +108,26 @@
                 </div>
             </div>
           </div>
-          <div class="col-xl-6 col-sm-6">
+          <div class="col-xl-4 col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex text-muted">
+                        <div class="flex-shrink-0  me-3 align-self-center">
+                            <div class="avatar-sm">
+                                <div class="avatar-title bg-light rounded-circle text-primary font-size-20">
+                                    <i class="ri-vip-diamond-line"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 overflow-hidden">
+                            <p class="mb-1">Total Dana Gotong Royong</p>
+                            <h5 class="mb-3"><?= $this->conv->convRupiah($brangkas->dana_gotongroyong) ?></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div class="col-xl-4 col-sm-4">
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex text-muted">

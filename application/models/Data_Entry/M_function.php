@@ -171,4 +171,6 @@ class M_function extends CI_Model{
     $this->db->where('anggota_no', $no_anggota);
     $this->db->delete('tb_rekening');
   }
+
+
 }

@@ -119,6 +119,10 @@ class Excel_report extends CI_Controller{
     $writer->save('php://output');
   }
 
+  function export_laporan_single()
+  {
+    // code...
+  }
 
 
 }

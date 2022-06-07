@@ -76,4 +76,49 @@ class M_views extends CI_Model{
     $this->db->order_by('last_update', 'DESC');
     return $this->db->get('master_view_pinjaman');
   }
+
+  function detail_cek($no_rekening)
+  {
+    $this->db->where('no_rekening', $no_rekening);
+    return $this->db->get('anggota_master_data')->row();
+  }
+
+  function detail_cek_pinjaman($no_rekening)
+  {
+    $this->db->where('no_rekening', $no_rekening);
+    $this->db->order_by('tanggal_pengajuan', 'DESC');
+    return $this->db->get('tb_pinjaman');
+  }
+
+  function detail_cek_angsuran($no_anggota)
+  {
+    $this->db->where('no_anggota', $no_anggota);
+    $this->db->limit('10');
+    $this->db->order_by('last_update', 'DESC');
+    return $this->db->get('tb_angsuran');
+  }
+
+  function log_all_simpanan($no_rekening)
+  {
+    $this->db->where('no_rekening', $no_rekening);
+    $this->db->order_by('last_update', 'DESC');
+    return $this->db->get('log_transaksi_anggota');
+  }
+
+  function crawl_anggota()
+  {
+    return $this->db->get('anggota_master_data');
+  }
+
+  function list_anggota_keluar()
+  {
+    $this->db->order_by('id_log', 'DESC');
+    return $this->db->get('log_anggota_keluar')->result();
+  }
+
+  function get_anggotaKeluar($no_anggota)
+  {
+    $this->db->where('no_anggota', $no_anggota);
+    return $this->db->get('log_anggota_keluar');
+  }
 }

@@ -17,6 +17,7 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="<?=base_url('anggota'); ?>">Data Anggota</a></li>
                         <li><a href="<?=base_url('daftar'); ?>">Tambah Anggota Baru</a></li>
+                        <li><a href="<?=base_url('anggota_keluar'); ?>">Anggota Yang Keluar</a></li>
                     </ul>
                 </li>
 
@@ -94,20 +95,11 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="<?= base_url('angsuran') ?>">Data Angsuran Terakhir</a></li>
                         <li><a href="<?= base_url('angsuran_tertunda') ?>">Cek Angsuran Tertunda</a></li>
-                        <li><a href="auth-recoverpw.html">Laporan Angsuran</a></li>
+                        <!-- <li><a href="auth-recoverpw.html">Laporan Angsuran</a></li> -->
                     </ul>
                 </li>
 
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="mdi mdi-account-cog"></i>
-                        <span>Data Petugas</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="<?=base_url('C_Admin'); ?>">List Petugas</a></li>
-                        <li><a href="<?=base_url('C_Admin/daftar'); ?>">Daftar Petugas</a></li>
-                    </ul>
-                </li>
+
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="mdi mdi-application"></i>
@@ -135,7 +127,7 @@
 
                     </ul>
                 </li>
-                <!-- <li class="menu-title">Pengaturan</li>
+                 <li class="menu-title">Pengaturan</li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="mdi mdi-cog"></i>
@@ -163,7 +155,7 @@
                         <i class="mdi mdi-logout"></i>
                         <span> logout </span>
                     </a>
-                </li> -->
+                </li>
             </ul>
         </div>
     </div>

@@ -29,7 +29,7 @@
                                           <label class="form-label">Jenis Simpanan</label>
                                             <div class="input-group">
                                                 <select class="form-control" name="jn_simpanan" required>
-                                                  <option selected>-- Pilih --</option>
+                                                  <option value="0" selected>-- Pilih --</option>
                                                   <option value="1">Pokok</option>
                                                   <option value="2">Wajib</option>
                                                   <option value="3">Sukarela</option>

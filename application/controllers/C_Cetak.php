@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+error_reporting(0);
 class C_Cetak extends CI_Controller{
 
   public function __construct()
@@ -93,6 +93,35 @@ class C_Cetak extends CI_Controller{
         'last_update'   => date_indo($load->last_update),
       );
       $this->load->view('cetak/invoice', $data);
+    }
+  }
+
+  function anggota_keluar($no_anggota)
+  {
+    $loads = $this->mv->get_anggotaKeluar($no_anggota);
+    $load = $loads->row();
+    if ($loads == null) {
+      echo "Parameter Salah";
+    }else {
+      $data = array(
+        'js'            => '',
+        'set'           => 'anggotaKeluar',
+        'title'         => 'Cetak Invoice Anggota Keluar',
+        'keterangan'    => $load->keterangan,
+        'no_rekening'   => $load->no_rekening,
+        'nama_anggota'  => $load->nama_anggota,
+        'instansi'      => $load->instansi,
+        'pokok'         => $load->s_pokok,
+        'wajib'         => $load->s_wajib,
+        'khusus'        => $load->s_khusus,
+        'lain'          => $load->s_lain,
+        'last_update'   => date_indo($load->last_update),
+      );
+
+      $logs['pengembalian_simpanan'] = $data['pokok']+$data['wajib']+$data['khusus']+$data['lain'];
+      $this->load->view('cetak/invoice', $data);
+      $this->db->where('no_anggota', $no_anggota);
+      $this->db->update('log_anggota_keluar', $logs);
     }
   }
 }

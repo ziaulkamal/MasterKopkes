@@ -151,12 +151,13 @@ class C_Operasional extends CI_Controller{
   function dana_sosial()
   {
     $load = $this->mf->get_brangkas()->row();
-
+    $anggota = $this->mf->anggota()->result();
     $data = array(
       'js'      =>  '',
       'title'   =>  'Update Penggunaan Dana Sosial',
       'action'  =>  'kelola_dana/single_process',
       'tipe'    =>  'dana_sosial',
+      'anggota' =>  $anggota,
       'load'    =>  $load,
       'page'    =>  'page/operasional/dana_lain'
     );
@@ -200,39 +201,71 @@ class C_Operasional extends CI_Controller{
     $kas = $load->kas;
     $keterangan = $this->input->post('keterangan');
     $nominal    = str_replace('.','',$this->input->post('nominal'));
+    $last_update = date('Y-m-d');
     if ($tipe == 'dana_pengurus') {
+      $jd = 'Dana Pengurus';
+      $kd = 1;
       $p_keterangan = 'Penggunaan Dana Kas untuk diserahkan ke pengurus dengan keterangan ('. $keterangan.') senilai '.$this->conv->convRupiah($nominal).' Pada tanggal '.date_indo($last_update);
       $brangkas['dana_pengurus'] = $load->dana_pengurus - $nominal;
     }elseif ($tipe == 'dana_pendidikan') {
+      $jd = 'Dana Pendidikan';
+      $kd = 2;
       $p_keterangan = 'Penggunaan Dana Kas untuk kebutuhan pendidikan dengan keterangan ('. $keterangan.') senilai '.$this->conv->convRupiah($nominal).' Pada tanggal '.date_indo($last_update);
       $brangkas['dana_pendidikan'] = $load->dana_pendidikan - $nominal;
     }elseif ($tipe == 'dana_kes_pegawai') {
+      $jd = 'Dana Kesejahteraan Pegawai';
+      $kd = 3;
       $p_keterangan = 'Penggunaan Dana Kas untuk kesejahteraan Pegawai dengan keterangan ('. $keterangan.') senilai '.$this->conv->convRupiah($nominal).' Pada tanggal '.date_indo($last_update);
       $brangkas['dana_kes_pegawai'] = $load->dana_kes_pegawai - $nominal;
     }elseif ($tipe == 'dana_sosial') {
+      $jd = 'Dana Sosial';
+      $kd = 4;
+      $anggota = $this->input->post('anggota_no');
       $p_keterangan = 'Penggunaan Dana Kas untuk sosial dengan keterangan ('. $keterangan.') senilai '.$this->conv->convRupiah($nominal).' Pada tanggal '.date_indo($last_update);
       $brangkas['dana_sosial'] = $load->dana_sosial - $nominal;
     }elseif ($tipe == 'dana_audit') {
+      $jd = 'Dana Audit';
+      $kd = 5;
       $p_keterangan = 'Penggunaan Dana Kas untuk kebutuhan Audit dengan keterangan ('. $keterangan.') senilai '.$this->conv->convRupiah($nominal).' Pada tanggal '.date_indo($last_update);
       $brangkas['dana_audit'] = $load->dana_audit - $nominal;
     }elseif ($tipe == 'dana_pembangunan') {
+      $jd = 'Dana Pembangunan';
+      $kd = 6;
       $p_keterangan = 'Penggunaan Dana Kas untuk keutuhan pembangunan dengan keterangan ('. $keterangan.') senilai '.$this->conv->convRupiah($nominal).' Pada tanggal '.date_indo($last_update);
       $brangkas['dana_pembangunan'] = $load->dana_pembangunan - $nominal;
     }
 
-    $log = array(
-      'nominal'       => $nominal,
-      'jenis'         => 20,
-      'keterangan'    => $p_keterangan,
-      'last_update'   => $last_update,
-    );
+    if ($tipe == 'dana_sosial') {
 
+      $log = array(
+        'jenis_dana'  => $jd,
+        'kode_dana'   => $kd,
+        'keterangan'  => $keterangan,
+        'dana_sosial' => 1,
+        'anggota_id'  => $anggota,
+        'jumlah'      => $nominal,
+        'last_update' => $last_update,
+      );
+    }else {
+
+      $log = array(
+        'jenis_dana'  => $jd,
+        'kode_dana'   => $kd,
+        'keterangan'  => $keterangan,
+        'dana_sosial' => 0,
+        'anggota_id'  => '-',
+        'jumlah'      => $nominal,
+        'last_update' => $last_update,
+      );
+    }
+
+  
     $brangkas['kas'] = $kas - $nominal;
     $brangkas['last_update'] = $last_update;
 
-    $this->mu->add_log($log);
+    $this->mu->add_log_pengelolaan_dana($log);
     $this->mu->update_brangkas($brangkas);
-    $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show">'.$log['keterangan'].'</div>');
+    $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show">'.$p_keterangan.'</div>');
     redirect('/');
   }
 

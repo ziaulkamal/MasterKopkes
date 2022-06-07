@@ -13,7 +13,7 @@ class M_create extends CI_Model{
   {
     return $this->db->update('tb_brangkas', $brangkas);
   }
-  
+
   // insert data
   function insert_anggota($data)
   {
@@ -102,5 +102,15 @@ class M_create extends CI_Model{
   {
     $this->db->where('kode_pinjaman', $kode);
     return $this->db->update('tb_pinjaman', $data);
+  }
+
+  function insert_log_simpanan($data)
+  {
+    return $this->db->insert('log_simpanan', $data);
+  }
+
+  function insert_log_delete($log_delete)
+  {
+    return $this->db->insert('log_anggota_keluar', $log_delete);
   }
 }

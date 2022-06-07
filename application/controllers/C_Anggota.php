@@ -66,21 +66,24 @@ class C_Anggota extends CI_Controller{
     {
       $this->session->set_flashdata('message', '<div class="alert alert-danger">Semua bidang wajib di isi </div>');
       redirect('daftar');
+    }elseif ($instansi == 0) {
+      $this->session->set_flashdata('message', '<div class="alert alert-danger">Semua bidang wajib di isi </div>');
+      redirect('daftar');
     }
     else
     {
       $data = array(
-        'no_anggota' => $no_anggota,
+        'no_anggota' => htmlspecialchars($no_anggota),
         'nama_anggota' => htmlspecialchars($nama_anggota),
         'alamat' => $alamat,
         'instansi' => $instansi,
-        'status' => $status,
+        'status' => htmlspecialchars($status),
         'registration' => $registration,
       );
 
       $rekening = array(
-        'no_rekening' => $no_rekening,
-        'anggota_no' => $no_anggota,
+        'no_rekening' => htmlspecialchars($no_rekening),
+        'anggota_no' => htmlspecialchars($no_anggota),
         'sts_pinjaman' => 0,
         'last_update' => $registration,
       );
@@ -124,7 +127,7 @@ class C_Anggota extends CI_Controller{
     $u_anggota = array(
       'instansi'    =>  $this->input->post('instansi'),
       'nama_anggota'=> htmlspecialchars($this->input->post('nama_anggota')),
-      'alamat'      => $this->input->post('alamat'),
+      'alamat'      => htmlspecialchars($this->input->post('alamat')),
       'registration'=> date('Y-m-d'),
     );
     if ($this->form_validation->run() == FALSE)
@@ -144,6 +147,7 @@ class C_Anggota extends CI_Controller{
   function delete($no_anggota)
   {
     $rekening = $this->mf->delete_load_rekening($no_anggota);
+    $detail = $this->mv->detail_cek($rekening->no_rekening);
     $brangkas_get = $this->mf->get_brangkas();
 
     $brangkas['kas'] = $brangkas_get->kas - $rekening->total_akumulasi;
@@ -153,18 +157,39 @@ class C_Anggota extends CI_Controller{
     $brangkas['dana_lainya'] = $brangkas_get->dana_lainya - $rekening->s_lain;
     $brangkas['last_update'] = date('Y-m-d');
 
+    $log_delete = array(
+      'no_anggota'    => $detail->no_anggota,
+      'no_rekening'   => $detail->no_rekening,
+      'instansi'      => $detail->nama_instansi,
+      'nama_anggota'  => $detail->nama_anggota,
+      'keterangan'    => 'Telah dikeluarkan',
+      's_pokok'       => $rekening->s_pokok,
+      's_wajib'       => $rekening->s_wajib,
+      's_khusus'      => $rekening->s_khusus,
+      's_lain'        => $rekening->s_lain,
+      'dana_gotongroyong' => 0,
+      'last_update'   => date('Y-m-d'),
+    );
+
     $this->mf->delete_rekening($no_anggota);
     $this->mc->update_brangkas($brangkas);
     $this->mf->delete($no_anggota);
-    $this->session->set_flashdata('message', '<div class="alert alert-danger"> Data dengan nomor anggota <b>'.$no_anggota.'</b> Berhasil Keluarkan. <br />
-    Simpanan yang dikembalikan sebagai berikut : <ul>
-    <li>Simpanan Pokok ['.$this->conv->convRupiah($rekening->s_pokok).']</li>
-    <li>Simpanan Wajib ['.$this->conv->convRupiah($rekening->s_wajib).']</li>
-    <li>Simpanan Khusus ['.$this->conv->convRupiah($rekening->s_khusus).']</li>
-    <li>Simpanan Lainya ['.$this->conv->convRupiah($rekening->s_lain).']</li>
-    </ul><br>
-    Total Akumulasi : ['.$this->conv->convRupiah($rekening->total_akumulasi).']
+    $this->mc->insert_log_delete($log_delete);
+    $this->session->set_flashdata('message', '<div class="alert alert-danger"> Data dengan nomor anggota <b>'.$no_anggota.'</b> Berhasil di keluarkan. <br />
+    Simpanan yang dikembalikan silahkan di <a href=' . base_url() . ' target="_blank">Cetak Log</a>
     </div>');
     redirect('anggota');
+  }
+
+  function cek_anggota_keluar()
+  {
+    $load = $this->mv->list_anggota_keluar();
+    $data = array(
+      'js'    => 'dataTables',
+      'title' => 'Anggota Sudah Keluar',
+      'anggota' => $load,
+      'page'  => 'page/anggota/list-anggota-keluar',
+    );
+    $this->load->view('main', $data);
   }
 }
