@@ -10,16 +10,16 @@ class Home extends CI_Controller{
       'Data_Entry/M_function' => 'amf',
       'Data_Entry/M_views' => 'amv',
       'Starter' => 'own',
-
-
     ));
     $this->load->library(array('Curency_indo_helper' => 'conv'));
+    if ($this->session->userdata('masuk') != TRUE) {
+      redirect('logout');
+    }
 
   }
 
   function index()
   {
-
     $data = array(
         'js'  => 'charts',
         'title' => 'Dashboard',

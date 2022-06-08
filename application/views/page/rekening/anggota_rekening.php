@@ -32,7 +32,10 @@
                                         <th>Simpanan Khusus</th>
                                         <th>Simpanan Lainya</th>
                                         <th>Total Simpanan</th>
+                                        <?php if ($this->session->userdata('id_lvl') == 1) { ?>
                                         <th>Status Pinjaman</th>
+                                        <?php } ?>
+
 
 
                                       </tr>
@@ -56,9 +59,11 @@
                                                   </div>
                                                   <div class="modal-body">
                                                     <div class="button-items">
-                                                      <a href="<?= base_url('simpanan_pertama/') . $data->no_rekening ?>" class="btn btn-primary waves-effect waves-light">
-                                                        Update Simpanan <i class="ri-arrow-right-line align-middle ms-2"></i>
-                                                      </a><br>
+                                                      <?php if ($this->session->userdata('id_lvl') == 1) { ?>
+                                                        <a href="<?= base_url('simpanan_pertama/') . $data->no_rekening ?>" class="btn btn-primary waves-effect waves-light">
+                                                          Update Simpanan <i class="ri-arrow-right-line align-middle ms-2"></i>
+                                                        </a><br>
+                                                      <?php } ?>
                                                       <a href="<?= base_url('detail_simpanan/') . $data->no_rekening ?>" class="btn btn-success waves-effect waves-light">
                                                         Log Simpanan <i class="ri-check-line align-middle me-2"></i>
                                                       </a><br>
@@ -78,11 +83,14 @@
                                           <td><?= $this->conv->convRupiah($data->kusus) ?></td>
                                           <td><?= $this->conv->convRupiah($data->lain) ?></td>
                                           <td><?= $this->conv->convRupiah($data->total) ?></td>
-                                          <td><center><?php if ($data->status_pinjam == 1) { ?>
-                                            <a class="btn btn-primary btn-sm waves-effect waves-light">Ada</a>
-                                          <?php }else { ?>
-                                            <a class="btn btn-dark btn-sm waves-effect waves-light" href="<?= base_url('tambah_pinjaman/').$data->no_rekening ?>">Tidak Ada</a>
-                                          <?php } ?></center></td>
+                                          <?php if ($this->session->userdata('id_lvl') == 1) { ?>
+                                            <td><center><?php if ($data->status_pinjam == 1) { ?>
+                                              <a class="btn btn-primary btn-sm waves-effect waves-light">Ada</a>
+                                            <?php }else { ?>
+                                              <a class="btn btn-dark btn-sm waves-effect waves-light" href="<?= base_url('tambah_pinjaman/').$data->no_rekening ?>">Tidak Ada</a>
+                                            <?php } ?></center></td>
+                                          <?php } ?>
+
                                         </tr>
                                       <?php }
                                      }

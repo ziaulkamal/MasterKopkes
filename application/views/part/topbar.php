@@ -55,11 +55,11 @@
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img class="rounded-circle header-profile-user" src="<?= base_url(); ?>assets/images/logo-sm.png"
                         alt="Header Avatar">
-                    <span class="d-none d-xl-inline-block ms-1">Administrator</span>
+                    <span class="d-none d-xl-inline-block ms-1"><?= $this->session->userdata('level') ?></span>
                     <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-end">
-                    <a class="dropdown-item text-danger" href="<?= base_url('C_Auth/logout') ?>"><i class="ri-shut-down-line align-middle me-1 text-danger"></i> Logout</a>
+                    <a class="dropdown-item text-danger" href="<?= base_url('logout') ?>"><i class="ri-shut-down-line align-middle me-1 text-danger"></i> Logout</a>
                 </div>
             </div>
         </div>

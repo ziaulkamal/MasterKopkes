@@ -111,7 +111,14 @@ $route['detail_simpanan/(:any)'] = 'C_Detail_anggota/cek_detail_simpanan/$1';
 
 // Cari
 $route['cari'] = 'C_Detail_anggota/get_user_list/';
+$route['login'] = 'C_Login/index';
+$route['process_login'] = 'C_Login/process_login';
+$route['logout'] = 'C_Login/logout';
+$route['sign_up'] = 'C_Login/created_account';
+$route['sign_up/created'] = 'C_Login/proses_created';
+$route['data_akun'] = 'C_Login/list_account';
+$route['delete_account/(:any)'] = 'C_Login/delete_account/$1';
 
 
-// $route['404_override'] = 'Pengaturan/error';
+$route['404_override'] = 'C_Login/logout';
 $route['translate_uri_dashes'] = FALSE;

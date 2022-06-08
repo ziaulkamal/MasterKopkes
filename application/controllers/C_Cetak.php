@@ -12,6 +12,9 @@ class C_Cetak extends CI_Controller{
     ));
     $this->load->library(array('Curency_indo_helper' => 'conv'));
     $this->load->helper('tgl_indo');
+    if ($this->session->userdata('masuk') != TRUE) {
+      redirect('logout');
+    }
   }
 
   function index()

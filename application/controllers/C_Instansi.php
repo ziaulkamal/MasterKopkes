@@ -14,6 +14,9 @@ class C_Instansi extends CI_Controller{
         'Data_Entry/M_create' => 'mc',
     ));
      $this->load->helper('tgl_indo');
+     if ($this->session->userdata('masuk') != TRUE) {
+       redirect('logout');
+     }
   }
 
   function index()

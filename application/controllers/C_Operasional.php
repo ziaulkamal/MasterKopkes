@@ -14,6 +14,9 @@ class C_Operasional extends CI_Controller{
     ));
     $this->load->library(array('Curency_indo_helper' => 'conv'));
     $this->load->helper('tgl_indo');
+    if ($this->session->userdata('masuk') != TRUE) {
+      redirect('logout');
+    }
 
   }
 
@@ -259,7 +262,7 @@ class C_Operasional extends CI_Controller{
       );
     }
 
-  
+
     $brangkas['kas'] = $kas - $nominal;
     $brangkas['last_update'] = $last_update;
 
@@ -393,18 +396,21 @@ class C_Operasional extends CI_Controller{
 
   function proses_neraca_tahunan()
   {
-    $tahun = $this->input->post('tahun');
+    $tahun = date('Y');
 
     $get_neraca = $this->mf->get_neraca_tahunan($tahun)->row();
+    //
+    // var_dump($get_neraca);
+    // die();
     $invent = $this->mf->get_inventaris($tahun);
     $total_anggota = $this->mf->get_anggota()->num_rows();
 
 
-    if ($get_neraca == null) {
+    if ($get_neraca != NULL) {
 
       // $margin_saving = $this->mf->get_margin()->result();
-      // $akumulasi = $this->mf->sum_margin()->row()->total_margin;
-      $akumulasi = '1022454794';
+      $akumulasi = $this->mf->sum_margin()->row()->total_margin;
+      // $akumulasi = '1022454794';
       $atk = $this->mf->sum_atk()->row()->atk;
       $honor = $this->mf->sum_honor()->row()->honor;
       $rat = $this->mf->sum_rat()->row()->rat;
@@ -557,9 +563,9 @@ class C_Operasional extends CI_Controller{
       $call_produk_inventaris = $this->mf->get_list_inventaris();
       $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show">Berhasil Generate Neraca</div>');
       redirect('olah_data');
-    }elseif ($get_neraca != null) {
-      if ($tahun == $get_neraca->tahun_neraca) {
-        $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show">Neraca Untuk Tahun Ini sudah dibuat</div>');
+    }elseif ($get_neraca == null) {
+      if ($tahun  != $get_neraca->tahun_neraca) {
+        $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show">Neraca Gagal dibuat karena data margin masih kosong atau Neraca tahun ini sudah dibuat</div>');
         redirect('olah_data');
       }
     }
@@ -592,9 +598,10 @@ class C_Operasional extends CI_Controller{
   function proses_jasa_simpanan()
   {
     $tahun = date('Y');
+    $get_neraca = $this->mf->get_neraca_tahunan($tahun)->row();
     $cek_bht = $this->mf->get_bht($tahun);
-    if ($cek_bht->num_rows() > 0 ) {
-      $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show">Data sudah di generate untuk tahun ini !</div>');
+    if ($cek_bht->num_rows() > 0 || $get_neraca == NULL) {
+      $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show">Data gagal dibuat atau neraca tahun ini sudah di generate !</div>');
       redirect('olah_data');
     }else {
       $neraca_tahunan = $this->mf->get_neraca_tahunan($tahun)->row();

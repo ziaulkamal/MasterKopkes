@@ -19,6 +19,9 @@ class C_Anggota extends CI_Controller{
        'Curency_indo_helper' => 'conv',
        'Parsing_bulan' => 'bulan'
      ));
+     if ($this->session->userdata('masuk') != TRUE) {
+       redirect('logout');
+     }
   }
 
   public function index()
@@ -66,7 +69,7 @@ class C_Anggota extends CI_Controller{
     {
       $this->session->set_flashdata('message', '<div class="alert alert-danger">Semua bidang wajib di isi </div>');
       redirect('daftar');
-    }elseif ($instansi == 0) {
+    }elseif ($instansi == 0 || $status == NULL) {
       $this->session->set_flashdata('message', '<div class="alert alert-danger">Semua bidang wajib di isi </div>');
       redirect('daftar');
     }
@@ -130,7 +133,7 @@ class C_Anggota extends CI_Controller{
       'alamat'      => htmlspecialchars($this->input->post('alamat')),
       'registration'=> date('Y-m-d'),
     );
-    if ($this->form_validation->run() == FALSE)
+    if ($this->form_validation->run() == FALSE || $this->input->post('instansi') == 0)
     {
       $this->session->set_flashdata('message', '<div class="alert alert-danger">Semua bidang wajib di isi </div>');
       redirect('update/'.$no_anggota);
@@ -146,6 +149,8 @@ class C_Anggota extends CI_Controller{
 
   function delete($no_anggota)
   {
+
+
     $rekening = $this->mf->delete_load_rekening($no_anggota);
     $detail = $this->mv->detail_cek($rekening->no_rekening);
     $brangkas_get = $this->mf->get_brangkas();
@@ -167,7 +172,7 @@ class C_Anggota extends CI_Controller{
       's_wajib'       => $rekening->s_wajib,
       's_khusus'      => $rekening->s_khusus,
       's_lain'        => $rekening->s_lain,
-      'dana_gotongroyong' => 0,
+      'pengembalian_simpanan' => 0,
       'last_update'   => date('Y-m-d'),
     );
 

@@ -442,15 +442,6 @@ CREATE TABLE `tb_margin_saving` (
   `last_update` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `tb_margin_saving`
---
-
-INSERT INTO `tb_margin_saving` (`id_margin`, `no_rekening`, `margin_saving`, `tahun`, `last_update`) VALUES
-(1, '20220111', 208333, 2022, '2022-06-06'),
-(2, '20220121', 100000, 2022, '2022-06-06'),
-(3, '20220101', 66666, 2022, '2022-06-06'),
-(4, '20220137', 866666, 2022, '2022-06-06');
 
 -- --------------------------------------------------------
 
@@ -589,7 +580,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `master_view_anggota_all`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `master_view_anggota_all`  AS SELECT `tb_anggota`.`no_anggota` AS `no`, `tb_anggota`.`nama_anggota` AS `nama`, `tb_anggota`.`nik` AS `nik`, `tb_anggota`.`nip` AS `nip`, `tb_anggota`.`tp_lahir` AS `lahir`, `tb_anggota`.`tgl_lahir` AS `tanggal`, `tb_anggota`.`alamat` AS `alamat`, `tb_instansi`.`nama_instansi` AS `instansi`, `tb_anggota`.`status` AS `status`, `tb_anggota`.`registration` AS `terdaftar` FROM (`tb_anggota` join `tb_instansi`) WHERE `tb_anggota`.`instansi` = `tb_instansi`.`kode_instansi``kode_instansi`  ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `master_view_anggota_all`  AS SELECT `tb_anggota`.`no_anggota` AS `no`, `tb_anggota`.`nama_anggota` AS `nama`, `tb_anggota`.`nik` AS `nik`, `tb_anggota`.`nip` AS `nip`, `tb_anggota`.`tp_lahir` AS `lahir`, `tb_anggota`.`tgl_lahir` AS `tanggal`, `tb_anggota`.`alamat` AS `alamat`, `tb_instansi`.`nama_instansi` AS `instansi`, `tb_anggota`.`status` AS `status`, `tb_anggota`.`registration` AS `terdaftar` FROM (`tb_anggota` join `tb_instansi`) WHERE `tb_anggota`.`instansi` = `tb_instansi`.`kode_instansi`  ;
 
 -- --------------------------------------------------------
 

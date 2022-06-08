@@ -12,10 +12,18 @@ class Pengaturan extends CI_Controller{
       'Data_Operasional/M_function' => 'mf',
       'Starter' => 'own',
     ));
+    if ($this->session->userdata('masuk') != TRUE) {
+      redirect('logout');
+    }
   }
+
 
   function reset_kas()
   {
+    // if ($this->session->userdata('id_lvl') == 1) {
+    //   $this->session->set_flashdata('message', '<div class="alert alert-warning alert-dismissible fade show">Anda tidak dibenarkan akses fitur ini !</div>');
+    //   redirect('dashboard');
+    // }
     $last_update = date('Y-m-d');
 
     $brangkas = array(
@@ -46,6 +54,10 @@ class Pengaturan extends CI_Controller{
 
   function konfigurasi_dasar()
   {
+    // if ($this->session->userdata('level') != 'PROGRAMMER') {
+    //   $this->session->set_flashdata('message', '<div class="alert alert-warning alert-dismissible fade show">Anda tidak dibenarkan akses fitur ini !</div>');
+    //   redirect('dashboard');
+    // }
     $load = $this->own->get_brangkas()->row();
     $data = array(
       'js'      =>  '',
@@ -59,6 +71,10 @@ class Pengaturan extends CI_Controller{
 
   function proses_setting()
   {
+    if ($this->session->userdata('level') != 'PROGRAMMER') {
+      $this->session->set_flashdata('message', '<div class="alert alert-warning alert-dismissible fade show">Anda tidak dibenarkan akses fitur ini !</div>');
+      redirect('dashboard');
+    }
     $last_update = date('Y-m-d');
 
     $brangkas = array(

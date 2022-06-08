@@ -34,7 +34,9 @@
                               <th>Instansi</th>
                               <th>Status</th>
                               <th>Diperbaharui</th>
-                              <th>Aksi</th>
+                              <?php if ($this->session->userdata('id_lvl') == 1 ) {?>
+                                <th>Aksi</th>
+                              <?php } ?>
                             </tr>
                             </thead>
                             <tbody>
@@ -55,11 +57,13 @@
                                   echo '<span class="badge bg-danger">Meninggal</span>';
                                 } ?></td>
                                 <td><?= date_indo($data->terdaftar); ?></td>
+                                <?php if ($this->session->userdata('id_lvl') == 1 ) {?>
                                 <td>
                                 <a href="<?= base_url('detail/').$data->no; ?>" class="btn btn-sm btn-outline-info waves-effect waves-light">Detail</a>
                                 <a href="<?= base_url('update/').$data->no; ?>" class="btn btn-sm btn-outline-danger waves-effect waves-light">Edit</a>
                                 <a href="<?= base_url('hapus/').$data->no; ?>" id="btn-delete" class="btn btn-sm btn-outline-dark waves-effect waves-light" onclick="<?= base_url('anggota') ?>">Keluarkan</a>
                               </td>
+                              <?php } ?>
                             </tr>
                             <?php } ?>
                             </tbody>

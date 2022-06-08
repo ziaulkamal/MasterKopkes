@@ -34,7 +34,9 @@
                             <th>Harga Beli</th>
                             <th>Harga Barang</th>
                             <th>Keterangan</th>
-                            <th>Aksi</th>
+                            <?php if ($this->session->userdata('id_lvl') == 1) { ?>
+                              <th>Aksi</th>
+                            <?php } ?>
                           </tr>
                           </thead>
                           <tbody>
@@ -47,9 +49,12 @@
                               <td><?= $this->conv->convRupiah($data->harga_beli) ?></td>
                               <td><?= $this->conv->convRupiah($data->harga_sekarang) ?></td>
                               <td><?= $data->keterangan ?></td>
-                              <td>
-                              <a href="<?= base_url('edit_inventaris/').$data->id; ?>" class="btn btn-sm btn-outline-info waves-effect waves-light">Update Harga Barang</a>
-                            </td>
+                              <?php if ($this->session->userdata('id_lvl') == 1) {?>
+            
+                                <td>
+                                  <a href="<?= base_url('edit_inventaris/').$data->id; ?>" class="btn btn-sm btn-outline-info waves-effect waves-light">Update Harga Barang</a>
+                                </td>
+                              <?php } ?>
                           </tr>
                         <?php }
                          ?>

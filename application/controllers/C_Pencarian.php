@@ -13,6 +13,9 @@ class C_Pencarian extends CI_Controller{
         'Data_Entry/M_function' => 'mf',
     ));
     $this->load->library(array('Curency_indo_helper' => 'conv'));
+    if ($this->session->userdata('masuk') != TRUE) {
+      redirect('logout');
+    }
   }
 
   function cari_anggota_simpanan()

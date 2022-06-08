@@ -18,6 +18,9 @@ class C_Detail_anggota extends CI_Controller{
        'Curency_indo_helper' => 'conv',
        'Parsing_bulan' => 'bulan'
      ));
+     if ($this->session->userdata('masuk') != TRUE) {
+       redirect('logout');
+     }
   }
 
   function cek_detail_anggota($no_rekening)

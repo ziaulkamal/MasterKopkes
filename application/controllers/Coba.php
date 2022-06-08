@@ -7,6 +7,9 @@ class Coba extends CI_Controller{
   {
     parent::__construct();
     //Codeigniter : Write Less Do More
+    if ($this->session->userdata('masuk') != TRUE) {
+      redirect('logout');
+    }
   }
 
   function index()

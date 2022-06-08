@@ -20,6 +20,9 @@ class C_Akutansi extends CI_Controller{
       'Parsing_bulan' => 'bulan'
     ));
    $this->load->helper('tgl_indo');
+   if ($this->session->userdata('masuk') != TRUE) {
+     redirect('logout');
+   }
   }
 
     function global_kas()
@@ -489,8 +492,12 @@ class C_Akutansi extends CI_Controller{
       $this->global_kas();
       $d_kas             = $this->kas;
       $d_piutang         = $this->total_piutang;
-      $d_hutang         = $this->total_hutang;
+      $d_hutang          = $this->total_hutang;
       $d_gotongroyong    = $this->dana_gotongroyong;
+      $d_simpok          = $this->dana_simpok;
+      $d_simwa           = $this->dana_simwa;
+      $d_kusus           = $this->dana_kusus;
+      $d_lain            = $this->dana_lainya;
       // IDEA: Akhir Penguraian Dari Function Global kas
 
       $no_rekening      = $this->input->post('no_rekening');
@@ -561,13 +568,17 @@ class C_Akutansi extends CI_Controller{
           $this->mc->update_margin($id, $is_margin);
         }
 
-        $brangkas['kas'] = $d_kas + $angsuran_pokok + $angsuran_margin;
+        $rekening = $this->mf->delete_load_rekening($anggota->anggota_no);
+        $detail = $this->mv->detail_cek($no_rekening);
+        $brangkas['kas'] = $d_kas + $angsuran_pokok + $angsuran_margin - $rekening->total_akumulasi;
+        $brangkas['dana_simpok'] = $d_simpok - $rekening->s_pokok;
+        $brangkas['dana_simwa'] = $d_simwa - $rekening->s_wajib;
+        $brangkas['dana_kusus'] = $d_kusus - $rekening->s_khusus;
+        $brangkas['dana_lainya'] = $d_lain - $rekening->s_lain;
         $brangkas['dana_gotongroyong'] = $d_gotongroyong - $angsuran_pokok - $angsuran_margin;
         $brangkas['total_hutang'] = $d_hutang + $angsuran_pokok;
         $brangkas['total_piutang'] = $d_piutang - $angsuran_pokok;
         $brangkas['last_update'] = $last_update;
-        $rekening = $this->mf->delete_load_rekening($anggota->anggota_no);
-        $detail = $this->mv->detail_cek($no_rekening);
         $log_delete = array(
           'no_anggota'    => $detail->no_anggota,
           'no_rekening'   => $detail->no_rekening,
@@ -578,7 +589,7 @@ class C_Akutansi extends CI_Controller{
           's_wajib'       => $rekening->s_wajib,
           's_khusus'      => $rekening->s_khusus,
           's_lain'        => $rekening->s_lain,
-          'dana_gotongroyong' => 0,
+          'pengembalian_simpanan' => 0,
           'last_update'   => date('Y-m-d'),
         );
         $this->mf->delete_rekening($anggota->anggota_no);

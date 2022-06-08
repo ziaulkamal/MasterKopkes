@@ -11,11 +11,17 @@ class Office_report extends CI_Controller{
       'Data_Operasional/M_function' => 'operasional_function',
     ));
     $this->load->library(array('Curency_indo_helper' => 'conv'));
+    if ($this->session->userdata('masuk') != TRUE) {
+      redirect('logout');
+    }
   }
 
   function index()
   {
-    var_dump($this->operasional_function->get_master_kolektif()->result());
+    if ($this->session->userdata('level') != 'PROGRAMMER') {
+      $this->session->set_flashdata('message', '<div class="alert alert-warning alert-dismissible fade show">Anda tidak dibenarkan akses fitur ini !</div>');
+      redirect('dashboard');
+    }
   }
 
   function export_docs($id)

@@ -28,7 +28,9 @@
                                         <th>Nama Anggota</th>
                                         <th>Durasi Tunggakan</th>
                                         <th>Sisa Angsuran Pokok</th>
-                                        <th>Opsi</th>
+                                        <?php if ($this->session->userdata('id_lvl') == 1) { ?>
+                                          <th>Opsi</th>
+                                        <?php } ?>
                                       </tr>
                                   </thead>
                                   <tbody>
@@ -41,11 +43,13 @@
                                         <td><?= $s->nama; ?></td>
                                         <td><?= $date - $this->bulan->parse($s->last_update). ' bulan' ?></td>
                                         <td><?= $this->conv->convRupiah($s->sisa_angsuran); ?></td>
-                                        <td>
-                                          <a href="<?= base_url('angsuran/').$s->kode ?>" class="btn btn-outline-info waves-effect">  Bayar </a>
-                                          <a href="<?= base_url('pelunasan/').$s->kode ?>" class="btn btn-outline-dark waves-effect"> Percepat Pelunasan </a>
-                                          <a href="<?= base_url('meninggal/').$s->kode ?>" class="btn btn-outline-danger waves-effect"> Meninggal Dunia </a>
-                                        </td>
+                                        <?php if ($this->session->userdata('id_lvl') == 1) { ?>
+                                          <td>
+                                            <a href="<?= base_url('angsuran/').$s->kode ?>" class="btn btn-outline-info waves-effect">  Bayar </a>
+                                            <a href="<?= base_url('pelunasan/').$s->kode ?>" class="btn btn-outline-dark waves-effect"> Percepat Pelunasan </a>
+                                            <a href="<?= base_url('meninggal/').$s->kode ?>" class="btn btn-outline-danger waves-effect"> Meninggal Dunia </a>
+                                          </td>
+                                        <?php } ?>
                                       </tr>
 
                                       <?php }

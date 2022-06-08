@@ -59,7 +59,7 @@
                                                   <option value="1">Aktif</option>
                                                   <option value="0">Non Aktif</option>
                                               <?php }else { ?>
-                                                  <option>-- Pilih --</option>
+                                                  <option value="2">-- Pilih --</option>
                                                   <option value="1">Aktif</option>
                                                   <option value="0">Non Aktif</option>
                                               <?php }

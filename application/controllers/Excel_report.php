@@ -15,7 +15,9 @@ class Excel_report extends CI_Controller{
       'Data_Operasional/M_function' => 'operasional_function',
     ));
     $this->load->library(array('Curency_indo_helper' => 'conv'));
-
+    if ($this->session->userdata('masuk') != TRUE) {
+      redirect('logout');
+    }
   }
 
   function index()
@@ -95,7 +97,7 @@ class Excel_report extends CI_Controller{
     $sheet_2->setCellValue('F15', $load->neraca_kesejahteraan);
     $sheet_2->setCellValue('F16', $load->dana_lainya);
     $sheet_2->setCellValue('F17', $load->dana_gotongroyong);
-    $sheet_2->setCellValue('F18', $load->sisa_bagian);
+    $sheet_2->setCellValue('F18', $sisa_bagian);
 
     $sheet_2->setCellValue('F23', $load->akumulasi_zakat);
     $sheet_2->setCellValue('F28', $load->dana_simpok);
@@ -113,9 +115,9 @@ class Excel_report extends CI_Controller{
 
     // IDEA: End Grouping Load Data Untuk Sheet 1
     $fileName = 'Neraca Saldo '. date('d') .' Desember '. date('Y');
-    header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-    header('Content-Disposition: attachment;filename='.$fileName.'.xlsx');
     $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
+    header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    header('Content-Disposition: attachment;filename='.$fileName.'.xls');
     $writer->save('php://output');
   }
 
