@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 07, 2022 at 07:11 AM
+-- Generation Time: Jun 08, 2022 at 04:40 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -250,6 +250,31 @@ CREATE TABLE `master_view_rekening` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tb_administrator`
+--
+
+CREATE TABLE `tb_administrator` (
+  `user_id` varchar(30) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` text NOT NULL,
+  `level` varchar(30) NOT NULL,
+  `last_login` datetime NOT NULL,
+  `date_created` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_administrator`
+--
+
+INSERT INTO `tb_administrator` (`user_id`, `username`, `password`, `level`, `last_login`, `date_created`) VALUES
+('A1654697235', 'ziaul_kamal', '0bc500c5ead065a40b297117a8f234b43b26cc17', '1', '2022-06-08 21:07:15', '2022-06-08'),
+('A1654697249', 'pengurus', '7a35e923c45bf8773f17c92c999e3ac7c28e073a', '2', '2022-06-08 21:07:29', '2022-06-08'),
+('A1654697264', 'dewas', '20d62ff4c91a18eb505b944bac31af5db41c3036', '3', '2022-06-08 21:07:44', '2022-06-08'),
+('A1654697286', 'operasional', '374763cf71d5b8b2bc22a8867276ace9cc411abf', '1', '2022-06-08 21:08:06', '2022-06-08');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tb_anggota`
 --
 
@@ -284,20 +309,6 @@ CREATE TABLE `tb_angsuran` (
   `status_pinjaman` int(11) NOT NULL,
   `last_update` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tb_angsuran`
---
-
-INSERT INTO `tb_angsuran` (`kode_angsuran`, `kode_pinjaman`, `no_anggota`, `angsuran_ke`, `angsuran_pokok`, `angsuran_margin`, `keterangan`, `status_pinjaman`, `last_update`) VALUES
-('A-1654507827', 'P-1654507823', '0101', '1', 416667, 33333, 'Sudah melakukan pembayaran Angsuran Bulanan', 1, '2022-06-06'),
-('A-1654519594', 'P-1654519585', '0137', '1', 3750000, 300000, 'Sudah melakukan pembayaran Angsuran Bulanan', 1, '2022-06-06'),
-('A-1654522057', 'P-1654519649', '0137', '1', 1666667, 133333, 'Sudah melakukan pembayaran Angsuran Bulanan', 1, '2022-06-06'),
-('C-1654507255', 'P-1654506980', '0111', 'Lunas', 24999996, 208333, 'Sudah melakukan pembayaran Angsuran dari dana gotong royong', 0, '2022-06-06'),
-('C-1654507539', 'P-1654507522', '0121', 'Lunas', 15000000, 100000, 'Sudah melakukan pembayaran Angsuran dari dana gotong royong', 0, '2022-06-06'),
-('C-1654507865', 'P-1654507823', '0101', 'Lunas', 4583337, 33333, 'Sudah melakukan pembayaran Angsuran dari dana gotong royong', 0, '2022-06-06'),
-('L-1654519615', 'P-1654519585', '0137', 'Lunas', 41250000, 300000, 'Sudah Berhasil melunaskan Angsuran', 0, '2022-06-06'),
-('L-1654522379', 'P-1654519649', '0137', 'Lunas', 18333337, 133333, 'Sudah Berhasil melunaskan Angsuran', 0, '2022-06-06');
 
 -- --------------------------------------------------------
 
@@ -354,7 +365,7 @@ CREATE TABLE `tb_brangkas` (
 --
 
 INSERT INTO `tb_brangkas` (`kas`, `dana_gotongroyong`, `dana_simpok`, `dana_simwa`, `dana_kusus`, `dana_lainya`, `total_hutang`, `total_piutang`, `jasa_usaha`, `jasa_simpanan`, `dana_cadangan`, `dana_pengurus`, `dana_pendidikan`, `dana_kes_pegawai`, `dana_sosial`, `dana_audit`, `dana_pembangunan`, `dana_penghapusan`, `last_update`) VALUES
-(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '2022-06-07');
+(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '2022-06-08');
 
 -- --------------------------------------------------------
 
@@ -409,25 +420,6 @@ CREATE TABLE `tb_inventaris` (
   `last_update` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `tb_inventaris`
---
-
-INSERT INTO `tb_inventaris` (`id`, `nama_barang`, `satuan`, `jumlah`, `harga_beli`, `harga_sekarang`, `keterangan`, `last_update`) VALUES
-('1652815704', 'Filling Kabinet', 'Buah', '1', 1300000, 1300000, '-', '2022-05-18'),
-('1652815733', 'Laptop Toshiba', 'unit', '2', 14190000, 14190000, '-', '2022-05-18'),
-('1652815774', 'Lemari arsip 2 Pintu', 'unit', '1', 1527500, 1527500, '-', '2022-05-18'),
-('1652815799', 'Alat Pendingin Ruangan ( AC )', 'Buah', '1', 3500000, 3500000, '-', '2022-05-18'),
-('1652815846', 'Meja ½ Biro ', 'Buah', '2', 1500000, 1500000, '', '2022-05-18'),
-('1652815869', 'Kursi Biasa', 'Buah', '4', 500000, 500000, '', '2022-05-18'),
-('1652815898', 'Dispenser', 'Buah', '1', 300000, 300000, '', '2022-05-18'),
-('1652815936', 'Komputer', 'unit', '1', 9500000, 9500000, '', '2022-05-18'),
-('1652816004', 'Seperangkat Alat Alat', '', '', 507500, 507500, '', '2022-05-18'),
-('1652816045', 'Lemari Arsip 4 Pintu', 'Unit', '1', 7500000, 7500000, '', '2022-05-18'),
-('1652816075', 'Komputer', 'unit', '1', 5000000, 5000000, '', '2022-05-18'),
-('1652816094', 'Meja', 'Buah', '2', 1450000, 1450000, '', '2022-05-18'),
-('1652816124', 'Printer', 'unit', '1', 2700000, 2700000, '', '2022-05-18');
-
 -- --------------------------------------------------------
 
 --
@@ -441,7 +433,6 @@ CREATE TABLE `tb_margin_saving` (
   `tahun` int(11) NOT NULL,
   `last_update` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
 
 -- --------------------------------------------------------
 
@@ -580,7 +571,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `master_view_anggota_all`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `master_view_anggota_all`  AS SELECT `tb_anggota`.`no_anggota` AS `no`, `tb_anggota`.`nama_anggota` AS `nama`, `tb_anggota`.`nik` AS `nik`, `tb_anggota`.`nip` AS `nip`, `tb_anggota`.`tp_lahir` AS `lahir`, `tb_anggota`.`tgl_lahir` AS `tanggal`, `tb_anggota`.`alamat` AS `alamat`, `tb_instansi`.`nama_instansi` AS `instansi`, `tb_anggota`.`status` AS `status`, `tb_anggota`.`registration` AS `terdaftar` FROM (`tb_anggota` join `tb_instansi`) WHERE `tb_anggota`.`instansi` = `tb_instansi`.`kode_instansi`  ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `master_view_anggota_all`  AS SELECT `tb_anggota`.`no_anggota` AS `no`, `tb_anggota`.`nama_anggota` AS `nama`, `tb_anggota`.`nik` AS `nik`, `tb_anggota`.`nip` AS `nip`, `tb_anggota`.`tp_lahir` AS `lahir`, `tb_anggota`.`tgl_lahir` AS `tanggal`, `tb_anggota`.`alamat` AS `alamat`, `tb_instansi`.`nama_instansi` AS `instansi`, `tb_anggota`.`status` AS `status`, `tb_anggota`.`registration` AS `terdaftar` FROM (`tb_anggota` join `tb_instansi`) WHERE `tb_anggota`.`instansi` = `tb_instansi`.`kode_instansi`;
 
 -- --------------------------------------------------------
 
@@ -633,6 +624,12 @@ ALTER TABLE `log_transaksi_anggota`
 --
 ALTER TABLE `master_kolektif`
   ADD PRIMARY KEY (`id_master`);
+
+--
+-- Indexes for table `tb_administrator`
+--
+ALTER TABLE `tb_administrator`
+  ADD PRIMARY KEY (`user_id`);
 
 --
 -- Indexes for table `tb_anggota`
@@ -750,7 +747,7 @@ ALTER TABLE `tb_instansi`
 -- AUTO_INCREMENT for table `tb_margin_saving`
 --
 ALTER TABLE `tb_margin_saving`
-  MODIFY `id_margin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_margin` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tb_neraca_tahunan`
