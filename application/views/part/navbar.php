@@ -51,7 +51,7 @@
                           <span>Simpanan</span>
                       </a>
                       <ul class="sub-menu" aria-expanded="false">
-                          <li><a href="<?=base_url('cari_simpanan'); ?>">Cari ID Anggota</a></li>
+                          <li><a href="<?=base_url('cari_simpanan'); ?>">Group Anggota</a></li>
                           <li><a href="<?=base_url('simpanan'); ?>">Data Simpanan Anggota</a></li>
                       </ul>
                   </li>

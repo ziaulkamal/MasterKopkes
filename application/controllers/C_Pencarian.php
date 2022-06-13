@@ -23,7 +23,7 @@ class C_Pencarian extends CI_Controller{
     $load = $this->mv->instansi_filter()->result();
     $data = array(
       'js'      =>  false,
-      'title'   =>  'Cari Anggota',
+      'title'   =>  'Group Anggota Berdasarkan Instansi',
       'load'    =>  $load,
       'name'    =>  'no_anggota',
       'page'    =>  'page/simpanan/cari_simpan'
