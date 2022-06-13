@@ -42,7 +42,6 @@
 <script src="<?= base_url(); ?>assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
 <script src="<?= base_url(); ?>assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
 <script src="<?= base_url(); ?>assets/js/pages/datatables.init.js"></script>
-<script src="<?= base_url(); ?>assets/js/app.js"></script>
 <?php }
 // IDEA: End Penggunaan Assets DataTables
 ?>

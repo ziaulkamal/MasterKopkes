@@ -9,7 +9,7 @@
             </div>
             <?php echo $this->session->flashdata('message'); ?>
 
-            <form class="custom-validation" action="<?= base_url('C_Simpanan/simpan_action') ?>"  method="post" enctype="multipart/form-data">
+            <form class="custom-validation" action="<?= base_url('tambil_berdasarkan_instansi') ?>"  method="post" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-6 lg-6">
                     <div class="card">
@@ -17,7 +17,13 @@
                         <div class="row">
                           <div class="mb-3 col-xl-12">
                             <div>
-                              <input type="text" class="form-control" id="form-input" name="<?= $name ?>" maxlength="12"  placeholder="<?= $placeholder ?>" required/>
+                              <select class="form-control" name="instansi">
+                                <option value="0" selected>-- Pilih --</option>
+                                <?php foreach ($load as $q) { ?>
+                                  <option value="<?= $q->nama_instansi ?>"><?= $q->nama_instansi ?></option>
+                                <?php } ?>
+
+                              </select>
                             </div>
                           </div>
                         </div>

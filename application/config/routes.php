@@ -49,6 +49,7 @@ $route['angsuran_tertunda'] = 'C_Akutansi/angsuran_tertunda';
 // Pencarian
 $route['cari_simpanan']  = 'C_Pencarian/cari_anggota_simpanan';
 $route['cari_pinjaman']  = 'C_Pencarian/cari_anggota_pinjaman';
+$route['tambil_berdasarkan_instansi']  = 'C_Pencarian/tampil_by_instansi';
 
 
 // Operasional

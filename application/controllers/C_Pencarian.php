@@ -20,12 +20,25 @@ class C_Pencarian extends CI_Controller{
 
   function cari_anggota_simpanan()
   {
+    $load = $this->mv->instansi_filter()->result();
     $data = array(
       'js'      =>  false,
       'title'   =>  'Cari Anggota',
-      'placeholder' => 'Masukkan ID Anggota',
+      'load'    =>  $load,
       'name'    =>  'no_anggota',
-      'page'    =>  'page/rekening/search_anggota_simpanan'
+      'page'    =>  'page/simpanan/cari_simpan'
+    );
+    $this->load->view('main', $data);
+  }
+
+  function tampil_by_instansi()
+  {
+    $load = $this->mv->res_instansi($this->input->post('instansi'))->result();
+    $data = array(
+      'js'      =>  'dataTables',
+      'title'   =>  'Data Anggota Dengan Urutan Instansi',
+      'load'    =>  $load,
+      'page'    =>  'page/simpanan/list_simpanan_by_instansi'
     );
     $this->load->view('main', $data);
   }
@@ -58,4 +71,9 @@ class C_Pencarian extends CI_Controller{
       $this->load->view('main', $data);
     }
   }
+
+  // function cari_by_instansi()
+  // {
+  //   $load = $this->
+  // }
 }

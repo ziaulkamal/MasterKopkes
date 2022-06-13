@@ -544,7 +544,7 @@ CREATE TABLE `tb_shu` (
 --
 DROP TABLE IF EXISTS `anggota_master_data`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `anggota_master_data`  AS SELECT `master_view_anggota`.`no` AS `no_anggota`, `master_view_anggota`.`nama` AS `nama_anggota`, `master_view_anggota`.`instansi` AS `nama_instansi`, `tb_rekening`.`no_rekening` AS `no_rekening`, `tb_rekening`.`total_akumulasi` AS `total_simpanan`, `tb_rekening`.`sts_pinjaman` AS `status_pinjaman` FROM (`master_view_anggota` join `tb_rekening` on(`tb_rekening`.`anggota_no` = `master_view_anggota`.`no`))  ;
+CREATE VIEW `anggota_master_data`  AS SELECT `master_view_anggota`.`no` AS `no_anggota`, `master_view_anggota`.`nama` AS `nama_anggota`, `master_view_anggota`.`instansi` AS `nama_instansi`, `tb_rekening`.`no_rekening` AS `no_rekening`, `tb_rekening`.`total_akumulasi` AS `total_simpanan`, `tb_rekening`.`sts_pinjaman` AS `status_pinjaman` FROM (`master_view_anggota` join `tb_rekening` on(`tb_rekening`.`anggota_no` = `master_view_anggota`.`no`))  ;
 
 -- --------------------------------------------------------
 
@@ -553,7 +553,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `log_angsuran_anggota`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `log_angsuran_anggota`  AS SELECT `tb_angsuran`.`kode_angsuran` AS `kode`, `tb_angsuran`.`kode_pinjaman` AS `pinjaman`, `tb_anggota`.`nama_anggota` AS `nama`, `tb_angsuran`.`angsuran_ke` AS `angsuran_ke`, `tb_angsuran`.`angsuran_pokok` AS `pokok`, `tb_angsuran`.`angsuran_margin` AS `margin`, `tb_angsuran`.`keterangan` AS `keterangan`, `tb_angsuran`.`last_update` AS `tgl_update` FROM (`tb_angsuran` join `tb_anggota` on(`tb_angsuran`.`no_anggota` = `tb_anggota`.`no_anggota`))  ;
+CREATE VIEW `log_angsuran_anggota`  AS SELECT `tb_angsuran`.`kode_angsuran` AS `kode`, `tb_angsuran`.`kode_pinjaman` AS `pinjaman`, `tb_anggota`.`nama_anggota` AS `nama`, `tb_angsuran`.`angsuran_ke` AS `angsuran_ke`, `tb_angsuran`.`angsuran_pokok` AS `pokok`, `tb_angsuran`.`angsuran_margin` AS `margin`, `tb_angsuran`.`keterangan` AS `keterangan`, `tb_angsuran`.`last_update` AS `tgl_update` FROM (`tb_angsuran` join `tb_anggota` on(`tb_angsuran`.`no_anggota` = `tb_anggota`.`no_anggota`))  ;
 
 -- --------------------------------------------------------
 
@@ -562,7 +562,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `master_view_anggota`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `master_view_anggota`  AS SELECT `tb_anggota`.`no_anggota` AS `no`, `tb_anggota`.`nama_anggota` AS `nama`, `tb_instansi`.`nama_instansi` AS `instansi`, `tb_anggota`.`status` AS `status`, `tb_anggota`.`registration` AS `terdaftar` FROM (`tb_anggota` join `tb_instansi` on(`tb_instansi`.`kode_instansi` = `tb_anggota`.`instansi`))  ;
+CREATE VIEW `master_view_anggota`  AS SELECT `tb_anggota`.`no_anggota` AS `no`, `tb_anggota`.`nama_anggota` AS `nama`, `tb_instansi`.`nama_instansi` AS `instansi`, `tb_anggota`.`status` AS `status`, `tb_anggota`.`registration` AS `terdaftar` FROM (`tb_anggota` join `tb_instansi` on(`tb_instansi`.`kode_instansi` = `tb_anggota`.`instansi`))  ;
 
 -- --------------------------------------------------------
 
@@ -571,7 +571,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `master_view_anggota_all`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `master_view_anggota_all`  AS SELECT `tb_anggota`.`no_anggota` AS `no`, `tb_anggota`.`nama_anggota` AS `nama`, `tb_anggota`.`nik` AS `nik`, `tb_anggota`.`nip` AS `nip`, `tb_anggota`.`tp_lahir` AS `lahir`, `tb_anggota`.`tgl_lahir` AS `tanggal`, `tb_anggota`.`alamat` AS `alamat`, `tb_instansi`.`nama_instansi` AS `instansi`, `tb_anggota`.`status` AS `status`, `tb_anggota`.`registration` AS `terdaftar` FROM (`tb_anggota` join `tb_instansi`) WHERE `tb_anggota`.`instansi` = `tb_instansi`.`kode_instansi`;
+CREATE VIEW `master_view_anggota_all`  AS SELECT `tb_anggota`.`no_anggota` AS `no`, `tb_anggota`.`nama_anggota` AS `nama`, `tb_anggota`.`nik` AS `nik`, `tb_anggota`.`nip` AS `nip`, `tb_anggota`.`tp_lahir` AS `lahir`, `tb_anggota`.`tgl_lahir` AS `tanggal`, `tb_anggota`.`alamat` AS `alamat`, `tb_instansi`.`nama_instansi` AS `instansi`, `tb_anggota`.`status` AS `status`, `tb_anggota`.`registration` AS `terdaftar` FROM (`tb_anggota` join `tb_instansi`) WHERE `tb_anggota`.`instansi` = `tb_instansi`.`kode_instansi`;
 
 -- --------------------------------------------------------
 
@@ -580,7 +580,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `master_view_pinjaman`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `master_view_pinjaman`  AS SELECT `tb_pinjaman`.`id` AS `id`, `tb_pinjaman`.`kode_pinjaman` AS `kode`, `tb_pinjaman`.`no_rekening` AS `no_rekening`, `master_view_rekening`.`nama` AS `nama`, `tb_pinjaman`.`plafon` AS `plafon`, `tb_pinjaman`.`tenor` AS `tenor`, `tb_pinjaman`.`margin` AS `margin`, `tb_pinjaman`.`pokok_murabahan` AS `pokok`, `tb_pinjaman`.`total_gotongroyong` AS `gotong_royong`, `tb_pinjaman`.`angsuran_ke` AS `ke`, `tb_pinjaman`.`sisa_angsuran` AS `sisa_angsuran`, `tb_pinjaman`.`tanggal_pengajuan` AS `tgl_pengajuan`, `tb_pinjaman`.`last_update` AS `last_update` FROM (`tb_pinjaman` join `master_view_rekening` on(`master_view_rekening`.`no` = `tb_pinjaman`.`no_rekening`))  ;
+CREATE VIEW `master_view_pinjaman`  AS SELECT `tb_pinjaman`.`id` AS `id`, `tb_pinjaman`.`kode_pinjaman` AS `kode`, `tb_pinjaman`.`no_rekening` AS `no_rekening`, `master_view_rekening`.`nama` AS `nama`, `tb_pinjaman`.`plafon` AS `plafon`, `tb_pinjaman`.`tenor` AS `tenor`, `tb_pinjaman`.`margin` AS `margin`, `tb_pinjaman`.`pokok_murabahan` AS `pokok`, `tb_pinjaman`.`total_gotongroyong` AS `gotong_royong`, `tb_pinjaman`.`angsuran_ke` AS `ke`, `tb_pinjaman`.`sisa_angsuran` AS `sisa_angsuran`, `tb_pinjaman`.`tanggal_pengajuan` AS `tgl_pengajuan`, `tb_pinjaman`.`last_update` AS `last_update` FROM (`tb_pinjaman` join `master_view_rekening` on(`master_view_rekening`.`no` = `tb_pinjaman`.`no_rekening`))  ;
 
 -- --------------------------------------------------------
 
@@ -589,7 +589,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `master_view_rekening`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `master_view_rekening`  AS SELECT `tb_rekening`.`no_rekening` AS `no`, `tb_anggota`.`nama_anggota` AS `nama`, `tb_rekening`.`s_pokok` AS `pokok`, `tb_rekening`.`s_wajib` AS `wajib`, `tb_rekening`.`s_khusus` AS `kusus`, `tb_rekening`.`s_lain` AS `lain`, `tb_rekening`.`total_akumulasi` AS `total`, `tb_rekening`.`sts_pinjaman` AS `status`, `tb_rekening`.`last_update` AS `update_terakhir` FROM (`tb_rekening` join `tb_anggota` on(`tb_rekening`.`anggota_no` = `tb_anggota`.`no_anggota`))  ;
+CREATE VIEW `master_view_rekening`  AS SELECT `tb_rekening`.`no_rekening` AS `no`, `tb_anggota`.`nama_anggota` AS `nama`, `tb_rekening`.`s_pokok` AS `pokok`, `tb_rekening`.`s_wajib` AS `wajib`, `tb_rekening`.`s_khusus` AS `kusus`, `tb_rekening`.`s_lain` AS `lain`, `tb_rekening`.`total_akumulasi` AS `total`, `tb_rekening`.`sts_pinjaman` AS `status`, `tb_rekening`.`last_update` AS `update_terakhir` FROM (`tb_rekening` join `tb_anggota` on(`tb_rekening`.`anggota_no` = `tb_anggota`.`no_anggota`))  ;
 
 --
 -- Indexes for dumped tables

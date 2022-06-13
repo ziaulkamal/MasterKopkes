@@ -121,4 +121,16 @@ class M_views extends CI_Model{
     $this->db->where('no_anggota', $no_anggota);
     return $this->db->get('log_anggota_keluar');
   }
+
+  function instansi_filter()
+  {
+    $this->db->group_by('nama_instansi');
+    return $this->db->get('anggota_master_data');
+  }
+
+  function res_instansi($nama_instansi)
+  {
+    $this->db->where('instansi', $nama_instansi);
+    return $this->db->get('rekening_by_instansi');
+  }
 }
